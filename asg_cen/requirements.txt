@@ -1,0 +1,7 @@
+numpy
+matplotlib
+scipy
+networkx
+prettytable
+progress
+psutil

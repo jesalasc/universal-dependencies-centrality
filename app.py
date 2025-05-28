@@ -4,14 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 from matplotlib.colors import BoundaryNorm
-from spacy import displacy
+#from spacy import displacy
 import streamlit.components.v1 as components
 import os
 
-import sys
 # Ensure the all_subgraphs code directory is on the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../all_subgraphs_implementation/code")))
-from all_subgraphs_centrality import all_subgraphs_centrality as asg
+from asg_cen.all_subgraphs_centrality import all_subgraphs_centrality as asg
 
 st.set_page_config(layout="wide")
 st.title("GraphML Centrality Visualizer")
