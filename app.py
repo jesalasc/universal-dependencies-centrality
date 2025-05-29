@@ -13,6 +13,7 @@ from asg_cen.all_subgraphs_centrality import all_subgraphs_centrality as asg
 
 st.set_page_config(layout="wide")
 st.title("Visualizador de centralidad en árboles de dependencias sintácticas")
+    # Pin phrase at top
 
 # --- Load GraphML ---
 def load_graph(file):
@@ -143,6 +144,28 @@ def hierarchy_pos(G, root=None, width=1.0, vert_gap=2, vert_loc=0, xcenter=0.5):
 
     return pos
 
+def build_dag_from_root(G_undirected, root_node):
+    """
+    Given an undirected graph and a root node, return a DAG
+    with edges directed away from the root based on BFS.
+    """
+    G_dag = nx.DiGraph()
+    G_dag.add_node(root_node, **G_undirected.nodes[root_node])
+
+    visited = set([root_node])
+    queue = [root_node]
+
+    while queue:
+        current = queue.pop(0)
+        for neighbor in G_undirected.neighbors(current):
+            if neighbor not in visited:
+                G_dag.add_node(neighbor, **G_undirected.nodes[neighbor])
+                G_dag.add_edge(current, neighbor, **G_undirected.edges[current, neighbor])
+                visited.add(neighbor)
+                queue.append(neighbor)
+    
+    return G_dag
+
 GRAPH_DIR = "./UD_Spanish-GSD/"  # Set your desired directory path here
 graph_files = [f for f in os.listdir(GRAPH_DIR) if f.endswith(".graphml")]
 #vis_mode = st.sidebar.radio("Visualization mode", ["Centrality", "Syntax Tree"])
@@ -154,37 +177,35 @@ else:
     with open(os.path.join(GRAPH_DIR, selected_file_name), 'r', encoding='utf-8') as f:
         G_directed, G_undirected = load_graph(f)
 
-    pos = hierarchy_pos(G_directed, vert_gap=3)
 
     st.sidebar.markdown("### Elige una medida de centralidad")
     centrality = st.sidebar.selectbox("Medida de centralidad", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"])
-    #centrality_2 = st.sidebar.selectbox("Centrality Measure 2", ["Betweenness", "Degree", "Closeness", "Eigenvector"])
+    
+    st.sidebar.markdown(f"**Frase**: {G_directed.graph.get('phrase', 'No phrase found')}")
 
-    # Arrange figures vertically for better horizontal space
-    st.subheader(f"{selected_file_name} - Directed Structure")
-    fig1, ax1 = draw_graph(G_directed, {n: 1 for n in G_directed.nodes()}, "Directed Syntactic Dependency Tree", pos, 'directed')
-    st.pyplot(fig1)
-    st.markdown(f"**Frase**: {G_directed.graph['phrase']}")
+    # Hang tree from most central node
+    centrality_scores = compute_centrality(G_undirected, centrality)
 
-    #st.subheader(f"{selected_file_name} - {centrality_2}")
-    c = compute_centrality(G_undirected, centrality)
-    fig2, ax2 = draw_graph(G_undirected, c, f"Centrality: {centrality}", pos)
-    st.pyplot(fig2)
-    st.markdown(f"**Frase**: {G_directed.graph['phrase']}")
+    
 
-    # else:  # Syntax Tree mode
-    #     words = [{"text": G_directed.nodes[n]["form"]} for n in G_directed.nodes()]
-    #     arcs = []
-    #     for src, tgt in G_directed.edges():
-    #         start = list(G_directed.nodes).index(src)
-    #         end = list(G_directed.nodes).index(tgt)
-    #         label = G_directed.edges[src, tgt].get("deprel", "")
-    #         arcs.append({
-    #             "start": min(start, end),
-    #             "end": max(start, end),
-    #             "label": label,
-    #             "dir": "left" if start > end else "right"
-    #         })
+    # Display trees side-by-side instead of vertically
+    col1, col2 = st.columns(2)
 
-    #     html = displacy.render({"words": words, "arcs": arcs}, style="dep", manual=True)
-    #     components.html(html, height=300, scrolling=True)
+    with col1:
+        st.subheader("Original Syntactic Dependency Tree")
+        root_node = str(G_directed.graph.get('root', None))
+        #print(root_node)
+        #print(G_directed.nodes(data=False))
+        pos1 = hierarchy_pos(G_directed, root=root_node, vert_gap=3)
+        fig1, ax1 = draw_graph(G_directed, {n: 1 for n in G_directed.nodes()}, "Directed Syntactic Dependency Tree", pos1, 'directed')
+        st.pyplot(fig1)
+
+    with col2:
+        st.subheader(f"Centrality: {centrality}")
+        c = compute_centrality(G_undirected, centrality)
+        root_node = max(c, key=c.get)
+        G_dag = build_dag_from_root(G_undirected, root_node)
+        pos2 = hierarchy_pos(G_dag, root=root_node, vert_gap=3)
+        #print(pos2)
+        fig2, ax2 = draw_graph(G_undirected, c, f"Centrality: {centrality}", pos2)
+        st.pyplot(fig2)
