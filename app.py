@@ -143,7 +143,7 @@ def hierarchy_pos(G, root=None, width=1.0, vert_gap=2, vert_loc=0, xcenter=0.5):
 
     return pos
 
-GRAPH_DIR = "../data/graphs/UD_Spanish-GSD"  # Set your desired directory path here
+GRAPH_DIR = "./UD_Spanish-GSD/"  # Set your desired directory path here
 graph_files = [f for f in os.listdir(GRAPH_DIR) if f.endswith(".graphml")]
 #vis_mode = st.sidebar.radio("Visualization mode", ["Centrality", "Syntax Tree"])
 

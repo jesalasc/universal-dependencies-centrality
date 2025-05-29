@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Para salvaros de todo esto ha venido el Movimiento Nacional que, por serlo, es movimiento popular, ni de izquierdas ni de derechas, porque quiere que ambos se unan al Movimiento y le sostengan.</data>
+<data key="d1">8</data>
+<node id="8">
+  <data key="d2">venido</data>
+</node>
+<node id="2">
+  <data key="d2">salvar</data>
+</node>
+<node id="7">
+  <data key="d2">ha</data>
+</node>
+<node id="10">
+  <data key="d2">Movimiento</data>
+</node>
+<node id="41">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Para</data>
+</node>
+<node id="3">
+  <data key="d2">os</data>
+</node>
+<node id="6">
+  <data key="d2">esto</data>
+</node>
+<node id="9">
+  <data key="d2">el</data>
+</node>
+<node id="11">
+  <data key="d2">Nacional</data>
+</node>
+<node id="19">
+  <data key="d2">movimiento</data>
+</node>
+<node id="4">
+  <data key="d2">de</data>
+</node>
+<node id="5">
+  <data key="d2">todo</data>
+</node>
+<node id="12">
+  <data key="d2">que</data>
+</node>
+<node id="15">
+  <data key="d2">ser</data>
+</node>
+<node id="18">
+  <data key="d2">es</data>
+</node>
+<node id="20">
+  <data key="d2">popular</data>
+</node>
+<node id="24">
+  <data key="d2">izquierdas</data>
+</node>
+<node id="30">
+  <data key="d2">quiere</data>
+</node>
+<node id="13">
+  <data key="d2">,</data>
+</node>
+<node id="14">
+  <data key="d2">por</data>
+</node>
+<node id="16">
+  <data key="d2">lo</data>
+</node>
+<node id="17">
+  <data key="d2">,</data>
+</node>
+<node id="21">
+  <data key="d2">,</data>
+</node>
+<node id="22">
+  <data key="d2">ni</data>
+</node>
+<node id="23">
+  <data key="d2">de</data>
+</node>
+<node id="27">
+  <data key="d2">derechas</data>
+</node>
+<node id="28">
+  <data key="d2">,</data>
+</node>
+<node id="29">
+  <data key="d2">porque</data>
+</node>
+<node id="34">
+  <data key="d2">unan</data>
+</node>
+<node id="25">
+  <data key="d2">ni</data>
+</node>
+<node id="26">
+  <data key="d2">de</data>
+</node>
+<node id="31">
+  <data key="d2">que</data>
+</node>
+<node id="32">
+  <data key="d2">ambos</data>
+</node>
+<node id="33">
+  <data key="d2">se</data>
+</node>
+<node id="37">
+  <data key="d2">Movimiento</data>
+</node>
+<node id="40">
+  <data key="d2">sostengan</data>
+</node>
+<node id="35">
+  <data key="d2">a</data>
+</node>
+<node id="36">
+  <data key="d2">el</data>
+</node>
+<node id="38">
+  <data key="d2">y</data>
+</node>
+<node id="39">
+  <data key="d2">le</data>
+</node>
+<edge source="8" target="2"/>
+<edge source="8" target="7"/>
+<edge source="8" target="10"/>
+<edge source="8" target="41"/>
+<edge source="2" target="1"/>
+<edge source="2" target="3"/>
+<edge source="2" target="6"/>
+<edge source="10" target="9"/>
+<edge source="10" target="11"/>
+<edge source="10" target="19"/>
+<edge source="6" target="4"/>
+<edge source="6" target="5"/>
+<edge source="19" target="12"/>
+<edge source="19" target="15"/>
+<edge source="19" target="18"/>
+<edge source="19" target="20"/>
+<edge source="19" target="24"/>
+<edge source="19" target="30"/>
+<edge source="15" target="13"/>
+<edge source="15" target="14"/>
+<edge source="15" target="16"/>
+<edge source="15" target="17"/>
+<edge source="24" target="21"/>
+<edge source="24" target="22"/>
+<edge source="24" target="23"/>
+<edge source="24" target="27"/>
+<edge source="24" target="28"/>
+<edge source="30" target="29"/>
+<edge source="30" target="34"/>
+<edge source="27" target="25"/>
+<edge source="27" target="26"/>
+<edge source="34" target="31"/>
+<edge source="34" target="32"/>
+<edge source="34" target="33"/>
+<edge source="34" target="37"/>
+<edge source="34" target="40"/>
+<edge source="37" target="35"/>
+<edge source="37" target="36"/>
+<edge source="40" target="38"/>
+<edge source="40" target="39"/>
+</graph></graphml>

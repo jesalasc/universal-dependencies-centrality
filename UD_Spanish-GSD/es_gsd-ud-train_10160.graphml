@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Tras abandonar el Gobierno, Scowcroft ocupó la Vicepresidencia de Kissinger Associates, Inc., una firma de consultoría fundada por Henry Kissinger, con el propósito de identificar socios estratégicos y oportunidades de inversión, efectuar previsiones de hechos internacionales, analizar riesgos políticos en diferentes países del planeta, investigar oscilaciones de divisas, y negociar con gobiernos mundiales para clientes como JP Morgan Chase, Coca - Cola, American Express, o Heinz.</data>
+<data key="d1">7</data>
+<node id="7">
+  <data key="d2">ocupó</data>
+</node>
+<node id="2">
+  <data key="d2">abandonar</data>
+</node>
+<node id="6">
+  <data key="d2">Scowcroft</data>
+</node>
+<node id="9">
+  <data key="d2">Vicepresidencia</data>
+</node>
+<node id="79">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Tras</data>
+</node>
+<node id="4">
+  <data key="d2">Gobierno</data>
+</node>
+<node id="5">
+  <data key="d2">,</data>
+</node>
+<node id="8">
+  <data key="d2">la</data>
+</node>
+<node id="11">
+  <data key="d2">Kissinger</data>
+</node>
+<node id="3">
+  <data key="d2">el</data>
+</node>
+<node id="10">
+  <data key="d2">de</data>
+</node>
+<node id="12">
+  <data key="d2">Associates</data>
+</node>
+<node id="13">
+  <data key="d2">,</data>
+</node>
+<node id="14">
+  <data key="d2">Inc.</data>
+</node>
+<node id="17">
+  <data key="d2">firma</data>
+</node>
+<node id="15">
+  <data key="d2">,</data>
+</node>
+<node id="16">
+  <data key="d2">una</data>
+</node>
+<node id="19">
+  <data key="d2">consultoría</data>
+</node>
+<node id="20">
+  <data key="d2">fundada</data>
+</node>
+<node id="18">
+  <data key="d2">de</data>
+</node>
+<node id="22">
+  <data key="d2">Henry</data>
+</node>
+<node id="27">
+  <data key="d2">propósito</data>
+</node>
+<node id="21">
+  <data key="d2">por</data>
+</node>
+<node id="23">
+  <data key="d2">Kissinger</data>
+</node>
+<node id="24">
+  <data key="d2">,</data>
+</node>
+<node id="25">
+  <data key="d2">con</data>
+</node>
+<node id="26">
+  <data key="d2">el</data>
+</node>
+<node id="29">
+  <data key="d2">identificar</data>
+</node>
+<node id="28">
+  <data key="d2">de</data>
+</node>
+<node id="30">
+  <data key="d2">socios</data>
+</node>
+<node id="37">
+  <data key="d2">efectuar</data>
+</node>
+<node id="43">
+  <data key="d2">analizar</data>
+</node>
+<node id="53">
+  <data key="d2">investigar</data>
+</node>
+<node id="59">
+  <data key="d2">negociar</data>
+</node>
+<node id="64">
+  <data key="d2">clientes</data>
+</node>
+<node id="31">
+  <data key="d2">estratégicos</data>
+</node>
+<node id="33">
+  <data key="d2">oportunidades</data>
+</node>
+<node id="36">
+  <data key="d2">,</data>
+</node>
+<node id="38">
+  <data key="d2">previsiones</data>
+</node>
+<node id="42">
+  <data key="d2">,</data>
+</node>
+<node id="44">
+  <data key="d2">riesgos</data>
+</node>
+<node id="48">
+  <data key="d2">países</data>
+</node>
+<node id="52">
+  <data key="d2">,</data>
+</node>
+<node id="54">
+  <data key="d2">oscilaciones</data>
+</node>
+<node id="57">
+  <data key="d2">,</data>
+</node>
+<node id="58">
+  <data key="d2">y</data>
+</node>
+<node id="61">
+  <data key="d2">gobiernos</data>
+</node>
+<node id="63">
+  <data key="d2">para</data>
+</node>
+<node id="66">
+  <data key="d2">JP</data>
+</node>
+<node id="32">
+  <data key="d2">y</data>
+</node>
+<node id="35">
+  <data key="d2">inversión</data>
+</node>
+<node id="40">
+  <data key="d2">hechos</data>
+</node>
+<node id="45">
+  <data key="d2">políticos</data>
+</node>
+<node id="46">
+  <data key="d2">en</data>
+</node>
+<node id="47">
+  <data key="d2">diferentes</data>
+</node>
+<node id="51">
+  <data key="d2">planeta</data>
+</node>
+<node id="56">
+  <data key="d2">divisas</data>
+</node>
+<node id="60">
+  <data key="d2">con</data>
+</node>
+<node id="62">
+  <data key="d2">mundiales</data>
+</node>
+<node id="65">
+  <data key="d2">como</data>
+</node>
+<node id="67">
+  <data key="d2">Morgan</data>
+</node>
+<node id="68">
+  <data key="d2">Chase</data>
+</node>
+<node id="70">
+  <data key="d2">Coca</data>
+</node>
+<node id="75">
+  <data key="d2">Express</data>
+</node>
+<node id="78">
+  <data key="d2">Heinz</data>
+</node>
+<node id="34">
+  <data key="d2">de</data>
+</node>
+<node id="39">
+  <data key="d2">de</data>
+</node>
+<node id="41">
+  <data key="d2">internacionales</data>
+</node>
+<node id="49">
+  <data key="d2">de</data>
+</node>
+<node id="50">
+  <data key="d2">el</data>
+</node>
+<node id="55">
+  <data key="d2">de</data>
+</node>
+<node id="69">
+  <data key="d2">,</data>
+</node>
+<node id="71">
+  <data key="d2">-</data>
+</node>
+<node id="72">
+  <data key="d2">Cola</data>
+</node>
+<node id="73">
+  <data key="d2">,</data>
+</node>
+<node id="74">
+  <data key="d2">American</data>
+</node>
+<node id="76">
+  <data key="d2">,</data>
+</node>
+<node id="77">
+  <data key="d2">o</data>
+</node>
+<edge source="7" target="2"/>
+<edge source="7" target="6"/>
+<edge source="7" target="9"/>
+<edge source="7" target="79"/>
+<edge source="2" target="1"/>
+<edge source="2" target="4"/>
+<edge source="2" target="5"/>
+<edge source="9" target="8"/>
+<edge source="9" target="11"/>
+<edge source="4" target="3"/>
+<edge source="11" target="10"/>
+<edge source="11" target="12"/>
+<edge source="11" target="13"/>
+<edge source="11" target="14"/>
+<edge source="11" target="17"/>
+<edge source="17" target="15"/>
+<edge source="17" target="16"/>
+<edge source="17" target="19"/>
+<edge source="17" target="20"/>
+<edge source="19" target="18"/>
+<edge source="20" target="22"/>
+<edge source="20" target="27"/>
+<edge source="22" target="21"/>
+<edge source="22" target="23"/>
+<edge source="27" target="24"/>
+<edge source="27" target="25"/>
+<edge source="27" target="26"/>
+<edge source="27" target="29"/>
+<edge source="29" target="28"/>
+<edge source="29" target="30"/>
+<edge source="29" target="37"/>
+<edge source="29" target="43"/>
+<edge source="29" target="53"/>
+<edge source="29" target="59"/>
+<edge source="29" target="64"/>
+<edge source="30" target="31"/>
+<edge source="30" target="33"/>
+<edge source="37" target="36"/>
+<edge source="37" target="38"/>
+<edge source="43" target="42"/>
+<edge source="43" target="44"/>
+<edge source="43" target="48"/>
+<edge source="53" target="52"/>
+<edge source="53" target="54"/>
+<edge source="59" target="57"/>
+<edge source="59" target="58"/>
+<edge source="59" target="61"/>
+<edge source="64" target="63"/>
+<edge source="64" target="66"/>
+<edge source="33" target="32"/>
+<edge source="33" target="35"/>
+<edge source="38" target="40"/>
+<edge source="44" target="45"/>
+<edge source="48" target="46"/>
+<edge source="48" target="47"/>
+<edge source="48" target="51"/>
+<edge source="54" target="56"/>
+<edge source="61" target="60"/>
+<edge source="61" target="62"/>
+<edge source="66" target="65"/>
+<edge source="66" target="67"/>
+<edge source="66" target="68"/>
+<edge source="66" target="70"/>
+<edge source="66" target="75"/>
+<edge source="66" target="78"/>
+<edge source="35" target="34"/>
+<edge source="40" target="39"/>
+<edge source="40" target="41"/>
+<edge source="51" target="49"/>
+<edge source="51" target="50"/>
+<edge source="56" target="55"/>
+<edge source="70" target="69"/>
+<edge source="70" target="71"/>
+<edge source="70" target="72"/>
+<edge source="75" target="73"/>
+<edge source="75" target="74"/>
+<edge source="78" target="76"/>
+<edge source="78" target="77"/>
+</graph></graphml>

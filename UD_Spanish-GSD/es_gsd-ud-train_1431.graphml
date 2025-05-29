@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">El 4 de junio de 1959 obtuvo el nombre de Arquidiócesis de Delhi</data>
+<data key="d1">7</data>
+<node id="7">
+  <data key="d2">obtuvo</data>
+</node>
+<node id="2">
+  <data key="d2">4</data>
+</node>
+<node id="9">
+  <data key="d2">nombre</data>
+</node>
+<node id="1">
+  <data key="d2">El</data>
+</node>
+<node id="4">
+  <data key="d2">junio</data>
+</node>
+<node id="8">
+  <data key="d2">el</data>
+</node>
+<node id="11">
+  <data key="d2">Arquidiócesis</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<node id="6">
+  <data key="d2">1959</data>
+</node>
+<node id="10">
+  <data key="d2">de</data>
+</node>
+<node id="13">
+  <data key="d2">Delhi</data>
+</node>
+<node id="5">
+  <data key="d2">de</data>
+</node>
+<node id="12">
+  <data key="d2">de</data>
+</node>
+<edge source="7" target="2"/>
+<edge source="7" target="9"/>
+<edge source="2" target="1"/>
+<edge source="2" target="4"/>
+<edge source="9" target="8"/>
+<edge source="9" target="11"/>
+<edge source="4" target="3"/>
+<edge source="4" target="6"/>
+<edge source="11" target="10"/>
+<edge source="11" target="13"/>
+<edge source="6" target="5"/>
+<edge source="13" target="12"/>
+</graph></graphml>

@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En las siguientes semanas, el público le pedía a Laurinaitis que le devolviera el trabajo a Jim Ross, el cual aceptó y lo hizo, pero en esa misma noche le dijo a Ross que iba a participar en una lucha en parejas con John Cena contra Alberto del Rio y Michael Cole y si no ganaba, no sería comentarista de la marca.</data>
+<data key="d1">9</data>
+<node id="9">
+  <data key="d2">pedía</data>
+</node>
+<node id="4">
+  <data key="d2">semanas</data>
+</node>
+<node id="5">
+  <data key="d2">,</data>
+</node>
+<node id="7">
+  <data key="d2">público</data>
+</node>
+<node id="8">
+  <data key="d2">le</data>
+</node>
+<node id="11">
+  <data key="d2">Laurinaitis</data>
+</node>
+<node id="14">
+  <data key="d2">devolviera</data>
+</node>
+<node id="68">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="2">
+  <data key="d2">las</data>
+</node>
+<node id="3">
+  <data key="d2">siguientes</data>
+</node>
+<node id="6">
+  <data key="d2">el</data>
+</node>
+<node id="10">
+  <data key="d2">a</data>
+</node>
+<node id="34">
+  <data key="d2">dijo</data>
+</node>
+<node id="12">
+  <data key="d2">que</data>
+</node>
+<node id="13">
+  <data key="d2">le</data>
+</node>
+<node id="16">
+  <data key="d2">trabajo</data>
+</node>
+<node id="18">
+  <data key="d2">Jim</data>
+</node>
+<node id="27">
+  <data key="d2">,</data>
+</node>
+<node id="28">
+  <data key="d2">pero</data>
+</node>
+<node id="32">
+  <data key="d2">noche</data>
+</node>
+<node id="33">
+  <data key="d2">le</data>
+</node>
+<node id="36">
+  <data key="d2">Ross</data>
+</node>
+<node id="40">
+  <data key="d2">participar</data>
+</node>
+<node id="15">
+  <data key="d2">el</data>
+</node>
+<node id="17">
+  <data key="d2">a</data>
+</node>
+<node id="19">
+  <data key="d2">Ross</data>
+</node>
+<node id="23">
+  <data key="d2">aceptó</data>
+</node>
+<node id="29">
+  <data key="d2">en</data>
+</node>
+<node id="30">
+  <data key="d2">esa</data>
+</node>
+<node id="31">
+  <data key="d2">misma</data>
+</node>
+<node id="35">
+  <data key="d2">a</data>
+</node>
+<node id="37">
+  <data key="d2">que</data>
+</node>
+<node id="38">
+  <data key="d2">iba</data>
+</node>
+<node id="43">
+  <data key="d2">lucha</data>
+</node>
+<node id="63">
+  <data key="d2">sería</data>
+</node>
+<node id="20">
+  <data key="d2">,</data>
+</node>
+<node id="22">
+  <data key="d2">cual</data>
+</node>
+<node id="26">
+  <data key="d2">hizo</data>
+</node>
+<node id="39">
+  <data key="d2">a</data>
+</node>
+<node id="41">
+  <data key="d2">en</data>
+</node>
+<node id="42">
+  <data key="d2">una</data>
+</node>
+<node id="45">
+  <data key="d2">parejas</data>
+</node>
+<node id="47">
+  <data key="d2">John</data>
+</node>
+<node id="50">
+  <data key="d2">Alberto</data>
+</node>
+<node id="57">
+  <data key="d2">y</data>
+</node>
+<node id="60">
+  <data key="d2">ganaba</data>
+</node>
+<node id="62">
+  <data key="d2">no</data>
+</node>
+<node id="64">
+  <data key="d2">comentarista</data>
+</node>
+<node id="21">
+  <data key="d2">el</data>
+</node>
+<node id="24">
+  <data key="d2">y</data>
+</node>
+<node id="25">
+  <data key="d2">lo</data>
+</node>
+<node id="44">
+  <data key="d2">en</data>
+</node>
+<node id="46">
+  <data key="d2">con</data>
+</node>
+<node id="48">
+  <data key="d2">Cena</data>
+</node>
+<node id="49">
+  <data key="d2">contra</data>
+</node>
+<node id="53">
+  <data key="d2">Rio</data>
+</node>
+<node id="55">
+  <data key="d2">Michael</data>
+</node>
+<node id="58">
+  <data key="d2">si</data>
+</node>
+<node id="59">
+  <data key="d2">no</data>
+</node>
+<node id="61">
+  <data key="d2">,</data>
+</node>
+<node id="67">
+  <data key="d2">marca</data>
+</node>
+<node id="51">
+  <data key="d2">de</data>
+</node>
+<node id="52">
+  <data key="d2">el</data>
+</node>
+<node id="54">
+  <data key="d2">y</data>
+</node>
+<node id="56">
+  <data key="d2">Cole</data>
+</node>
+<node id="65">
+  <data key="d2">de</data>
+</node>
+<node id="66">
+  <data key="d2">la</data>
+</node>
+<edge source="9" target="4"/>
+<edge source="9" target="5"/>
+<edge source="9" target="7"/>
+<edge source="9" target="8"/>
+<edge source="9" target="11"/>
+<edge source="9" target="14"/>
+<edge source="9" target="68"/>
+<edge source="4" target="1"/>
+<edge source="4" target="2"/>
+<edge source="4" target="3"/>
+<edge source="7" target="6"/>
+<edge source="11" target="10"/>
+<edge source="11" target="34"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="16"/>
+<edge source="14" target="18"/>
+<edge source="34" target="27"/>
+<edge source="34" target="28"/>
+<edge source="34" target="32"/>
+<edge source="34" target="33"/>
+<edge source="34" target="36"/>
+<edge source="34" target="40"/>
+<edge source="16" target="15"/>
+<edge source="18" target="17"/>
+<edge source="18" target="19"/>
+<edge source="18" target="23"/>
+<edge source="32" target="29"/>
+<edge source="32" target="30"/>
+<edge source="32" target="31"/>
+<edge source="36" target="35"/>
+<edge source="40" target="37"/>
+<edge source="40" target="38"/>
+<edge source="40" target="43"/>
+<edge source="40" target="63"/>
+<edge source="23" target="20"/>
+<edge source="23" target="22"/>
+<edge source="23" target="26"/>
+<edge source="38" target="39"/>
+<edge source="43" target="41"/>
+<edge source="43" target="42"/>
+<edge source="43" target="45"/>
+<edge source="43" target="47"/>
+<edge source="43" target="50"/>
+<edge source="63" target="57"/>
+<edge source="63" target="60"/>
+<edge source="63" target="62"/>
+<edge source="63" target="64"/>
+<edge source="22" target="21"/>
+<edge source="26" target="24"/>
+<edge source="26" target="25"/>
+<edge source="45" target="44"/>
+<edge source="47" target="46"/>
+<edge source="47" target="48"/>
+<edge source="50" target="49"/>
+<edge source="50" target="53"/>
+<edge source="50" target="55"/>
+<edge source="60" target="58"/>
+<edge source="60" target="59"/>
+<edge source="60" target="61"/>
+<edge source="64" target="67"/>
+<edge source="53" target="51"/>
+<edge source="53" target="52"/>
+<edge source="55" target="54"/>
+<edge source="55" target="56"/>
+<edge source="67" target="65"/>
+<edge source="67" target="66"/>
+</graph></graphml>

@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Aunque Hecatomno había pensado en una posible rebelión, siempre fue fiel al rey persa, por lo que no había razón para negarle a su hijo el derecho a sucederle.</data>
+<data key="d1">12</data>
+<node id="12">
+  <data key="d2">fiel</data>
+</node>
+<node id="4">
+  <data key="d2">pensado</data>
+</node>
+<node id="10">
+  <data key="d2">siempre</data>
+</node>
+<node id="11">
+  <data key="d2">fue</data>
+</node>
+<node id="17">
+  <data key="d2">,</data>
+</node>
+<node id="22">
+  <data key="d2">había</data>
+</node>
+<node id="35">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Aunque</data>
+</node>
+<node id="2">
+  <data key="d2">Hecatomno</data>
+</node>
+<node id="3">
+  <data key="d2">había</data>
+</node>
+<node id="8">
+  <data key="d2">rebelión</data>
+</node>
+<node id="9">
+  <data key="d2">,</data>
+</node>
+<node id="15">
+  <data key="d2">rey</data>
+</node>
+<node id="20">
+  <data key="d2">que</data>
+</node>
+<node id="21">
+  <data key="d2">no</data>
+</node>
+<node id="23">
+  <data key="d2">razón</data>
+</node>
+<node id="25">
+  <data key="d2">negar</data>
+</node>
+<node id="5">
+  <data key="d2">en</data>
+</node>
+<node id="6">
+  <data key="d2">una</data>
+</node>
+<node id="7">
+  <data key="d2">posible</data>
+</node>
+<node id="13">
+  <data key="d2">a</data>
+</node>
+<node id="14">
+  <data key="d2">el</data>
+</node>
+<node id="16">
+  <data key="d2">persa</data>
+</node>
+<node id="18">
+  <data key="d2">por</data>
+</node>
+<node id="19">
+  <data key="d2">lo</data>
+</node>
+<node id="24">
+  <data key="d2">para</data>
+</node>
+<node id="26">
+  <data key="d2">le</data>
+</node>
+<node id="29">
+  <data key="d2">hijo</data>
+</node>
+<node id="31">
+  <data key="d2">derecho</data>
+</node>
+<node id="27">
+  <data key="d2">a</data>
+</node>
+<node id="28">
+  <data key="d2">su</data>
+</node>
+<node id="30">
+  <data key="d2">el</data>
+</node>
+<node id="33">
+  <data key="d2">suceder</data>
+</node>
+<node id="32">
+  <data key="d2">a</data>
+</node>
+<node id="34">
+  <data key="d2">le</data>
+</node>
+<edge source="12" target="4"/>
+<edge source="12" target="10"/>
+<edge source="12" target="11"/>
+<edge source="12" target="17"/>
+<edge source="12" target="22"/>
+<edge source="12" target="35"/>
+<edge source="4" target="1"/>
+<edge source="4" target="2"/>
+<edge source="4" target="3"/>
+<edge source="4" target="8"/>
+<edge source="4" target="9"/>
+<edge source="11" target="15"/>
+<edge source="22" target="20"/>
+<edge source="22" target="21"/>
+<edge source="22" target="23"/>
+<edge source="22" target="25"/>
+<edge source="8" target="5"/>
+<edge source="8" target="6"/>
+<edge source="8" target="7"/>
+<edge source="15" target="13"/>
+<edge source="15" target="14"/>
+<edge source="15" target="16"/>
+<edge source="20" target="18"/>
+<edge source="20" target="19"/>
+<edge source="25" target="24"/>
+<edge source="25" target="26"/>
+<edge source="25" target="29"/>
+<edge source="25" target="31"/>
+<edge source="29" target="27"/>
+<edge source="29" target="28"/>
+<edge source="31" target="30"/>
+<edge source="31" target="33"/>
+<edge source="33" target="32"/>
+<edge source="33" target="34"/>
+</graph></graphml>

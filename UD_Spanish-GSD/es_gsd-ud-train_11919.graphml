@@ -1,0 +1,530 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En julio de 1937 fue a exponer sus fotografías en la Feria mundial de París y desde allí se trasladó a Londres para realizar una serie de reproducciones de cuadros de la National Gallery para la empresa Uvachrome de Múnich y entonces fijó su residencia en esta ciudad, al estallar la segunda guerra mundial fue ingresado en un campo de internamiento en Huyton, cerca de Liverpool, aunque pronto fue trasladado a Sídney y de allí a varios campos australianos: Hay, Orange y Tatura hasta ser liberado en noviembre de 1941 que pudo trasladarse a Londres donde realizó reportajes sobre edificios históricos para el National Buildings Records que tuvieron gran aceptación pero en 1947 abandonó la fotografía profesional para dedicarse al coleccionismo.</data>
+<data key="d1">5</data>
+<node id="5">
+  <data key="d2">fue</data>
+</node>
+<node id="2">
+  <data key="d2">julio</data>
+</node>
+<node id="7">
+  <data key="d2">exponer</data>
+</node>
+<node id="20">
+  <data key="d2">trasladó</data>
+</node>
+<node id="43">
+  <data key="d2">fijó</data>
+</node>
+<node id="49">
+  <data key="d2">,</data>
+</node>
+<node id="58">
+  <data key="d2">ingresado</data>
+</node>
+<node id="131">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="4">
+  <data key="d2">1937</data>
+</node>
+<node id="6">
+  <data key="d2">a</data>
+</node>
+<node id="9">
+  <data key="d2">fotografías</data>
+</node>
+<node id="12">
+  <data key="d2">Feria</data>
+</node>
+<node id="16">
+  <data key="d2">y</data>
+</node>
+<node id="18">
+  <data key="d2">allí</data>
+</node>
+<node id="19">
+  <data key="d2">se</data>
+</node>
+<node id="22">
+  <data key="d2">Londres</data>
+</node>
+<node id="24">
+  <data key="d2">realizar</data>
+</node>
+<node id="41">
+  <data key="d2">y</data>
+</node>
+<node id="42">
+  <data key="d2">entonces</data>
+</node>
+<node id="45">
+  <data key="d2">residencia</data>
+</node>
+<node id="48">
+  <data key="d2">ciudad</data>
+</node>
+<node id="52">
+  <data key="d2">estallar</data>
+</node>
+<node id="57">
+  <data key="d2">fue</data>
+</node>
+<node id="61">
+  <data key="d2">campo</data>
+</node>
+<node id="74">
+  <data key="d2">trasladado</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<node id="8">
+  <data key="d2">sus</data>
+</node>
+<node id="10">
+  <data key="d2">en</data>
+</node>
+<node id="11">
+  <data key="d2">la</data>
+</node>
+<node id="13">
+  <data key="d2">mundial</data>
+</node>
+<node id="15">
+  <data key="d2">París</data>
+</node>
+<node id="17">
+  <data key="d2">desde</data>
+</node>
+<node id="21">
+  <data key="d2">a</data>
+</node>
+<node id="23">
+  <data key="d2">para</data>
+</node>
+<node id="26">
+  <data key="d2">serie</data>
+</node>
+<node id="37">
+  <data key="d2">empresa</data>
+</node>
+<node id="44">
+  <data key="d2">su</data>
+</node>
+<node id="46">
+  <data key="d2">en</data>
+</node>
+<node id="47">
+  <data key="d2">esta</data>
+</node>
+<node id="50">
+  <data key="d2">a</data>
+</node>
+<node id="51">
+  <data key="d2">el</data>
+</node>
+<node id="55">
+  <data key="d2">guerra</data>
+</node>
+<node id="59">
+  <data key="d2">en</data>
+</node>
+<node id="60">
+  <data key="d2">un</data>
+</node>
+<node id="63">
+  <data key="d2">internamiento</data>
+</node>
+<node id="65">
+  <data key="d2">Huyton</data>
+</node>
+<node id="69">
+  <data key="d2">Liverpool</data>
+</node>
+<node id="70">
+  <data key="d2">,</data>
+</node>
+<node id="71">
+  <data key="d2">aunque</data>
+</node>
+<node id="72">
+  <data key="d2">pronto</data>
+</node>
+<node id="73">
+  <data key="d2">fue</data>
+</node>
+<node id="76">
+  <data key="d2">Sídney</data>
+</node>
+<node id="92">
+  <data key="d2">liberado</data>
+</node>
+<node id="14">
+  <data key="d2">de</data>
+</node>
+<node id="25">
+  <data key="d2">una</data>
+</node>
+<node id="28">
+  <data key="d2">reproducciones</data>
+</node>
+<node id="35">
+  <data key="d2">para</data>
+</node>
+<node id="36">
+  <data key="d2">la</data>
+</node>
+<node id="38">
+  <data key="d2">Uvachrome</data>
+</node>
+<node id="40">
+  <data key="d2">Múnich</data>
+</node>
+<node id="53">
+  <data key="d2">la</data>
+</node>
+<node id="54">
+  <data key="d2">segunda</data>
+</node>
+<node id="56">
+  <data key="d2">mundial</data>
+</node>
+<node id="62">
+  <data key="d2">de</data>
+</node>
+<node id="64">
+  <data key="d2">en</data>
+</node>
+<node id="66">
+  <data key="d2">,</data>
+</node>
+<node id="67">
+  <data key="d2">cerca</data>
+</node>
+<node id="75">
+  <data key="d2">a</data>
+</node>
+<node id="78">
+  <data key="d2">de</data>
+</node>
+<node id="90">
+  <data key="d2">hasta</data>
+</node>
+<node id="91">
+  <data key="d2">ser</data>
+</node>
+<node id="94">
+  <data key="d2">noviembre</data>
+</node>
+<node id="27">
+  <data key="d2">de</data>
+</node>
+<node id="30">
+  <data key="d2">cuadros</data>
+</node>
+<node id="39">
+  <data key="d2">de</data>
+</node>
+<node id="68">
+  <data key="d2">de</data>
+</node>
+<node id="77">
+  <data key="d2">y</data>
+</node>
+<node id="79">
+  <data key="d2">allí</data>
+</node>
+<node id="82">
+  <data key="d2">campos</data>
+</node>
+<node id="93">
+  <data key="d2">en</data>
+</node>
+<node id="96">
+  <data key="d2">1941</data>
+</node>
+<node id="99">
+  <data key="d2">trasladar</data>
+</node>
+<node id="29">
+  <data key="d2">de</data>
+</node>
+<node id="34">
+  <data key="d2">Gallery</data>
+</node>
+<node id="80">
+  <data key="d2">a</data>
+</node>
+<node id="81">
+  <data key="d2">varios</data>
+</node>
+<node id="83">
+  <data key="d2">australianos</data>
+</node>
+<node id="84">
+  <data key="d2">:</data>
+</node>
+<node id="85">
+  <data key="d2">Hay</data>
+</node>
+<node id="95">
+  <data key="d2">de</data>
+</node>
+<node id="97">
+  <data key="d2">que</data>
+</node>
+<node id="98">
+  <data key="d2">pudo</data>
+</node>
+<node id="100">
+  <data key="d2">se</data>
+</node>
+<node id="102">
+  <data key="d2">Londres</data>
+</node>
+<node id="121">
+  <data key="d2">abandonó</data>
+</node>
+<node id="31">
+  <data key="d2">de</data>
+</node>
+<node id="32">
+  <data key="d2">la</data>
+</node>
+<node id="33">
+  <data key="d2">National</data>
+</node>
+<node id="87">
+  <data key="d2">Orange</data>
+</node>
+<node id="89">
+  <data key="d2">Tatura</data>
+</node>
+<node id="101">
+  <data key="d2">a</data>
+</node>
+<node id="104">
+  <data key="d2">realizó</data>
+</node>
+<node id="118">
+  <data key="d2">pero</data>
+</node>
+<node id="120">
+  <data key="d2">1947</data>
+</node>
+<node id="123">
+  <data key="d2">fotografía</data>
+</node>
+<node id="126">
+  <data key="d2">dedicar</data>
+</node>
+<node id="86">
+  <data key="d2">,</data>
+</node>
+<node id="88">
+  <data key="d2">y</data>
+</node>
+<node id="103">
+  <data key="d2">donde</data>
+</node>
+<node id="105">
+  <data key="d2">reportajes</data>
+</node>
+<node id="119">
+  <data key="d2">en</data>
+</node>
+<node id="122">
+  <data key="d2">la</data>
+</node>
+<node id="124">
+  <data key="d2">profesional</data>
+</node>
+<node id="125">
+  <data key="d2">para</data>
+</node>
+<node id="127">
+  <data key="d2">se</data>
+</node>
+<node id="130">
+  <data key="d2">coleccionismo</data>
+</node>
+<node id="107">
+  <data key="d2">edificios</data>
+</node>
+<node id="111">
+  <data key="d2">National</data>
+</node>
+<node id="115">
+  <data key="d2">tuvieron</data>
+</node>
+<node id="128">
+  <data key="d2">a</data>
+</node>
+<node id="129">
+  <data key="d2">el</data>
+</node>
+<node id="106">
+  <data key="d2">sobre</data>
+</node>
+<node id="108">
+  <data key="d2">históricos</data>
+</node>
+<node id="109">
+  <data key="d2">para</data>
+</node>
+<node id="110">
+  <data key="d2">el</data>
+</node>
+<node id="112">
+  <data key="d2">Buildings</data>
+</node>
+<node id="113">
+  <data key="d2">Records</data>
+</node>
+<node id="114">
+  <data key="d2">que</data>
+</node>
+<node id="117">
+  <data key="d2">aceptación</data>
+</node>
+<node id="116">
+  <data key="d2">gran</data>
+</node>
+<edge source="5" target="2"/>
+<edge source="5" target="7"/>
+<edge source="5" target="20"/>
+<edge source="5" target="43"/>
+<edge source="5" target="49"/>
+<edge source="5" target="58"/>
+<edge source="5" target="131"/>
+<edge source="2" target="1"/>
+<edge source="2" target="4"/>
+<edge source="7" target="6"/>
+<edge source="7" target="9"/>
+<edge source="7" target="12"/>
+<edge source="20" target="16"/>
+<edge source="20" target="18"/>
+<edge source="20" target="19"/>
+<edge source="20" target="22"/>
+<edge source="20" target="24"/>
+<edge source="43" target="41"/>
+<edge source="43" target="42"/>
+<edge source="43" target="45"/>
+<edge source="43" target="48"/>
+<edge source="58" target="52"/>
+<edge source="58" target="57"/>
+<edge source="58" target="61"/>
+<edge source="58" target="74"/>
+<edge source="4" target="3"/>
+<edge source="9" target="8"/>
+<edge source="12" target="10"/>
+<edge source="12" target="11"/>
+<edge source="12" target="13"/>
+<edge source="12" target="15"/>
+<edge source="18" target="17"/>
+<edge source="22" target="21"/>
+<edge source="24" target="23"/>
+<edge source="24" target="26"/>
+<edge source="24" target="37"/>
+<edge source="45" target="44"/>
+<edge source="48" target="46"/>
+<edge source="48" target="47"/>
+<edge source="52" target="50"/>
+<edge source="52" target="51"/>
+<edge source="52" target="55"/>
+<edge source="61" target="59"/>
+<edge source="61" target="60"/>
+<edge source="61" target="63"/>
+<edge source="61" target="65"/>
+<edge source="61" target="69"/>
+<edge source="74" target="70"/>
+<edge source="74" target="71"/>
+<edge source="74" target="72"/>
+<edge source="74" target="73"/>
+<edge source="74" target="76"/>
+<edge source="74" target="92"/>
+<edge source="15" target="14"/>
+<edge source="26" target="25"/>
+<edge source="26" target="28"/>
+<edge source="37" target="35"/>
+<edge source="37" target="36"/>
+<edge source="37" target="38"/>
+<edge source="37" target="40"/>
+<edge source="55" target="53"/>
+<edge source="55" target="54"/>
+<edge source="55" target="56"/>
+<edge source="63" target="62"/>
+<edge source="65" target="64"/>
+<edge source="69" target="66"/>
+<edge source="69" target="67"/>
+<edge source="76" target="75"/>
+<edge source="76" target="78"/>
+<edge source="92" target="90"/>
+<edge source="92" target="91"/>
+<edge source="92" target="94"/>
+<edge source="28" target="27"/>
+<edge source="28" target="30"/>
+<edge source="40" target="39"/>
+<edge source="67" target="68"/>
+<edge source="78" target="77"/>
+<edge source="78" target="79"/>
+<edge source="78" target="82"/>
+<edge source="94" target="93"/>
+<edge source="94" target="96"/>
+<edge source="94" target="99"/>
+<edge source="30" target="29"/>
+<edge source="30" target="34"/>
+<edge source="82" target="80"/>
+<edge source="82" target="81"/>
+<edge source="82" target="83"/>
+<edge source="82" target="84"/>
+<edge source="82" target="85"/>
+<edge source="96" target="95"/>
+<edge source="99" target="97"/>
+<edge source="99" target="98"/>
+<edge source="99" target="100"/>
+<edge source="99" target="102"/>
+<edge source="99" target="121"/>
+<edge source="34" target="31"/>
+<edge source="34" target="32"/>
+<edge source="34" target="33"/>
+<edge source="85" target="87"/>
+<edge source="85" target="89"/>
+<edge source="102" target="101"/>
+<edge source="102" target="104"/>
+<edge source="121" target="118"/>
+<edge source="121" target="120"/>
+<edge source="121" target="123"/>
+<edge source="121" target="126"/>
+<edge source="87" target="86"/>
+<edge source="87" target="88"/>
+<edge source="104" target="103"/>
+<edge source="104" target="105"/>
+<edge source="120" target="119"/>
+<edge source="123" target="122"/>
+<edge source="123" target="124"/>
+<edge source="126" target="125"/>
+<edge source="126" target="127"/>
+<edge source="126" target="130"/>
+<edge source="105" target="107"/>
+<edge source="105" target="111"/>
+<edge source="105" target="115"/>
+<edge source="130" target="128"/>
+<edge source="130" target="129"/>
+<edge source="107" target="106"/>
+<edge source="107" target="108"/>
+<edge source="111" target="109"/>
+<edge source="111" target="110"/>
+<edge source="111" target="112"/>
+<edge source="111" target="113"/>
+<edge source="115" target="114"/>
+<edge source="115" target="117"/>
+<edge source="117" target="116"/>
+</graph></graphml>

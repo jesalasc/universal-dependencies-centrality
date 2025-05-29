@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En cuanto a sistemas de 16 bits, emula muy bien la Turbografx, PC Engine y Sega Mega Drive.</data>
+<data key="d1">9</data>
+<node id="9">
+  <data key="d2">emula</data>
+</node>
+<node id="4">
+  <data key="d2">sistemas</data>
+</node>
+<node id="8">
+  <data key="d2">,</data>
+</node>
+<node id="11">
+  <data key="d2">bien</data>
+</node>
+<node id="13">
+  <data key="d2">Turbografx</data>
+</node>
+<node id="21">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="7">
+  <data key="d2">bits</data>
+</node>
+<node id="10">
+  <data key="d2">muy</data>
+</node>
+<node id="12">
+  <data key="d2">la</data>
+</node>
+<node id="15">
+  <data key="d2">PC</data>
+</node>
+<node id="18">
+  <data key="d2">Sega</data>
+</node>
+<node id="2">
+  <data key="d2">cuanto</data>
+</node>
+<node id="3">
+  <data key="d2">a</data>
+</node>
+<node id="5">
+  <data key="d2">de</data>
+</node>
+<node id="6">
+  <data key="d2">16</data>
+</node>
+<node id="14">
+  <data key="d2">,</data>
+</node>
+<node id="16">
+  <data key="d2">Engine</data>
+</node>
+<node id="17">
+  <data key="d2">y</data>
+</node>
+<node id="19">
+  <data key="d2">Mega</data>
+</node>
+<node id="20">
+  <data key="d2">Drive</data>
+</node>
+<edge source="9" target="4"/>
+<edge source="9" target="8"/>
+<edge source="9" target="11"/>
+<edge source="9" target="13"/>
+<edge source="9" target="21"/>
+<edge source="4" target="1"/>
+<edge source="4" target="7"/>
+<edge source="11" target="10"/>
+<edge source="13" target="12"/>
+<edge source="13" target="15"/>
+<edge source="13" target="18"/>
+<edge source="1" target="2"/>
+<edge source="1" target="3"/>
+<edge source="7" target="5"/>
+<edge source="7" target="6"/>
+<edge source="15" target="14"/>
+<edge source="15" target="16"/>
+<edge source="18" target="17"/>
+<edge source="18" target="19"/>
+<edge source="18" target="20"/>
+</graph></graphml>

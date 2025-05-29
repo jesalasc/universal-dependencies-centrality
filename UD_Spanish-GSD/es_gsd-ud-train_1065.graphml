@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Muchos deltanos han optado por mudarse a otros estados cercanos (Monagas, Bolívar y Anzoátegui) en búsqueda de fuentes de trabajo ya que en Tucupita y en el resto de los municipios no hay ningún tipo de industrias que puedan darle impulso a su economía.</data>
+<data key="d1">4</data>
+<node id="4">
+  <data key="d2">optado</data>
+</node>
+<node id="2">
+  <data key="d2">deltanos</data>
+</node>
+<node id="3">
+  <data key="d2">han</data>
+</node>
+<node id="6">
+  <data key="d2">mudar</data>
+</node>
+<node id="37">
+  <data key="d2">hay</data>
+</node>
+<node id="50">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Muchos</data>
+</node>
+<node id="5">
+  <data key="d2">por</data>
+</node>
+<node id="7">
+  <data key="d2">se</data>
+</node>
+<node id="10">
+  <data key="d2">estados</data>
+</node>
+<node id="20">
+  <data key="d2">búsqueda</data>
+</node>
+<node id="25">
+  <data key="d2">ya</data>
+</node>
+<node id="28">
+  <data key="d2">Tucupita</data>
+</node>
+<node id="36">
+  <data key="d2">no</data>
+</node>
+<node id="39">
+  <data key="d2">tipo</data>
+</node>
+<node id="8">
+  <data key="d2">a</data>
+</node>
+<node id="9">
+  <data key="d2">otros</data>
+</node>
+<node id="11">
+  <data key="d2">cercanos</data>
+</node>
+<node id="13">
+  <data key="d2">Monagas</data>
+</node>
+<node id="19">
+  <data key="d2">en</data>
+</node>
+<node id="22">
+  <data key="d2">fuentes</data>
+</node>
+<node id="26">
+  <data key="d2">que</data>
+</node>
+<node id="27">
+  <data key="d2">en</data>
+</node>
+<node id="32">
+  <data key="d2">resto</data>
+</node>
+<node id="38">
+  <data key="d2">ningún</data>
+</node>
+<node id="41">
+  <data key="d2">industrias</data>
+</node>
+<node id="12">
+  <data key="d2">(</data>
+</node>
+<node id="15">
+  <data key="d2">Bolívar</data>
+</node>
+<node id="17">
+  <data key="d2">Anzoátegui</data>
+</node>
+<node id="18">
+  <data key="d2">)</data>
+</node>
+<node id="21">
+  <data key="d2">de</data>
+</node>
+<node id="24">
+  <data key="d2">trabajo</data>
+</node>
+<node id="29">
+  <data key="d2">y</data>
+</node>
+<node id="30">
+  <data key="d2">en</data>
+</node>
+<node id="31">
+  <data key="d2">el</data>
+</node>
+<node id="35">
+  <data key="d2">municipios</data>
+</node>
+<node id="40">
+  <data key="d2">de</data>
+</node>
+<node id="44">
+  <data key="d2">dar</data>
+</node>
+<node id="14">
+  <data key="d2">,</data>
+</node>
+<node id="16">
+  <data key="d2">y</data>
+</node>
+<node id="23">
+  <data key="d2">de</data>
+</node>
+<node id="33">
+  <data key="d2">de</data>
+</node>
+<node id="34">
+  <data key="d2">los</data>
+</node>
+<node id="42">
+  <data key="d2">que</data>
+</node>
+<node id="43">
+  <data key="d2">puedan</data>
+</node>
+<node id="45">
+  <data key="d2">le</data>
+</node>
+<node id="46">
+  <data key="d2">impulso</data>
+</node>
+<node id="49">
+  <data key="d2">economía</data>
+</node>
+<node id="47">
+  <data key="d2">a</data>
+</node>
+<node id="48">
+  <data key="d2">su</data>
+</node>
+<edge source="4" target="2"/>
+<edge source="4" target="3"/>
+<edge source="4" target="6"/>
+<edge source="4" target="37"/>
+<edge source="4" target="50"/>
+<edge source="2" target="1"/>
+<edge source="6" target="5"/>
+<edge source="6" target="7"/>
+<edge source="6" target="10"/>
+<edge source="6" target="20"/>
+<edge source="37" target="25"/>
+<edge source="37" target="28"/>
+<edge source="37" target="36"/>
+<edge source="37" target="39"/>
+<edge source="10" target="8"/>
+<edge source="10" target="9"/>
+<edge source="10" target="11"/>
+<edge source="10" target="13"/>
+<edge source="20" target="19"/>
+<edge source="20" target="22"/>
+<edge source="25" target="26"/>
+<edge source="28" target="27"/>
+<edge source="28" target="32"/>
+<edge source="39" target="38"/>
+<edge source="39" target="41"/>
+<edge source="13" target="12"/>
+<edge source="13" target="15"/>
+<edge source="13" target="17"/>
+<edge source="13" target="18"/>
+<edge source="22" target="21"/>
+<edge source="22" target="24"/>
+<edge source="32" target="29"/>
+<edge source="32" target="30"/>
+<edge source="32" target="31"/>
+<edge source="32" target="35"/>
+<edge source="41" target="40"/>
+<edge source="41" target="44"/>
+<edge source="15" target="14"/>
+<edge source="17" target="16"/>
+<edge source="24" target="23"/>
+<edge source="35" target="33"/>
+<edge source="35" target="34"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="45"/>
+<edge source="44" target="46"/>
+<edge source="44" target="49"/>
+<edge source="49" target="47"/>
+<edge source="49" target="48"/>
+</graph></graphml>

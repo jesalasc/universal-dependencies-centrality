@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">A su vez, el General Obregón permaneció en Celaya mientras que la vanguardia del General Fortunato Maycotte marchaba hasta El Guaje, a unos 18 kilómetros al norte, distancia desproporcionada para una vanguardia.</data>
+<data key="d1">8</data>
+<node id="8">
+  <data key="d2">permaneció</data>
+</node>
+<node id="3">
+  <data key="d2">vez</data>
+</node>
+<node id="6">
+  <data key="d2">General</data>
+</node>
+<node id="10">
+  <data key="d2">Celaya</data>
+</node>
+<node id="20">
+  <data key="d2">marchaba</data>
+</node>
+<node id="38">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">A</data>
+</node>
+<node id="2">
+  <data key="d2">su</data>
+</node>
+<node id="4">
+  <data key="d2">,</data>
+</node>
+<node id="5">
+  <data key="d2">el</data>
+</node>
+<node id="7">
+  <data key="d2">Obregón</data>
+</node>
+<node id="9">
+  <data key="d2">en</data>
+</node>
+<node id="11">
+  <data key="d2">mientras</data>
+</node>
+<node id="14">
+  <data key="d2">vanguardia</data>
+</node>
+<node id="23">
+  <data key="d2">Guaje</data>
+</node>
+<node id="12">
+  <data key="d2">que</data>
+</node>
+<node id="13">
+  <data key="d2">la</data>
+</node>
+<node id="17">
+  <data key="d2">General</data>
+</node>
+<node id="21">
+  <data key="d2">hasta</data>
+</node>
+<node id="22">
+  <data key="d2">El</data>
+</node>
+<node id="28">
+  <data key="d2">kilómetros</data>
+</node>
+<node id="15">
+  <data key="d2">de</data>
+</node>
+<node id="16">
+  <data key="d2">el</data>
+</node>
+<node id="18">
+  <data key="d2">Fortunato</data>
+</node>
+<node id="24">
+  <data key="d2">,</data>
+</node>
+<node id="25">
+  <data key="d2">a</data>
+</node>
+<node id="27">
+  <data key="d2">18</data>
+</node>
+<node id="31">
+  <data key="d2">norte</data>
+</node>
+<node id="32">
+  <data key="d2">,</data>
+</node>
+<node id="33">
+  <data key="d2">distancia</data>
+</node>
+<node id="19">
+  <data key="d2">Maycotte</data>
+</node>
+<node id="26">
+  <data key="d2">unos</data>
+</node>
+<node id="29">
+  <data key="d2">a</data>
+</node>
+<node id="30">
+  <data key="d2">el</data>
+</node>
+<node id="34">
+  <data key="d2">desproporcionada</data>
+</node>
+<node id="37">
+  <data key="d2">vanguardia</data>
+</node>
+<node id="35">
+  <data key="d2">para</data>
+</node>
+<node id="36">
+  <data key="d2">una</data>
+</node>
+<edge source="8" target="3"/>
+<edge source="8" target="6"/>
+<edge source="8" target="10"/>
+<edge source="8" target="20"/>
+<edge source="8" target="38"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="3" target="4"/>
+<edge source="6" target="5"/>
+<edge source="6" target="7"/>
+<edge source="10" target="9"/>
+<edge source="20" target="11"/>
+<edge source="20" target="14"/>
+<edge source="20" target="23"/>
+<edge source="11" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="17"/>
+<edge source="23" target="21"/>
+<edge source="23" target="22"/>
+<edge source="23" target="28"/>
+<edge source="17" target="15"/>
+<edge source="17" target="16"/>
+<edge source="17" target="18"/>
+<edge source="28" target="24"/>
+<edge source="28" target="25"/>
+<edge source="28" target="27"/>
+<edge source="28" target="31"/>
+<edge source="28" target="32"/>
+<edge source="28" target="33"/>
+<edge source="18" target="19"/>
+<edge source="27" target="26"/>
+<edge source="31" target="29"/>
+<edge source="31" target="30"/>
+<edge source="33" target="34"/>
+<edge source="33" target="37"/>
+<edge source="37" target="35"/>
+<edge source="37" target="36"/>
+</graph></graphml>

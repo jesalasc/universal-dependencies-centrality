@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Fue enterrado allí.</data>
+<data key="d1">2</data>
+<node id="2">
+  <data key="d2">enterrado</data>
+</node>
+<node id="1">
+  <data key="d2">Fue</data>
+</node>
+<node id="3">
+  <data key="d2">allí</data>
+</node>
+<node id="4">
+  <data key="d2">.</data>
+</node>
+<edge source="2" target="1"/>
+<edge source="2" target="3"/>
+<edge source="2" target="4"/>
+</graph></graphml>

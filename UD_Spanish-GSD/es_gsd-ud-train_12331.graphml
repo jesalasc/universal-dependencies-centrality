@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Hace falta un foro mundial donde se patentice una historia que contenga la visión de los historiadores de los cinco continentes".</data>
+<data key="d1">1</data>
+<node id="1">
+  <data key="d2">Hace</data>
+</node>
+<node id="2">
+  <data key="d2">falta</data>
+</node>
+<node id="4">
+  <data key="d2">foro</data>
+</node>
+<node id="22">
+  <data key="d2">"</data>
+</node>
+<node id="23">
+  <data key="d2">.</data>
+</node>
+<node id="3">
+  <data key="d2">un</data>
+</node>
+<node id="5">
+  <data key="d2">mundial</data>
+</node>
+<node id="8">
+  <data key="d2">patentice</data>
+</node>
+<node id="6">
+  <data key="d2">donde</data>
+</node>
+<node id="7">
+  <data key="d2">se</data>
+</node>
+<node id="10">
+  <data key="d2">historia</data>
+</node>
+<node id="9">
+  <data key="d2">una</data>
+</node>
+<node id="12">
+  <data key="d2">contenga</data>
+</node>
+<node id="11">
+  <data key="d2">que</data>
+</node>
+<node id="14">
+  <data key="d2">visión</data>
+</node>
+<node id="13">
+  <data key="d2">la</data>
+</node>
+<node id="17">
+  <data key="d2">historiadores</data>
+</node>
+<node id="15">
+  <data key="d2">de</data>
+</node>
+<node id="16">
+  <data key="d2">los</data>
+</node>
+<node id="21">
+  <data key="d2">continentes</data>
+</node>
+<node id="18">
+  <data key="d2">de</data>
+</node>
+<node id="19">
+  <data key="d2">los</data>
+</node>
+<node id="20">
+  <data key="d2">cinco</data>
+</node>
+<edge source="1" target="2"/>
+<edge source="1" target="4"/>
+<edge source="1" target="22"/>
+<edge source="1" target="23"/>
+<edge source="4" target="3"/>
+<edge source="4" target="5"/>
+<edge source="4" target="8"/>
+<edge source="8" target="6"/>
+<edge source="8" target="7"/>
+<edge source="8" target="10"/>
+<edge source="10" target="9"/>
+<edge source="10" target="12"/>
+<edge source="12" target="11"/>
+<edge source="12" target="14"/>
+<edge source="14" target="13"/>
+<edge source="14" target="17"/>
+<edge source="17" target="15"/>
+<edge source="17" target="16"/>
+<edge source="17" target="21"/>
+<edge source="21" target="18"/>
+<edge source="21" target="19"/>
+<edge source="21" target="20"/>
+</graph></graphml>

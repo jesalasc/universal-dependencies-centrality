@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En ese torneo Khaldoun Ibrahim disputó dos partidos.</data>
+<data key="d1">6</data>
+<node id="6">
+  <data key="d2">disputó</data>
+</node>
+<node id="3">
+  <data key="d2">torneo</data>
+</node>
+<node id="4">
+  <data key="d2">Khaldoun</data>
+</node>
+<node id="8">
+  <data key="d2">partidos</data>
+</node>
+<node id="9">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="2">
+  <data key="d2">ese</data>
+</node>
+<node id="5">
+  <data key="d2">Ibrahim</data>
+</node>
+<node id="7">
+  <data key="d2">dos</data>
+</node>
+<edge source="6" target="3"/>
+<edge source="6" target="4"/>
+<edge source="6" target="8"/>
+<edge source="6" target="9"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="4" target="5"/>
+<edge source="8" target="7"/>
+</graph></graphml>

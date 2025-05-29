@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En el año 1989 se censaron en los Alpes 5.154 glaciares con una superficie de alrededor de 3.000 km².</data>
+<data key="d1">6</data>
+<node id="6">
+  <data key="d2">censaron</data>
+</node>
+<node id="3">
+  <data key="d2">año</data>
+</node>
+<node id="5">
+  <data key="d2">se</data>
+</node>
+<node id="9">
+  <data key="d2">Alpes</data>
+</node>
+<node id="11">
+  <data key="d2">glaciares</data>
+</node>
+<node id="21">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="2">
+  <data key="d2">el</data>
+</node>
+<node id="4">
+  <data key="d2">1989</data>
+</node>
+<node id="7">
+  <data key="d2">en</data>
+</node>
+<node id="8">
+  <data key="d2">los</data>
+</node>
+<node id="10">
+  <data key="d2">5.154</data>
+</node>
+<node id="14">
+  <data key="d2">superficie</data>
+</node>
+<node id="12">
+  <data key="d2">con</data>
+</node>
+<node id="13">
+  <data key="d2">una</data>
+</node>
+<node id="19">
+  <data key="d2">km</data>
+</node>
+<node id="15">
+  <data key="d2">de</data>
+</node>
+<node id="18">
+  <data key="d2">3.000</data>
+</node>
+<node id="20">
+  <data key="d2">²</data>
+</node>
+<node id="16">
+  <data key="d2">alrededor</data>
+</node>
+<node id="17">
+  <data key="d2">de</data>
+</node>
+<edge source="6" target="3"/>
+<edge source="6" target="5"/>
+<edge source="6" target="9"/>
+<edge source="6" target="11"/>
+<edge source="6" target="21"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="3" target="4"/>
+<edge source="9" target="7"/>
+<edge source="9" target="8"/>
+<edge source="11" target="10"/>
+<edge source="11" target="14"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="19"/>
+<edge source="19" target="15"/>
+<edge source="19" target="18"/>
+<edge source="19" target="20"/>
+<edge source="18" target="16"/>
+<edge source="16" target="17"/>
+</graph></graphml>

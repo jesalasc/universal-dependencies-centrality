@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">El objetivo de este trabajo ayudar a conocer la historia humana de nuestra Patagonia, la relación de las comunidades indígenas allí existentes desde la ocupación española hasta nuestros días, los intereses que se mueven detrás de las reivindicaciones araucanas ("mapuches") para contribuir a formar una idea más clara sobre esta delicada situación que puede llevar a la Argentina a su desintegración territorial.</data>
+<data key="d1">6</data>
+<node id="6">
+  <data key="d2">ayudar</data>
+</node>
+<node id="2">
+  <data key="d2">objetivo</data>
+</node>
+<node id="8">
+  <data key="d2">conocer</data>
+</node>
+<node id="69">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">El</data>
+</node>
+<node id="5">
+  <data key="d2">trabajo</data>
+</node>
+<node id="7">
+  <data key="d2">a</data>
+</node>
+<node id="10">
+  <data key="d2">historia</data>
+</node>
+<node id="48">
+  <data key="d2">contribuir</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<node id="4">
+  <data key="d2">este</data>
+</node>
+<node id="9">
+  <data key="d2">la</data>
+</node>
+<node id="11">
+  <data key="d2">humana</data>
+</node>
+<node id="14">
+  <data key="d2">Patagonia</data>
+</node>
+<node id="17">
+  <data key="d2">relación</data>
+</node>
+<node id="33">
+  <data key="d2">intereses</data>
+</node>
+<node id="47">
+  <data key="d2">para</data>
+</node>
+<node id="50">
+  <data key="d2">formar</data>
+</node>
+<node id="12">
+  <data key="d2">de</data>
+</node>
+<node id="13">
+  <data key="d2">nuestra</data>
+</node>
+<node id="15">
+  <data key="d2">,</data>
+</node>
+<node id="16">
+  <data key="d2">la</data>
+</node>
+<node id="20">
+  <data key="d2">comunidades</data>
+</node>
+<node id="26">
+  <data key="d2">ocupación</data>
+</node>
+<node id="30">
+  <data key="d2">días</data>
+</node>
+<node id="31">
+  <data key="d2">,</data>
+</node>
+<node id="32">
+  <data key="d2">los</data>
+</node>
+<node id="36">
+  <data key="d2">mueven</data>
+</node>
+<node id="49">
+  <data key="d2">a</data>
+</node>
+<node id="52">
+  <data key="d2">idea</data>
+</node>
+<node id="18">
+  <data key="d2">de</data>
+</node>
+<node id="19">
+  <data key="d2">las</data>
+</node>
+<node id="21">
+  <data key="d2">indígenas</data>
+</node>
+<node id="23">
+  <data key="d2">existentes</data>
+</node>
+<node id="24">
+  <data key="d2">desde</data>
+</node>
+<node id="25">
+  <data key="d2">la</data>
+</node>
+<node id="27">
+  <data key="d2">española</data>
+</node>
+<node id="28">
+  <data key="d2">hasta</data>
+</node>
+<node id="29">
+  <data key="d2">nuestros</data>
+</node>
+<node id="34">
+  <data key="d2">que</data>
+</node>
+<node id="35">
+  <data key="d2">se</data>
+</node>
+<node id="40">
+  <data key="d2">reivindicaciones</data>
+</node>
+<node id="51">
+  <data key="d2">una</data>
+</node>
+<node id="54">
+  <data key="d2">clara</data>
+</node>
+<node id="58">
+  <data key="d2">situación</data>
+</node>
+<node id="22">
+  <data key="d2">allí</data>
+</node>
+<node id="37">
+  <data key="d2">detrás</data>
+</node>
+<node id="39">
+  <data key="d2">las</data>
+</node>
+<node id="41">
+  <data key="d2">araucanas</data>
+</node>
+<node id="53">
+  <data key="d2">más</data>
+</node>
+<node id="55">
+  <data key="d2">sobre</data>
+</node>
+<node id="56">
+  <data key="d2">esta</data>
+</node>
+<node id="57">
+  <data key="d2">delicada</data>
+</node>
+<node id="61">
+  <data key="d2">llevar</data>
+</node>
+<node id="38">
+  <data key="d2">de</data>
+</node>
+<node id="44">
+  <data key="d2">mapuches</data>
+</node>
+<node id="59">
+  <data key="d2">que</data>
+</node>
+<node id="60">
+  <data key="d2">puede</data>
+</node>
+<node id="64">
+  <data key="d2">Argentina</data>
+</node>
+<node id="67">
+  <data key="d2">desintegración</data>
+</node>
+<node id="42">
+  <data key="d2">(</data>
+</node>
+<node id="43">
+  <data key="d2">"</data>
+</node>
+<node id="45">
+  <data key="d2">"</data>
+</node>
+<node id="46">
+  <data key="d2">)</data>
+</node>
+<node id="62">
+  <data key="d2">a</data>
+</node>
+<node id="63">
+  <data key="d2">la</data>
+</node>
+<node id="65">
+  <data key="d2">a</data>
+</node>
+<node id="66">
+  <data key="d2">su</data>
+</node>
+<node id="68">
+  <data key="d2">territorial</data>
+</node>
+<edge source="6" target="2"/>
+<edge source="6" target="8"/>
+<edge source="6" target="69"/>
+<edge source="2" target="1"/>
+<edge source="2" target="5"/>
+<edge source="8" target="7"/>
+<edge source="8" target="10"/>
+<edge source="8" target="48"/>
+<edge source="5" target="3"/>
+<edge source="5" target="4"/>
+<edge source="10" target="9"/>
+<edge source="10" target="11"/>
+<edge source="10" target="14"/>
+<edge source="10" target="17"/>
+<edge source="10" target="33"/>
+<edge source="48" target="47"/>
+<edge source="48" target="50"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="17" target="15"/>
+<edge source="17" target="16"/>
+<edge source="17" target="20"/>
+<edge source="17" target="26"/>
+<edge source="17" target="30"/>
+<edge source="33" target="31"/>
+<edge source="33" target="32"/>
+<edge source="33" target="36"/>
+<edge source="50" target="49"/>
+<edge source="50" target="52"/>
+<edge source="20" target="18"/>
+<edge source="20" target="19"/>
+<edge source="20" target="21"/>
+<edge source="20" target="23"/>
+<edge source="26" target="24"/>
+<edge source="26" target="25"/>
+<edge source="26" target="27"/>
+<edge source="30" target="28"/>
+<edge source="30" target="29"/>
+<edge source="36" target="34"/>
+<edge source="36" target="35"/>
+<edge source="36" target="40"/>
+<edge source="52" target="51"/>
+<edge source="52" target="54"/>
+<edge source="52" target="58"/>
+<edge source="23" target="22"/>
+<edge source="40" target="37"/>
+<edge source="40" target="39"/>
+<edge source="40" target="41"/>
+<edge source="54" target="53"/>
+<edge source="58" target="55"/>
+<edge source="58" target="56"/>
+<edge source="58" target="57"/>
+<edge source="58" target="61"/>
+<edge source="37" target="38"/>
+<edge source="41" target="44"/>
+<edge source="61" target="59"/>
+<edge source="61" target="60"/>
+<edge source="61" target="64"/>
+<edge source="61" target="67"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="45"/>
+<edge source="44" target="46"/>
+<edge source="64" target="62"/>
+<edge source="64" target="63"/>
+<edge source="67" target="65"/>
+<edge source="67" target="66"/>
+<edge source="67" target="68"/>
+</graph></graphml>

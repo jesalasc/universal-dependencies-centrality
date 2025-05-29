@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">El proyecto de ley que impulsa el gobierno porteño pretende modificar el actual sistema de designación de docentes en las escuelas, que en la actualidad se implementa a través de Juntas de Clasificación, por otro en el que el Ejecutivo sea el que dé el puntaje necesario para que un docente pueda tomar un cargo.</data>
+<data key="d1">10</data>
+<node id="10">
+  <data key="d2">pretende</data>
+</node>
+<node id="2">
+  <data key="d2">proyecto</data>
+</node>
+<node id="11">
+  <data key="d2">modificar</data>
+</node>
+<node id="58">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">El</data>
+</node>
+<node id="4">
+  <data key="d2">ley</data>
+</node>
+<node id="14">
+  <data key="d2">sistema</data>
+</node>
+<node id="37">
+  <data key="d2">otro</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<node id="6">
+  <data key="d2">impulsa</data>
+</node>
+<node id="12">
+  <data key="d2">el</data>
+</node>
+<node id="13">
+  <data key="d2">actual</data>
+</node>
+<node id="16">
+  <data key="d2">designación</data>
+</node>
+<node id="28">
+  <data key="d2">implementa</data>
+</node>
+<node id="36">
+  <data key="d2">por</data>
+</node>
+<node id="44">
+  <data key="d2">el</data>
+</node>
+<node id="5">
+  <data key="d2">que</data>
+</node>
+<node id="8">
+  <data key="d2">gobierno</data>
+</node>
+<node id="15">
+  <data key="d2">de</data>
+</node>
+<node id="18">
+  <data key="d2">docentes</data>
+</node>
+<node id="21">
+  <data key="d2">escuelas</data>
+</node>
+<node id="22">
+  <data key="d2">,</data>
+</node>
+<node id="23">
+  <data key="d2">que</data>
+</node>
+<node id="26">
+  <data key="d2">actualidad</data>
+</node>
+<node id="27">
+  <data key="d2">se</data>
+</node>
+<node id="30">
+  <data key="d2">través</data>
+</node>
+<node id="35">
+  <data key="d2">,</data>
+</node>
+<node id="40">
+  <data key="d2">que</data>
+</node>
+<node id="42">
+  <data key="d2">Ejecutivo</data>
+</node>
+<node id="43">
+  <data key="d2">sea</data>
+</node>
+<node id="46">
+  <data key="d2">dé</data>
+</node>
+<node id="7">
+  <data key="d2">el</data>
+</node>
+<node id="9">
+  <data key="d2">porteño</data>
+</node>
+<node id="17">
+  <data key="d2">de</data>
+</node>
+<node id="19">
+  <data key="d2">en</data>
+</node>
+<node id="20">
+  <data key="d2">las</data>
+</node>
+<node id="24">
+  <data key="d2">en</data>
+</node>
+<node id="25">
+  <data key="d2">la</data>
+</node>
+<node id="29">
+  <data key="d2">a</data>
+</node>
+<node id="32">
+  <data key="d2">Juntas</data>
+</node>
+<node id="38">
+  <data key="d2">en</data>
+</node>
+<node id="39">
+  <data key="d2">el</data>
+</node>
+<node id="41">
+  <data key="d2">el</data>
+</node>
+<node id="45">
+  <data key="d2">que</data>
+</node>
+<node id="48">
+  <data key="d2">puntaje</data>
+</node>
+<node id="31">
+  <data key="d2">de</data>
+</node>
+<node id="34">
+  <data key="d2">Clasificación</data>
+</node>
+<node id="47">
+  <data key="d2">el</data>
+</node>
+<node id="49">
+  <data key="d2">necesario</data>
+</node>
+<node id="33">
+  <data key="d2">de</data>
+</node>
+<node id="55">
+  <data key="d2">tomar</data>
+</node>
+<node id="50">
+  <data key="d2">para</data>
+</node>
+<node id="51">
+  <data key="d2">que</data>
+</node>
+<node id="53">
+  <data key="d2">docente</data>
+</node>
+<node id="54">
+  <data key="d2">pueda</data>
+</node>
+<node id="57">
+  <data key="d2">cargo</data>
+</node>
+<node id="52">
+  <data key="d2">un</data>
+</node>
+<node id="56">
+  <data key="d2">un</data>
+</node>
+<edge source="10" target="2"/>
+<edge source="10" target="11"/>
+<edge source="10" target="58"/>
+<edge source="2" target="1"/>
+<edge source="2" target="4"/>
+<edge source="11" target="14"/>
+<edge source="11" target="37"/>
+<edge source="4" target="3"/>
+<edge source="4" target="6"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="16"/>
+<edge source="14" target="28"/>
+<edge source="37" target="36"/>
+<edge source="37" target="44"/>
+<edge source="6" target="5"/>
+<edge source="6" target="8"/>
+<edge source="16" target="15"/>
+<edge source="16" target="18"/>
+<edge source="16" target="21"/>
+<edge source="28" target="22"/>
+<edge source="28" target="23"/>
+<edge source="28" target="26"/>
+<edge source="28" target="27"/>
+<edge source="28" target="30"/>
+<edge source="28" target="35"/>
+<edge source="44" target="40"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="46"/>
+<edge source="8" target="7"/>
+<edge source="8" target="9"/>
+<edge source="18" target="17"/>
+<edge source="21" target="19"/>
+<edge source="21" target="20"/>
+<edge source="26" target="24"/>
+<edge source="26" target="25"/>
+<edge source="30" target="29"/>
+<edge source="30" target="32"/>
+<edge source="40" target="38"/>
+<edge source="40" target="39"/>
+<edge source="42" target="41"/>
+<edge source="46" target="45"/>
+<edge source="46" target="48"/>
+<edge source="32" target="31"/>
+<edge source="32" target="34"/>
+<edge source="48" target="47"/>
+<edge source="48" target="49"/>
+<edge source="34" target="33"/>
+<edge source="49" target="55"/>
+<edge source="55" target="50"/>
+<edge source="55" target="51"/>
+<edge source="55" target="53"/>
+<edge source="55" target="54"/>
+<edge source="55" target="57"/>
+<edge source="53" target="52"/>
+<edge source="57" target="56"/>
+</graph></graphml>

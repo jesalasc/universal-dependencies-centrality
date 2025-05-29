@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Pero el ex presidente y ex gobernador fue más allá: le escribió una dura carta a Aníbal Fernández con recriminaciones sobre su conducta y puso en tela de juicio temas importantes y gravosos para el jefe de Gabinete, quien hasta el momento de escribir este artículo dio el silencio como respuesta.</data>
+<data key="d1">8</data>
+<node id="8">
+  <data key="d2">fue</data>
+</node>
+<node id="1">
+  <data key="d2">Pero</data>
+</node>
+<node id="4">
+  <data key="d2">presidente</data>
+</node>
+<node id="10">
+  <data key="d2">allá</data>
+</node>
+<node id="11">
+  <data key="d2">:</data>
+</node>
+<node id="13">
+  <data key="d2">escribió</data>
+</node>
+<node id="2">
+  <data key="d2">el</data>
+</node>
+<node id="3">
+  <data key="d2">ex</data>
+</node>
+<node id="7">
+  <data key="d2">gobernador</data>
+</node>
+<node id="9">
+  <data key="d2">más</data>
+</node>
+<node id="12">
+  <data key="d2">le</data>
+</node>
+<node id="16">
+  <data key="d2">carta</data>
+</node>
+<node id="18">
+  <data key="d2">Aníbal</data>
+</node>
+<node id="21">
+  <data key="d2">recriminaciones</data>
+</node>
+<node id="26">
+  <data key="d2">puso</data>
+</node>
+<node id="54">
+  <data key="d2">.</data>
+</node>
+<node id="5">
+  <data key="d2">y</data>
+</node>
+<node id="6">
+  <data key="d2">ex</data>
+</node>
+<node id="14">
+  <data key="d2">una</data>
+</node>
+<node id="15">
+  <data key="d2">dura</data>
+</node>
+<node id="17">
+  <data key="d2">a</data>
+</node>
+<node id="19">
+  <data key="d2">Fernández</data>
+</node>
+<node id="20">
+  <data key="d2">con</data>
+</node>
+<node id="24">
+  <data key="d2">conducta</data>
+</node>
+<node id="25">
+  <data key="d2">y</data>
+</node>
+<node id="28">
+  <data key="d2">tela</data>
+</node>
+<node id="31">
+  <data key="d2">temas</data>
+</node>
+<node id="22">
+  <data key="d2">sobre</data>
+</node>
+<node id="23">
+  <data key="d2">su</data>
+</node>
+<node id="27">
+  <data key="d2">en</data>
+</node>
+<node id="30">
+  <data key="d2">juicio</data>
+</node>
+<node id="32">
+  <data key="d2">importantes</data>
+</node>
+<node id="29">
+  <data key="d2">de</data>
+</node>
+<node id="34">
+  <data key="d2">gravosos</data>
+</node>
+<node id="37">
+  <data key="d2">jefe</data>
+</node>
+<node id="33">
+  <data key="d2">y</data>
+</node>
+<node id="35">
+  <data key="d2">para</data>
+</node>
+<node id="36">
+  <data key="d2">el</data>
+</node>
+<node id="39">
+  <data key="d2">Gabinete</data>
+</node>
+<node id="49">
+  <data key="d2">dio</data>
+</node>
+<node id="38">
+  <data key="d2">de</data>
+</node>
+<node id="40">
+  <data key="d2">,</data>
+</node>
+<node id="41">
+  <data key="d2">quien</data>
+</node>
+<node id="44">
+  <data key="d2">momento</data>
+</node>
+<node id="51">
+  <data key="d2">silencio</data>
+</node>
+<node id="53">
+  <data key="d2">respuesta</data>
+</node>
+<node id="42">
+  <data key="d2">hasta</data>
+</node>
+<node id="43">
+  <data key="d2">el</data>
+</node>
+<node id="46">
+  <data key="d2">escribir</data>
+</node>
+<node id="50">
+  <data key="d2">el</data>
+</node>
+<node id="52">
+  <data key="d2">como</data>
+</node>
+<node id="45">
+  <data key="d2">de</data>
+</node>
+<node id="48">
+  <data key="d2">artículo</data>
+</node>
+<node id="47">
+  <data key="d2">este</data>
+</node>
+<edge source="8" target="1"/>
+<edge source="8" target="4"/>
+<edge source="8" target="10"/>
+<edge source="8" target="11"/>
+<edge source="8" target="13"/>
+<edge source="4" target="2"/>
+<edge source="4" target="3"/>
+<edge source="4" target="7"/>
+<edge source="10" target="9"/>
+<edge source="13" target="12"/>
+<edge source="13" target="16"/>
+<edge source="13" target="18"/>
+<edge source="13" target="21"/>
+<edge source="13" target="26"/>
+<edge source="13" target="54"/>
+<edge source="7" target="5"/>
+<edge source="7" target="6"/>
+<edge source="16" target="14"/>
+<edge source="16" target="15"/>
+<edge source="18" target="17"/>
+<edge source="18" target="19"/>
+<edge source="21" target="20"/>
+<edge source="21" target="24"/>
+<edge source="26" target="25"/>
+<edge source="26" target="28"/>
+<edge source="26" target="31"/>
+<edge source="24" target="22"/>
+<edge source="24" target="23"/>
+<edge source="28" target="27"/>
+<edge source="28" target="30"/>
+<edge source="31" target="32"/>
+<edge source="30" target="29"/>
+<edge source="32" target="34"/>
+<edge source="32" target="37"/>
+<edge source="34" target="33"/>
+<edge source="37" target="35"/>
+<edge source="37" target="36"/>
+<edge source="37" target="39"/>
+<edge source="37" target="49"/>
+<edge source="39" target="38"/>
+<edge source="49" target="40"/>
+<edge source="49" target="41"/>
+<edge source="49" target="44"/>
+<edge source="49" target="51"/>
+<edge source="49" target="53"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="46"/>
+<edge source="51" target="50"/>
+<edge source="53" target="52"/>
+<edge source="46" target="45"/>
+<edge source="46" target="48"/>
+<edge source="48" target="47"/>
+</graph></graphml>

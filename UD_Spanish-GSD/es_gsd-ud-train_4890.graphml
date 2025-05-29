@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">La capilla tiene dos entradas una más ornada con la imagen del Creador sosteniendo la bola del mundo y con adornos góticos y otra por la que se accede al Pabellón del Consulado del año 1549 con el escudo de la ciudad en su parte central,</data>
+<data key="d1">3</data>
+<node id="3">
+  <data key="d2">tiene</data>
+</node>
+<node id="2">
+  <data key="d2">capilla</data>
+</node>
+<node id="5">
+  <data key="d2">entradas</data>
+</node>
+<node id="52">
+  <data key="d2">,</data>
+</node>
+<node id="1">
+  <data key="d2">La</data>
+</node>
+<node id="4">
+  <data key="d2">dos</data>
+</node>
+<node id="6">
+  <data key="d2">una</data>
+</node>
+<node id="8">
+  <data key="d2">ornada</data>
+</node>
+<node id="11">
+  <data key="d2">imagen</data>
+</node>
+<node id="26">
+  <data key="d2">otra</data>
+</node>
+<node id="7">
+  <data key="d2">más</data>
+</node>
+<node id="9">
+  <data key="d2">con</data>
+</node>
+<node id="10">
+  <data key="d2">la</data>
+</node>
+<node id="14">
+  <data key="d2">Creador</data>
+</node>
+<node id="23">
+  <data key="d2">adornos</data>
+</node>
+<node id="25">
+  <data key="d2">y</data>
+</node>
+<node id="31">
+  <data key="d2">accede</data>
+</node>
+<node id="44">
+  <data key="d2">escudo</data>
+</node>
+<node id="12">
+  <data key="d2">de</data>
+</node>
+<node id="13">
+  <data key="d2">el</data>
+</node>
+<node id="15">
+  <data key="d2">sosteniendo</data>
+</node>
+<node id="21">
+  <data key="d2">y</data>
+</node>
+<node id="22">
+  <data key="d2">con</data>
+</node>
+<node id="24">
+  <data key="d2">góticos</data>
+</node>
+<node id="29">
+  <data key="d2">que</data>
+</node>
+<node id="30">
+  <data key="d2">se</data>
+</node>
+<node id="34">
+  <data key="d2">Pabellón</data>
+</node>
+<node id="42">
+  <data key="d2">con</data>
+</node>
+<node id="43">
+  <data key="d2">el</data>
+</node>
+<node id="47">
+  <data key="d2">ciudad</data>
+</node>
+<node id="50">
+  <data key="d2">parte</data>
+</node>
+<node id="17">
+  <data key="d2">bola</data>
+</node>
+<node id="27">
+  <data key="d2">por</data>
+</node>
+<node id="28">
+  <data key="d2">la</data>
+</node>
+<node id="32">
+  <data key="d2">a</data>
+</node>
+<node id="33">
+  <data key="d2">el</data>
+</node>
+<node id="37">
+  <data key="d2">Consulado</data>
+</node>
+<node id="45">
+  <data key="d2">de</data>
+</node>
+<node id="46">
+  <data key="d2">la</data>
+</node>
+<node id="48">
+  <data key="d2">en</data>
+</node>
+<node id="49">
+  <data key="d2">su</data>
+</node>
+<node id="51">
+  <data key="d2">central</data>
+</node>
+<node id="16">
+  <data key="d2">la</data>
+</node>
+<node id="20">
+  <data key="d2">mundo</data>
+</node>
+<node id="35">
+  <data key="d2">de</data>
+</node>
+<node id="36">
+  <data key="d2">el</data>
+</node>
+<node id="40">
+  <data key="d2">año</data>
+</node>
+<node id="18">
+  <data key="d2">de</data>
+</node>
+<node id="19">
+  <data key="d2">el</data>
+</node>
+<node id="38">
+  <data key="d2">de</data>
+</node>
+<node id="39">
+  <data key="d2">el</data>
+</node>
+<node id="41">
+  <data key="d2">1549</data>
+</node>
+<edge source="3" target="2"/>
+<edge source="3" target="5"/>
+<edge source="3" target="52"/>
+<edge source="2" target="1"/>
+<edge source="5" target="4"/>
+<edge source="5" target="6"/>
+<edge source="6" target="8"/>
+<edge source="6" target="11"/>
+<edge source="6" target="26"/>
+<edge source="8" target="7"/>
+<edge source="11" target="9"/>
+<edge source="11" target="10"/>
+<edge source="11" target="14"/>
+<edge source="11" target="23"/>
+<edge source="26" target="25"/>
+<edge source="26" target="31"/>
+<edge source="26" target="44"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="15"/>
+<edge source="23" target="21"/>
+<edge source="23" target="22"/>
+<edge source="23" target="24"/>
+<edge source="31" target="29"/>
+<edge source="31" target="30"/>
+<edge source="31" target="34"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="47"/>
+<edge source="44" target="50"/>
+<edge source="15" target="17"/>
+<edge source="29" target="27"/>
+<edge source="29" target="28"/>
+<edge source="34" target="32"/>
+<edge source="34" target="33"/>
+<edge source="34" target="37"/>
+<edge source="47" target="45"/>
+<edge source="47" target="46"/>
+<edge source="50" target="48"/>
+<edge source="50" target="49"/>
+<edge source="50" target="51"/>
+<edge source="17" target="16"/>
+<edge source="17" target="20"/>
+<edge source="37" target="35"/>
+<edge source="37" target="36"/>
+<edge source="37" target="40"/>
+<edge source="20" target="18"/>
+<edge source="20" target="19"/>
+<edge source="40" target="38"/>
+<edge source="40" target="39"/>
+<edge source="40" target="41"/>
+</graph></graphml>

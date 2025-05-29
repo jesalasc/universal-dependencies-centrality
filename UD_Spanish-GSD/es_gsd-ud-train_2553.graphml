@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Es endémica de México.</data>
+<data key="d1">2</data>
+<node id="2">
+  <data key="d2">endémica</data>
+</node>
+<node id="1">
+  <data key="d2">Es</data>
+</node>
+<node id="4">
+  <data key="d2">México</data>
+</node>
+<node id="5">
+  <data key="d2">.</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<edge source="2" target="1"/>
+<edge source="2" target="4"/>
+<edge source="2" target="5"/>
+<edge source="4" target="3"/>
+</graph></graphml>

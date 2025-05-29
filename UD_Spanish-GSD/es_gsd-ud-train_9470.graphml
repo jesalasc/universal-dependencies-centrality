@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En los GPS conviene poner Dalia, 1 y así se llega perfectamente.</data>
+<data key="d1">4</data>
+<node id="4">
+  <data key="d2">conviene</data>
+</node>
+<node id="3">
+  <data key="d2">GPS</data>
+</node>
+<node id="5">
+  <data key="d2">poner</data>
+</node>
+<node id="12">
+  <data key="d2">llega</data>
+</node>
+<node id="14">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="2">
+  <data key="d2">los</data>
+</node>
+<node id="6">
+  <data key="d2">Dalia</data>
+</node>
+<node id="9">
+  <data key="d2">y</data>
+</node>
+<node id="10">
+  <data key="d2">así</data>
+</node>
+<node id="11">
+  <data key="d2">se</data>
+</node>
+<node id="13">
+  <data key="d2">perfectamente</data>
+</node>
+<node id="7">
+  <data key="d2">,</data>
+</node>
+<node id="8">
+  <data key="d2">1</data>
+</node>
+<edge source="4" target="3"/>
+<edge source="4" target="5"/>
+<edge source="4" target="12"/>
+<edge source="4" target="14"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="5" target="6"/>
+<edge source="12" target="9"/>
+<edge source="12" target="10"/>
+<edge source="12" target="11"/>
+<edge source="12" target="13"/>
+<edge source="6" target="7"/>
+<edge source="6" target="8"/>
+</graph></graphml>

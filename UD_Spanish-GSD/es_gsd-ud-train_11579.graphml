@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">TERRIERS (acrónimo de Tomographic Experiment using Radiative Recombinative Ionospheric EUV and Radio Sources, en español Experimento Tomográfico usando Ultravioleta Extremo Ionosférico Recombinativo Radiativo y Ondas de Radio) es un satélite artificial de la NASA construido en el marco del programa STEDI (Student Explorer Demonstration Initiative).</data>
+<data key="d1">33</data>
+<node id="33">
+  <data key="d2">satélite</data>
+</node>
+<node id="1">
+  <data key="d2">TERRIERS</data>
+</node>
+<node id="31">
+  <data key="d2">es</data>
+</node>
+<node id="32">
+  <data key="d2">un</data>
+</node>
+<node id="34">
+  <data key="d2">artificial</data>
+</node>
+<node id="37">
+  <data key="d2">NASA</data>
+</node>
+<node id="38">
+  <data key="d2">construido</data>
+</node>
+<node id="52">
+  <data key="d2">.</data>
+</node>
+<node id="3">
+  <data key="d2">acrónimo</data>
+</node>
+<node id="35">
+  <data key="d2">de</data>
+</node>
+<node id="36">
+  <data key="d2">la</data>
+</node>
+<node id="41">
+  <data key="d2">marco</data>
+</node>
+<node id="2">
+  <data key="d2">(</data>
+</node>
+<node id="14">
+  <data key="d2">Sources</data>
+</node>
+<node id="15">
+  <data key="d2">,</data>
+</node>
+<node id="17">
+  <data key="d2">español</data>
+</node>
+<node id="30">
+  <data key="d2">)</data>
+</node>
+<node id="39">
+  <data key="d2">en</data>
+</node>
+<node id="40">
+  <data key="d2">el</data>
+</node>
+<node id="44">
+  <data key="d2">programa</data>
+</node>
+<node id="4">
+  <data key="d2">de</data>
+</node>
+<node id="13">
+  <data key="d2">Radio</data>
+</node>
+<node id="16">
+  <data key="d2">en</data>
+</node>
+<node id="18">
+  <data key="d2">Experimento</data>
+</node>
+<node id="42">
+  <data key="d2">de</data>
+</node>
+<node id="43">
+  <data key="d2">el</data>
+</node>
+<node id="45">
+  <data key="d2">STEDI</data>
+</node>
+<node id="11">
+  <data key="d2">EUV</data>
+</node>
+<node id="19">
+  <data key="d2">Tomográfico</data>
+</node>
+<node id="20">
+  <data key="d2">usando</data>
+</node>
+<node id="50">
+  <data key="d2">Initiative</data>
+</node>
+<node id="10">
+  <data key="d2">Ionospheric</data>
+</node>
+<node id="12">
+  <data key="d2">and</data>
+</node>
+<node id="22">
+  <data key="d2">Extremo</data>
+</node>
+<node id="46">
+  <data key="d2">(</data>
+</node>
+<node id="49">
+  <data key="d2">Demonstration</data>
+</node>
+<node id="51">
+  <data key="d2">)</data>
+</node>
+<node id="9">
+  <data key="d2">Recombinative</data>
+</node>
+<node id="21">
+  <data key="d2">Ultravioleta</data>
+</node>
+<node id="23">
+  <data key="d2">Ionosférico</data>
+</node>
+<node id="24">
+  <data key="d2">Recombinativo</data>
+</node>
+<node id="25">
+  <data key="d2">Radiativo</data>
+</node>
+<node id="27">
+  <data key="d2">Ondas</data>
+</node>
+<node id="48">
+  <data key="d2">Explorer</data>
+</node>
+<node id="8">
+  <data key="d2">Radiative</data>
+</node>
+<node id="26">
+  <data key="d2">y</data>
+</node>
+<node id="29">
+  <data key="d2">Radio</data>
+</node>
+<node id="47">
+  <data key="d2">Student</data>
+</node>
+<node id="7">
+  <data key="d2">using</data>
+</node>
+<node id="28">
+  <data key="d2">de</data>
+</node>
+<node id="6">
+  <data key="d2">Experiment</data>
+</node>
+<node id="5">
+  <data key="d2">Tomographic</data>
+</node>
+<edge source="33" target="1"/>
+<edge source="33" target="31"/>
+<edge source="33" target="32"/>
+<edge source="33" target="34"/>
+<edge source="33" target="37"/>
+<edge source="33" target="38"/>
+<edge source="33" target="52"/>
+<edge source="1" target="3"/>
+<edge source="37" target="35"/>
+<edge source="37" target="36"/>
+<edge source="38" target="41"/>
+<edge source="3" target="2"/>
+<edge source="3" target="14"/>
+<edge source="3" target="15"/>
+<edge source="3" target="17"/>
+<edge source="3" target="30"/>
+<edge source="41" target="39"/>
+<edge source="41" target="40"/>
+<edge source="41" target="44"/>
+<edge source="14" target="4"/>
+<edge source="14" target="13"/>
+<edge source="17" target="16"/>
+<edge source="17" target="18"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="45"/>
+<edge source="13" target="11"/>
+<edge source="18" target="19"/>
+<edge source="18" target="20"/>
+<edge source="45" target="50"/>
+<edge source="11" target="10"/>
+<edge source="11" target="12"/>
+<edge source="20" target="22"/>
+<edge source="50" target="46"/>
+<edge source="50" target="49"/>
+<edge source="50" target="51"/>
+<edge source="10" target="9"/>
+<edge source="22" target="21"/>
+<edge source="22" target="23"/>
+<edge source="22" target="24"/>
+<edge source="22" target="25"/>
+<edge source="22" target="27"/>
+<edge source="49" target="48"/>
+<edge source="9" target="8"/>
+<edge source="27" target="26"/>
+<edge source="27" target="29"/>
+<edge source="48" target="47"/>
+<edge source="8" target="7"/>
+<edge source="29" target="28"/>
+<edge source="7" target="6"/>
+<edge source="6" target="5"/>
+</graph></graphml>

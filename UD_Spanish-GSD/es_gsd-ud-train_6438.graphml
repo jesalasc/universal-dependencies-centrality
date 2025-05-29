@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Desde diciembre de 2010 al 31 de junio de 2011, los viajeros que reserven a través de Agoda.es podrán asegurarse tarifas con descuento en los resorts de Maldivas y para mayor comodidad volar directamente desde Bangkok a Malé con Bangkok Airways la única línea aérea con tres vuelos semanales.</data>
+<data key="d1">22</data>
+<node id="22">
+  <data key="d2">asegurar</data>
+</node>
+<node id="2">
+  <data key="d2">diciembre</data>
+</node>
+<node id="14">
+  <data key="d2">viajeros</data>
+</node>
+<node id="21">
+  <data key="d2">podrán</data>
+</node>
+<node id="23">
+  <data key="d2">se</data>
+</node>
+<node id="24">
+  <data key="d2">tarifas</data>
+</node>
+<node id="29">
+  <data key="d2">resorts</data>
+</node>
+<node id="36">
+  <data key="d2">volar</data>
+</node>
+<node id="53">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Desde</data>
+</node>
+<node id="4">
+  <data key="d2">2010</data>
+</node>
+<node id="7">
+  <data key="d2">31</data>
+</node>
+<node id="12">
+  <data key="d2">,</data>
+</node>
+<node id="13">
+  <data key="d2">los</data>
+</node>
+<node id="16">
+  <data key="d2">reserven</data>
+</node>
+<node id="26">
+  <data key="d2">descuento</data>
+</node>
+<node id="27">
+  <data key="d2">en</data>
+</node>
+<node id="28">
+  <data key="d2">los</data>
+</node>
+<node id="31">
+  <data key="d2">Maldivas</data>
+</node>
+<node id="32">
+  <data key="d2">y</data>
+</node>
+<node id="35">
+  <data key="d2">comodidad</data>
+</node>
+<node id="37">
+  <data key="d2">directamente</data>
+</node>
+<node id="39">
+  <data key="d2">Bangkok</data>
+</node>
+<node id="41">
+  <data key="d2">Malé</data>
+</node>
+<node id="43">
+  <data key="d2">Bangkok</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<node id="5">
+  <data key="d2">a</data>
+</node>
+<node id="6">
+  <data key="d2">el</data>
+</node>
+<node id="9">
+  <data key="d2">junio</data>
+</node>
+<node id="15">
+  <data key="d2">que</data>
+</node>
+<node id="18">
+  <data key="d2">través</data>
+</node>
+<node id="25">
+  <data key="d2">con</data>
+</node>
+<node id="30">
+  <data key="d2">de</data>
+</node>
+<node id="33">
+  <data key="d2">para</data>
+</node>
+<node id="34">
+  <data key="d2">mayor</data>
+</node>
+<node id="38">
+  <data key="d2">desde</data>
+</node>
+<node id="40">
+  <data key="d2">a</data>
+</node>
+<node id="42">
+  <data key="d2">con</data>
+</node>
+<node id="44">
+  <data key="d2">Airways</data>
+</node>
+<node id="47">
+  <data key="d2">línea</data>
+</node>
+<node id="8">
+  <data key="d2">de</data>
+</node>
+<node id="11">
+  <data key="d2">2011</data>
+</node>
+<node id="17">
+  <data key="d2">a</data>
+</node>
+<node id="20">
+  <data key="d2">Agoda.es</data>
+</node>
+<node id="45">
+  <data key="d2">la</data>
+</node>
+<node id="46">
+  <data key="d2">única</data>
+</node>
+<node id="48">
+  <data key="d2">aérea</data>
+</node>
+<node id="51">
+  <data key="d2">vuelos</data>
+</node>
+<node id="10">
+  <data key="d2">de</data>
+</node>
+<node id="19">
+  <data key="d2">de</data>
+</node>
+<node id="49">
+  <data key="d2">con</data>
+</node>
+<node id="50">
+  <data key="d2">tres</data>
+</node>
+<node id="52">
+  <data key="d2">semanales</data>
+</node>
+<edge source="22" target="2"/>
+<edge source="22" target="14"/>
+<edge source="22" target="21"/>
+<edge source="22" target="23"/>
+<edge source="22" target="24"/>
+<edge source="22" target="29"/>
+<edge source="22" target="36"/>
+<edge source="22" target="53"/>
+<edge source="2" target="1"/>
+<edge source="2" target="4"/>
+<edge source="2" target="7"/>
+<edge source="2" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="16"/>
+<edge source="24" target="26"/>
+<edge source="29" target="27"/>
+<edge source="29" target="28"/>
+<edge source="29" target="31"/>
+<edge source="36" target="32"/>
+<edge source="36" target="35"/>
+<edge source="36" target="37"/>
+<edge source="36" target="39"/>
+<edge source="36" target="41"/>
+<edge source="36" target="43"/>
+<edge source="4" target="3"/>
+<edge source="7" target="5"/>
+<edge source="7" target="6"/>
+<edge source="7" target="9"/>
+<edge source="16" target="15"/>
+<edge source="16" target="18"/>
+<edge source="26" target="25"/>
+<edge source="31" target="30"/>
+<edge source="35" target="33"/>
+<edge source="35" target="34"/>
+<edge source="39" target="38"/>
+<edge source="41" target="40"/>
+<edge source="43" target="42"/>
+<edge source="43" target="44"/>
+<edge source="43" target="47"/>
+<edge source="9" target="8"/>
+<edge source="9" target="11"/>
+<edge source="18" target="17"/>
+<edge source="18" target="20"/>
+<edge source="47" target="45"/>
+<edge source="47" target="46"/>
+<edge source="47" target="48"/>
+<edge source="47" target="51"/>
+<edge source="11" target="10"/>
+<edge source="20" target="19"/>
+<edge source="51" target="49"/>
+<edge source="51" target="50"/>
+<edge source="51" target="52"/>
+</graph></graphml>

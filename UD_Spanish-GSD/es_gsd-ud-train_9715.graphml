@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">El próximo lunes estará en nuestra ciudad, donde por primera vez se celebrará una Conferencia Sectorial, con asistencia de representantes de todas las comunidades autónomas, además que se aprovechará su estancia para colocar la primera piedra de la futura Biblioteca del Estado.</data>
+<data key="d1">4</data>
+<node id="4">
+  <data key="d2">estará</data>
+</node>
+<node id="3">
+  <data key="d2">lunes</data>
+</node>
+<node id="7">
+  <data key="d2">ciudad</data>
+</node>
+<node id="32">
+  <data key="d2">aprovechará</data>
+</node>
+<node id="47">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">El</data>
+</node>
+<node id="2">
+  <data key="d2">próximo</data>
+</node>
+<node id="5">
+  <data key="d2">en</data>
+</node>
+<node id="6">
+  <data key="d2">nuestra</data>
+</node>
+<node id="14">
+  <data key="d2">celebrará</data>
+</node>
+<node id="28">
+  <data key="d2">,</data>
+</node>
+<node id="29">
+  <data key="d2">además</data>
+</node>
+<node id="31">
+  <data key="d2">se</data>
+</node>
+<node id="34">
+  <data key="d2">estancia</data>
+</node>
+<node id="36">
+  <data key="d2">colocar</data>
+</node>
+<node id="8">
+  <data key="d2">,</data>
+</node>
+<node id="9">
+  <data key="d2">donde</data>
+</node>
+<node id="12">
+  <data key="d2">vez</data>
+</node>
+<node id="13">
+  <data key="d2">se</data>
+</node>
+<node id="16">
+  <data key="d2">Conferencia</data>
+</node>
+<node id="20">
+  <data key="d2">asistencia</data>
+</node>
+<node id="30">
+  <data key="d2">que</data>
+</node>
+<node id="33">
+  <data key="d2">su</data>
+</node>
+<node id="35">
+  <data key="d2">para</data>
+</node>
+<node id="39">
+  <data key="d2">piedra</data>
+</node>
+<node id="10">
+  <data key="d2">por</data>
+</node>
+<node id="11">
+  <data key="d2">primera</data>
+</node>
+<node id="15">
+  <data key="d2">una</data>
+</node>
+<node id="17">
+  <data key="d2">Sectorial</data>
+</node>
+<node id="18">
+  <data key="d2">,</data>
+</node>
+<node id="19">
+  <data key="d2">con</data>
+</node>
+<node id="22">
+  <data key="d2">representantes</data>
+</node>
+<node id="37">
+  <data key="d2">la</data>
+</node>
+<node id="38">
+  <data key="d2">primera</data>
+</node>
+<node id="43">
+  <data key="d2">Biblioteca</data>
+</node>
+<node id="21">
+  <data key="d2">de</data>
+</node>
+<node id="26">
+  <data key="d2">comunidades</data>
+</node>
+<node id="40">
+  <data key="d2">de</data>
+</node>
+<node id="41">
+  <data key="d2">la</data>
+</node>
+<node id="42">
+  <data key="d2">futura</data>
+</node>
+<node id="46">
+  <data key="d2">Estado</data>
+</node>
+<node id="23">
+  <data key="d2">de</data>
+</node>
+<node id="24">
+  <data key="d2">todas</data>
+</node>
+<node id="25">
+  <data key="d2">las</data>
+</node>
+<node id="27">
+  <data key="d2">autónomas</data>
+</node>
+<node id="44">
+  <data key="d2">de</data>
+</node>
+<node id="45">
+  <data key="d2">el</data>
+</node>
+<edge source="4" target="3"/>
+<edge source="4" target="7"/>
+<edge source="4" target="32"/>
+<edge source="4" target="47"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="7" target="5"/>
+<edge source="7" target="6"/>
+<edge source="7" target="14"/>
+<edge source="32" target="28"/>
+<edge source="32" target="29"/>
+<edge source="32" target="31"/>
+<edge source="32" target="34"/>
+<edge source="32" target="36"/>
+<edge source="14" target="8"/>
+<edge source="14" target="9"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="16"/>
+<edge source="14" target="20"/>
+<edge source="29" target="30"/>
+<edge source="34" target="33"/>
+<edge source="36" target="35"/>
+<edge source="36" target="39"/>
+<edge source="12" target="10"/>
+<edge source="12" target="11"/>
+<edge source="16" target="15"/>
+<edge source="16" target="17"/>
+<edge source="20" target="18"/>
+<edge source="20" target="19"/>
+<edge source="20" target="22"/>
+<edge source="39" target="37"/>
+<edge source="39" target="38"/>
+<edge source="39" target="43"/>
+<edge source="22" target="21"/>
+<edge source="22" target="26"/>
+<edge source="43" target="40"/>
+<edge source="43" target="41"/>
+<edge source="43" target="42"/>
+<edge source="43" target="46"/>
+<edge source="26" target="23"/>
+<edge source="26" target="24"/>
+<edge source="26" target="25"/>
+<edge source="26" target="27"/>
+<edge source="46" target="44"/>
+<edge source="46" target="45"/>
+</graph></graphml>

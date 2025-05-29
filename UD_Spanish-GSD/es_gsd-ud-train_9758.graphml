@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Su objeto era entrevistarse con el gobernador Pedro de La Gasca para informarle de los pormenores del Paraguay, pedirle ayuda y solicitar la gobernación para Martínez de Irala.</data>
+<data key="d1">2</data>
+<node id="2">
+  <data key="d2">objeto</data>
+</node>
+<node id="1">
+  <data key="d2">Su</data>
+</node>
+<node id="3">
+  <data key="d2">era</data>
+</node>
+<node id="4">
+  <data key="d2">entrevistar</data>
+</node>
+<node id="34">
+  <data key="d2">.</data>
+</node>
+<node id="5">
+  <data key="d2">se</data>
+</node>
+<node id="8">
+  <data key="d2">gobernador</data>
+</node>
+<node id="14">
+  <data key="d2">informar</data>
+</node>
+<node id="23">
+  <data key="d2">pedir</data>
+</node>
+<node id="27">
+  <data key="d2">solicitar</data>
+</node>
+<node id="6">
+  <data key="d2">con</data>
+</node>
+<node id="7">
+  <data key="d2">el</data>
+</node>
+<node id="9">
+  <data key="d2">Pedro</data>
+</node>
+<node id="13">
+  <data key="d2">para</data>
+</node>
+<node id="15">
+  <data key="d2">le</data>
+</node>
+<node id="18">
+  <data key="d2">pormenores</data>
+</node>
+<node id="22">
+  <data key="d2">,</data>
+</node>
+<node id="24">
+  <data key="d2">le</data>
+</node>
+<node id="25">
+  <data key="d2">ayuda</data>
+</node>
+<node id="26">
+  <data key="d2">y</data>
+</node>
+<node id="29">
+  <data key="d2">gobernación</data>
+</node>
+<node id="31">
+  <data key="d2">Martínez</data>
+</node>
+<node id="11">
+  <data key="d2">La</data>
+</node>
+<node id="12">
+  <data key="d2">Gasca</data>
+</node>
+<node id="16">
+  <data key="d2">de</data>
+</node>
+<node id="17">
+  <data key="d2">los</data>
+</node>
+<node id="21">
+  <data key="d2">Paraguay</data>
+</node>
+<node id="28">
+  <data key="d2">la</data>
+</node>
+<node id="30">
+  <data key="d2">para</data>
+</node>
+<node id="33">
+  <data key="d2">Irala</data>
+</node>
+<node id="10">
+  <data key="d2">de</data>
+</node>
+<node id="19">
+  <data key="d2">de</data>
+</node>
+<node id="20">
+  <data key="d2">el</data>
+</node>
+<node id="32">
+  <data key="d2">de</data>
+</node>
+<edge source="2" target="1"/>
+<edge source="2" target="3"/>
+<edge source="2" target="4"/>
+<edge source="2" target="34"/>
+<edge source="4" target="5"/>
+<edge source="4" target="8"/>
+<edge source="4" target="14"/>
+<edge source="4" target="23"/>
+<edge source="4" target="27"/>
+<edge source="8" target="6"/>
+<edge source="8" target="7"/>
+<edge source="8" target="9"/>
+<edge source="14" target="13"/>
+<edge source="14" target="15"/>
+<edge source="14" target="18"/>
+<edge source="23" target="22"/>
+<edge source="23" target="24"/>
+<edge source="23" target="25"/>
+<edge source="27" target="26"/>
+<edge source="27" target="29"/>
+<edge source="27" target="31"/>
+<edge source="9" target="11"/>
+<edge source="9" target="12"/>
+<edge source="18" target="16"/>
+<edge source="18" target="17"/>
+<edge source="18" target="21"/>
+<edge source="29" target="28"/>
+<edge source="31" target="30"/>
+<edge source="31" target="33"/>
+<edge source="12" target="10"/>
+<edge source="21" target="19"/>
+<edge source="21" target="20"/>
+<edge source="33" target="32"/>
+</graph></graphml>

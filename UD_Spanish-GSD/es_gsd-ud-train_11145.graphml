@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Originalmente se planteó la construcción de un recinto para 120 000 espectadores, no obstante, el alto costo de la obra impedía, en palabras del propio presidente de la institución, concretar el proyecto sin una subvención estatal.</data>
+<data key="d1">3</data>
+<node id="3">
+  <data key="d2">planteó</data>
+</node>
+<node id="1">
+  <data key="d2">Originalmente</data>
+</node>
+<node id="2">
+  <data key="d2">se</data>
+</node>
+<node id="5">
+  <data key="d2">construcción</data>
+</node>
+<node id="23">
+  <data key="d2">impedía</data>
+</node>
+<node id="42">
+  <data key="d2">.</data>
+</node>
+<node id="4">
+  <data key="d2">la</data>
+</node>
+<node id="8">
+  <data key="d2">recinto</data>
+</node>
+<node id="13">
+  <data key="d2">,</data>
+</node>
+<node id="14">
+  <data key="d2">no</data>
+</node>
+<node id="16">
+  <data key="d2">,</data>
+</node>
+<node id="19">
+  <data key="d2">costo</data>
+</node>
+<node id="35">
+  <data key="d2">concretar</data>
+</node>
+<node id="6">
+  <data key="d2">de</data>
+</node>
+<node id="7">
+  <data key="d2">un</data>
+</node>
+<node id="12">
+  <data key="d2">espectadores</data>
+</node>
+<node id="15">
+  <data key="d2">obstante</data>
+</node>
+<node id="17">
+  <data key="d2">el</data>
+</node>
+<node id="18">
+  <data key="d2">alto</data>
+</node>
+<node id="22">
+  <data key="d2">obra</data>
+</node>
+<node id="26">
+  <data key="d2">palabras</data>
+</node>
+<node id="37">
+  <data key="d2">proyecto</data>
+</node>
+<node id="40">
+  <data key="d2">subvención</data>
+</node>
+<node id="9">
+  <data key="d2">para</data>
+</node>
+<node id="11">
+  <data key="d2">000</data>
+</node>
+<node id="20">
+  <data key="d2">de</data>
+</node>
+<node id="21">
+  <data key="d2">la</data>
+</node>
+<node id="24">
+  <data key="d2">,</data>
+</node>
+<node id="25">
+  <data key="d2">en</data>
+</node>
+<node id="30">
+  <data key="d2">presidente</data>
+</node>
+<node id="34">
+  <data key="d2">,</data>
+</node>
+<node id="36">
+  <data key="d2">el</data>
+</node>
+<node id="38">
+  <data key="d2">sin</data>
+</node>
+<node id="39">
+  <data key="d2">una</data>
+</node>
+<node id="41">
+  <data key="d2">estatal</data>
+</node>
+<node id="10">
+  <data key="d2">120</data>
+</node>
+<node id="27">
+  <data key="d2">de</data>
+</node>
+<node id="28">
+  <data key="d2">el</data>
+</node>
+<node id="29">
+  <data key="d2">propio</data>
+</node>
+<node id="33">
+  <data key="d2">institución</data>
+</node>
+<node id="31">
+  <data key="d2">de</data>
+</node>
+<node id="32">
+  <data key="d2">la</data>
+</node>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="3" target="5"/>
+<edge source="3" target="23"/>
+<edge source="3" target="42"/>
+<edge source="5" target="4"/>
+<edge source="5" target="8"/>
+<edge source="23" target="13"/>
+<edge source="23" target="14"/>
+<edge source="23" target="16"/>
+<edge source="23" target="19"/>
+<edge source="23" target="35"/>
+<edge source="8" target="6"/>
+<edge source="8" target="7"/>
+<edge source="8" target="12"/>
+<edge source="14" target="15"/>
+<edge source="19" target="17"/>
+<edge source="19" target="18"/>
+<edge source="19" target="22"/>
+<edge source="35" target="26"/>
+<edge source="35" target="37"/>
+<edge source="35" target="40"/>
+<edge source="12" target="9"/>
+<edge source="12" target="11"/>
+<edge source="22" target="20"/>
+<edge source="22" target="21"/>
+<edge source="26" target="24"/>
+<edge source="26" target="25"/>
+<edge source="26" target="30"/>
+<edge source="26" target="34"/>
+<edge source="37" target="36"/>
+<edge source="40" target="38"/>
+<edge source="40" target="39"/>
+<edge source="40" target="41"/>
+<edge source="11" target="10"/>
+<edge source="30" target="27"/>
+<edge source="30" target="28"/>
+<edge source="30" target="29"/>
+<edge source="30" target="33"/>
+<edge source="33" target="31"/>
+<edge source="33" target="32"/>
+</graph></graphml>

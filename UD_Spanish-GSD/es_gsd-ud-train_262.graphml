@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Edward Burnett Tylor sostenía que las sociedades no occidentales usaban el animismo para explicar por qué sucedían las cosas.</data>
+<data key="d1">4</data>
+<node id="4">
+  <data key="d2">sostenía</data>
+</node>
+<node id="1">
+  <data key="d2">Edward</data>
+</node>
+<node id="10">
+  <data key="d2">usaban</data>
+</node>
+<node id="20">
+  <data key="d2">.</data>
+</node>
+<node id="2">
+  <data key="d2">Burnett</data>
+</node>
+<node id="3">
+  <data key="d2">Tylor</data>
+</node>
+<node id="5">
+  <data key="d2">que</data>
+</node>
+<node id="7">
+  <data key="d2">sociedades</data>
+</node>
+<node id="12">
+  <data key="d2">animismo</data>
+</node>
+<node id="14">
+  <data key="d2">explicar</data>
+</node>
+<node id="6">
+  <data key="d2">las</data>
+</node>
+<node id="9">
+  <data key="d2">occidentales</data>
+</node>
+<node id="11">
+  <data key="d2">el</data>
+</node>
+<node id="13">
+  <data key="d2">para</data>
+</node>
+<node id="16">
+  <data key="d2">qué</data>
+</node>
+<node id="17">
+  <data key="d2">sucedían</data>
+</node>
+<node id="8">
+  <data key="d2">no</data>
+</node>
+<node id="15">
+  <data key="d2">por</data>
+</node>
+<node id="19">
+  <data key="d2">cosas</data>
+</node>
+<node id="18">
+  <data key="d2">las</data>
+</node>
+<edge source="4" target="1"/>
+<edge source="4" target="10"/>
+<edge source="4" target="20"/>
+<edge source="1" target="2"/>
+<edge source="1" target="3"/>
+<edge source="10" target="5"/>
+<edge source="10" target="7"/>
+<edge source="10" target="12"/>
+<edge source="10" target="14"/>
+<edge source="7" target="6"/>
+<edge source="7" target="9"/>
+<edge source="12" target="11"/>
+<edge source="14" target="13"/>
+<edge source="14" target="16"/>
+<edge source="14" target="17"/>
+<edge source="9" target="8"/>
+<edge source="16" target="15"/>
+<edge source="17" target="19"/>
+<edge source="19" target="18"/>
+</graph></graphml>

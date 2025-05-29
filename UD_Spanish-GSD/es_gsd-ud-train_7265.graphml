@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Las Hermanas de la Batalla En el universo de ficción de Warhammer 40000 Son una Facción del Imperio del hombre, también conocido como el Adepta Sororitas, son mujeres guerreras pertenecientes a la "Eclesiarquía", el brazo religioso del Imperial del gobierno.</data>
+<data key="d1">16</data>
+<node id="16">
+  <data key="d2">Facción</data>
+</node>
+<node id="2">
+  <data key="d2">Hermanas</data>
+</node>
+<node id="8">
+  <data key="d2">universo</data>
+</node>
+<node id="14">
+  <data key="d2">Son</data>
+</node>
+<node id="15">
+  <data key="d2">una</data>
+</node>
+<node id="19">
+  <data key="d2">Imperio</data>
+</node>
+<node id="32">
+  <data key="d2">mujeres</data>
+</node>
+<node id="50">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Las</data>
+</node>
+<node id="5">
+  <data key="d2">Batalla</data>
+</node>
+<node id="6">
+  <data key="d2">En</data>
+</node>
+<node id="7">
+  <data key="d2">el</data>
+</node>
+<node id="10">
+  <data key="d2">ficción</data>
+</node>
+<node id="17">
+  <data key="d2">de</data>
+</node>
+<node id="18">
+  <data key="d2">el</data>
+</node>
+<node id="22">
+  <data key="d2">hombre</data>
+</node>
+<node id="25">
+  <data key="d2">conocido</data>
+</node>
+<node id="30">
+  <data key="d2">,</data>
+</node>
+<node id="31">
+  <data key="d2">son</data>
+</node>
+<node id="33">
+  <data key="d2">guerreras</data>
+</node>
+<node id="34">
+  <data key="d2">pertenecientes</data>
+</node>
+<node id="3">
+  <data key="d2">de</data>
+</node>
+<node id="4">
+  <data key="d2">la</data>
+</node>
+<node id="9">
+  <data key="d2">de</data>
+</node>
+<node id="12">
+  <data key="d2">Warhammer</data>
+</node>
+<node id="20">
+  <data key="d2">de</data>
+</node>
+<node id="21">
+  <data key="d2">el</data>
+</node>
+<node id="23">
+  <data key="d2">,</data>
+</node>
+<node id="24">
+  <data key="d2">también</data>
+</node>
+<node id="28">
+  <data key="d2">Adepta</data>
+</node>
+<node id="38">
+  <data key="d2">Eclesiarquía</data>
+</node>
+<node id="11">
+  <data key="d2">de</data>
+</node>
+<node id="13">
+  <data key="d2">40000</data>
+</node>
+<node id="26">
+  <data key="d2">como</data>
+</node>
+<node id="27">
+  <data key="d2">el</data>
+</node>
+<node id="29">
+  <data key="d2">Sororitas</data>
+</node>
+<node id="35">
+  <data key="d2">a</data>
+</node>
+<node id="36">
+  <data key="d2">la</data>
+</node>
+<node id="37">
+  <data key="d2">"</data>
+</node>
+<node id="42">
+  <data key="d2">brazo</data>
+</node>
+<node id="39">
+  <data key="d2">"</data>
+</node>
+<node id="40">
+  <data key="d2">,</data>
+</node>
+<node id="41">
+  <data key="d2">el</data>
+</node>
+<node id="43">
+  <data key="d2">religioso</data>
+</node>
+<node id="46">
+  <data key="d2">Imperial</data>
+</node>
+<node id="44">
+  <data key="d2">de</data>
+</node>
+<node id="45">
+  <data key="d2">el</data>
+</node>
+<node id="49">
+  <data key="d2">gobierno</data>
+</node>
+<node id="47">
+  <data key="d2">de</data>
+</node>
+<node id="48">
+  <data key="d2">el</data>
+</node>
+<edge source="16" target="2"/>
+<edge source="16" target="8"/>
+<edge source="16" target="14"/>
+<edge source="16" target="15"/>
+<edge source="16" target="19"/>
+<edge source="16" target="32"/>
+<edge source="16" target="50"/>
+<edge source="2" target="1"/>
+<edge source="2" target="5"/>
+<edge source="8" target="6"/>
+<edge source="8" target="7"/>
+<edge source="8" target="10"/>
+<edge source="19" target="17"/>
+<edge source="19" target="18"/>
+<edge source="19" target="22"/>
+<edge source="19" target="25"/>
+<edge source="32" target="30"/>
+<edge source="32" target="31"/>
+<edge source="32" target="33"/>
+<edge source="32" target="34"/>
+<edge source="5" target="3"/>
+<edge source="5" target="4"/>
+<edge source="10" target="9"/>
+<edge source="10" target="12"/>
+<edge source="22" target="20"/>
+<edge source="22" target="21"/>
+<edge source="25" target="23"/>
+<edge source="25" target="24"/>
+<edge source="25" target="28"/>
+<edge source="34" target="38"/>
+<edge source="12" target="11"/>
+<edge source="12" target="13"/>
+<edge source="28" target="26"/>
+<edge source="28" target="27"/>
+<edge source="28" target="29"/>
+<edge source="38" target="35"/>
+<edge source="38" target="36"/>
+<edge source="38" target="37"/>
+<edge source="38" target="42"/>
+<edge source="42" target="39"/>
+<edge source="42" target="40"/>
+<edge source="42" target="41"/>
+<edge source="42" target="43"/>
+<edge source="42" target="46"/>
+<edge source="46" target="44"/>
+<edge source="46" target="45"/>
+<edge source="46" target="49"/>
+<edge source="49" target="47"/>
+<edge source="49" target="48"/>
+</graph></graphml>

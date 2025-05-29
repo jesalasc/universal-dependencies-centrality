@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Por su parte, en el campo aliado, el Marqués de Caxias, comandante de las fuerzas brasileñas, solicitó al emperador Pedro II que diera por terminada la guerra, a lo que éste se negó: consideraba que la estabilidad de su corona dependía de una victoria completa y aplastante, que incluyera la prisión o muerte de López, la instalación de un gobierno probrasileño en el Paraguay y la solución de todos los conflictos limítrofes con ese país en beneficio del Imperio.</data>
+<data key="d1">21</data>
+<node id="21">
+  <data key="d2">solicitó</data>
+</node>
+<node id="3">
+  <data key="d2">parte</data>
+</node>
+<node id="7">
+  <data key="d2">campo</data>
+</node>
+<node id="11">
+  <data key="d2">Marqués</data>
+</node>
+<node id="24">
+  <data key="d2">emperador</data>
+</node>
+<node id="28">
+  <data key="d2">diera</data>
+</node>
+<node id="33">
+  <data key="d2">,</data>
+</node>
+<node id="39">
+  <data key="d2">negó</data>
+</node>
+<node id="90">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">Por</data>
+</node>
+<node id="2">
+  <data key="d2">su</data>
+</node>
+<node id="4">
+  <data key="d2">,</data>
+</node>
+<node id="5">
+  <data key="d2">en</data>
+</node>
+<node id="6">
+  <data key="d2">el</data>
+</node>
+<node id="8">
+  <data key="d2">aliado</data>
+</node>
+<node id="9">
+  <data key="d2">,</data>
+</node>
+<node id="10">
+  <data key="d2">el</data>
+</node>
+<node id="13">
+  <data key="d2">Caxias</data>
+</node>
+<node id="15">
+  <data key="d2">comandante</data>
+</node>
+<node id="22">
+  <data key="d2">a</data>
+</node>
+<node id="23">
+  <data key="d2">el</data>
+</node>
+<node id="25">
+  <data key="d2">Pedro</data>
+</node>
+<node id="27">
+  <data key="d2">que</data>
+</node>
+<node id="30">
+  <data key="d2">terminada</data>
+</node>
+<node id="32">
+  <data key="d2">guerra</data>
+</node>
+<node id="36">
+  <data key="d2">que</data>
+</node>
+<node id="37">
+  <data key="d2">éste</data>
+</node>
+<node id="38">
+  <data key="d2">se</data>
+</node>
+<node id="40">
+  <data key="d2">:</data>
+</node>
+<node id="41">
+  <data key="d2">consideraba</data>
+</node>
+<node id="12">
+  <data key="d2">de</data>
+</node>
+<node id="14">
+  <data key="d2">,</data>
+</node>
+<node id="18">
+  <data key="d2">fuerzas</data>
+</node>
+<node id="20">
+  <data key="d2">,</data>
+</node>
+<node id="26">
+  <data key="d2">II</data>
+</node>
+<node id="29">
+  <data key="d2">por</data>
+</node>
+<node id="31">
+  <data key="d2">la</data>
+</node>
+<node id="34">
+  <data key="d2">a</data>
+</node>
+<node id="35">
+  <data key="d2">lo</data>
+</node>
+<node id="48">
+  <data key="d2">dependía</data>
+</node>
+<node id="16">
+  <data key="d2">de</data>
+</node>
+<node id="17">
+  <data key="d2">las</data>
+</node>
+<node id="19">
+  <data key="d2">brasileñas</data>
+</node>
+<node id="42">
+  <data key="d2">que</data>
+</node>
+<node id="44">
+  <data key="d2">estabilidad</data>
+</node>
+<node id="51">
+  <data key="d2">victoria</data>
+</node>
+<node id="43">
+  <data key="d2">la</data>
+</node>
+<node id="47">
+  <data key="d2">corona</data>
+</node>
+<node id="49">
+  <data key="d2">de</data>
+</node>
+<node id="50">
+  <data key="d2">una</data>
+</node>
+<node id="52">
+  <data key="d2">completa</data>
+</node>
+<node id="57">
+  <data key="d2">incluyera</data>
+</node>
+<node id="45">
+  <data key="d2">de</data>
+</node>
+<node id="46">
+  <data key="d2">su</data>
+</node>
+<node id="54">
+  <data key="d2">aplastante</data>
+</node>
+<node id="55">
+  <data key="d2">,</data>
+</node>
+<node id="56">
+  <data key="d2">que</data>
+</node>
+<node id="59">
+  <data key="d2">prisión</data>
+</node>
+<node id="53">
+  <data key="d2">y</data>
+</node>
+<node id="58">
+  <data key="d2">la</data>
+</node>
+<node id="61">
+  <data key="d2">muerte</data>
+</node>
+<node id="63">
+  <data key="d2">López</data>
+</node>
+<node id="66">
+  <data key="d2">instalación</data>
+</node>
+<node id="76">
+  <data key="d2">solución</data>
+</node>
+<node id="60">
+  <data key="d2">o</data>
+</node>
+<node id="62">
+  <data key="d2">de</data>
+</node>
+<node id="64">
+  <data key="d2">,</data>
+</node>
+<node id="65">
+  <data key="d2">la</data>
+</node>
+<node id="69">
+  <data key="d2">gobierno</data>
+</node>
+<node id="73">
+  <data key="d2">Paraguay</data>
+</node>
+<node id="74">
+  <data key="d2">y</data>
+</node>
+<node id="75">
+  <data key="d2">la</data>
+</node>
+<node id="80">
+  <data key="d2">conflictos</data>
+</node>
+<node id="86">
+  <data key="d2">beneficio</data>
+</node>
+<node id="67">
+  <data key="d2">de</data>
+</node>
+<node id="68">
+  <data key="d2">un</data>
+</node>
+<node id="70">
+  <data key="d2">probrasileño</data>
+</node>
+<node id="71">
+  <data key="d2">en</data>
+</node>
+<node id="72">
+  <data key="d2">el</data>
+</node>
+<node id="77">
+  <data key="d2">de</data>
+</node>
+<node id="78">
+  <data key="d2">todos</data>
+</node>
+<node id="79">
+  <data key="d2">los</data>
+</node>
+<node id="81">
+  <data key="d2">limítrofes</data>
+</node>
+<node id="84">
+  <data key="d2">país</data>
+</node>
+<node id="85">
+  <data key="d2">en</data>
+</node>
+<node id="89">
+  <data key="d2">Imperio</data>
+</node>
+<node id="82">
+  <data key="d2">con</data>
+</node>
+<node id="83">
+  <data key="d2">ese</data>
+</node>
+<node id="87">
+  <data key="d2">de</data>
+</node>
+<node id="88">
+  <data key="d2">el</data>
+</node>
+<edge source="21" target="3"/>
+<edge source="21" target="7"/>
+<edge source="21" target="11"/>
+<edge source="21" target="24"/>
+<edge source="21" target="28"/>
+<edge source="21" target="33"/>
+<edge source="21" target="39"/>
+<edge source="21" target="90"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="7" target="4"/>
+<edge source="7" target="5"/>
+<edge source="7" target="6"/>
+<edge source="7" target="8"/>
+<edge source="7" target="9"/>
+<edge source="11" target="10"/>
+<edge source="11" target="13"/>
+<edge source="11" target="15"/>
+<edge source="24" target="22"/>
+<edge source="24" target="23"/>
+<edge source="24" target="25"/>
+<edge source="28" target="27"/>
+<edge source="28" target="30"/>
+<edge source="28" target="32"/>
+<edge source="39" target="36"/>
+<edge source="39" target="37"/>
+<edge source="39" target="38"/>
+<edge source="39" target="40"/>
+<edge source="39" target="41"/>
+<edge source="13" target="12"/>
+<edge source="15" target="14"/>
+<edge source="15" target="18"/>
+<edge source="15" target="20"/>
+<edge source="25" target="26"/>
+<edge source="30" target="29"/>
+<edge source="32" target="31"/>
+<edge source="36" target="34"/>
+<edge source="36" target="35"/>
+<edge source="41" target="48"/>
+<edge source="18" target="16"/>
+<edge source="18" target="17"/>
+<edge source="18" target="19"/>
+<edge source="48" target="42"/>
+<edge source="48" target="44"/>
+<edge source="48" target="51"/>
+<edge source="44" target="43"/>
+<edge source="44" target="47"/>
+<edge source="51" target="49"/>
+<edge source="51" target="50"/>
+<edge source="51" target="52"/>
+<edge source="51" target="57"/>
+<edge source="47" target="45"/>
+<edge source="47" target="46"/>
+<edge source="52" target="54"/>
+<edge source="57" target="55"/>
+<edge source="57" target="56"/>
+<edge source="57" target="59"/>
+<edge source="54" target="53"/>
+<edge source="59" target="58"/>
+<edge source="59" target="61"/>
+<edge source="59" target="63"/>
+<edge source="59" target="66"/>
+<edge source="59" target="76"/>
+<edge source="61" target="60"/>
+<edge source="63" target="62"/>
+<edge source="66" target="64"/>
+<edge source="66" target="65"/>
+<edge source="66" target="69"/>
+<edge source="66" target="73"/>
+<edge source="76" target="74"/>
+<edge source="76" target="75"/>
+<edge source="76" target="80"/>
+<edge source="76" target="86"/>
+<edge source="69" target="67"/>
+<edge source="69" target="68"/>
+<edge source="69" target="70"/>
+<edge source="73" target="71"/>
+<edge source="73" target="72"/>
+<edge source="80" target="77"/>
+<edge source="80" target="78"/>
+<edge source="80" target="79"/>
+<edge source="80" target="81"/>
+<edge source="80" target="84"/>
+<edge source="86" target="85"/>
+<edge source="86" target="89"/>
+<edge source="84" target="82"/>
+<edge source="84" target="83"/>
+<edge source="89" target="87"/>
+<edge source="89" target="88"/>
+</graph></graphml>

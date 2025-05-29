@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">En el congreso de la Asociación Británica para el Avance de la Ciencia, celebrado en Oxford en 1847, el Obispo de Oxford Samuel Wilberforce usó su sermón de los domingos en la iglesia de St. Mary para criticar "la manera incorrecta de hacer ciencia" y lanzar un fuerte ataque hacia el posible autor de la obra, Robert Chambers, en escenario "llena hasta la sofocación" con geólogos, astrónomos y zoólogos.</data>
+<data key="d1">27</data>
+<node id="27">
+  <data key="d2">usó</data>
+</node>
+<node id="3">
+  <data key="d2">congreso</data>
+</node>
+<node id="22">
+  <data key="d2">Obispo</data>
+</node>
+<node id="29">
+  <data key="d2">sermón</data>
+</node>
+<node id="40">
+  <data key="d2">criticar</data>
+</node>
+<node id="79">
+  <data key="d2">.</data>
+</node>
+<node id="1">
+  <data key="d2">En</data>
+</node>
+<node id="2">
+  <data key="d2">el</data>
+</node>
+<node id="6">
+  <data key="d2">Asociación</data>
+</node>
+<node id="15">
+  <data key="d2">celebrado</data>
+</node>
+<node id="21">
+  <data key="d2">el</data>
+</node>
+<node id="24">
+  <data key="d2">Oxford</data>
+</node>
+<node id="25">
+  <data key="d2">Samuel</data>
+</node>
+<node id="28">
+  <data key="d2">su</data>
+</node>
+<node id="32">
+  <data key="d2">domingos</data>
+</node>
+<node id="35">
+  <data key="d2">iglesia</data>
+</node>
+<node id="39">
+  <data key="d2">para</data>
+</node>
+<node id="43">
+  <data key="d2">manera</data>
+</node>
+<node id="50">
+  <data key="d2">lanzar</data>
+</node>
+<node id="4">
+  <data key="d2">de</data>
+</node>
+<node id="5">
+  <data key="d2">la</data>
+</node>
+<node id="7">
+  <data key="d2">Británica</data>
+</node>
+<node id="10">
+  <data key="d2">Avance</data>
+</node>
+<node id="14">
+  <data key="d2">,</data>
+</node>
+<node id="17">
+  <data key="d2">Oxford</data>
+</node>
+<node id="19">
+  <data key="d2">1847</data>
+</node>
+<node id="20">
+  <data key="d2">,</data>
+</node>
+<node id="23">
+  <data key="d2">de</data>
+</node>
+<node id="26">
+  <data key="d2">Wilberforce</data>
+</node>
+<node id="30">
+  <data key="d2">de</data>
+</node>
+<node id="31">
+  <data key="d2">los</data>
+</node>
+<node id="33">
+  <data key="d2">en</data>
+</node>
+<node id="34">
+  <data key="d2">la</data>
+</node>
+<node id="37">
+  <data key="d2">St.</data>
+</node>
+<node id="41">
+  <data key="d2">"</data>
+</node>
+<node id="42">
+  <data key="d2">la</data>
+</node>
+<node id="44">
+  <data key="d2">incorrecta</data>
+</node>
+<node id="46">
+  <data key="d2">hacer</data>
+</node>
+<node id="48">
+  <data key="d2">"</data>
+</node>
+<node id="49">
+  <data key="d2">y</data>
+</node>
+<node id="53">
+  <data key="d2">ataque</data>
+</node>
+<node id="66">
+  <data key="d2">escenario</data>
+</node>
+<node id="8">
+  <data key="d2">para</data>
+</node>
+<node id="9">
+  <data key="d2">el</data>
+</node>
+<node id="13">
+  <data key="d2">Ciencia</data>
+</node>
+<node id="16">
+  <data key="d2">en</data>
+</node>
+<node id="18">
+  <data key="d2">en</data>
+</node>
+<node id="36">
+  <data key="d2">de</data>
+</node>
+<node id="38">
+  <data key="d2">Mary</data>
+</node>
+<node id="45">
+  <data key="d2">de</data>
+</node>
+<node id="47">
+  <data key="d2">ciencia</data>
+</node>
+<node id="51">
+  <data key="d2">un</data>
+</node>
+<node id="52">
+  <data key="d2">fuerte</data>
+</node>
+<node id="57">
+  <data key="d2">autor</data>
+</node>
+<node id="64">
+  <data key="d2">,</data>
+</node>
+<node id="65">
+  <data key="d2">en</data>
+</node>
+<node id="68">
+  <data key="d2">llena</data>
+</node>
+<node id="74">
+  <data key="d2">geólogos</data>
+</node>
+<node id="11">
+  <data key="d2">de</data>
+</node>
+<node id="12">
+  <data key="d2">la</data>
+</node>
+<node id="54">
+  <data key="d2">hacia</data>
+</node>
+<node id="55">
+  <data key="d2">el</data>
+</node>
+<node id="56">
+  <data key="d2">posible</data>
+</node>
+<node id="60">
+  <data key="d2">obra</data>
+</node>
+<node id="62">
+  <data key="d2">Robert</data>
+</node>
+<node id="67">
+  <data key="d2">"</data>
+</node>
+<node id="71">
+  <data key="d2">sofocación</data>
+</node>
+<node id="72">
+  <data key="d2">"</data>
+</node>
+<node id="73">
+  <data key="d2">con</data>
+</node>
+<node id="76">
+  <data key="d2">astrónomos</data>
+</node>
+<node id="78">
+  <data key="d2">zoólogos</data>
+</node>
+<node id="58">
+  <data key="d2">de</data>
+</node>
+<node id="59">
+  <data key="d2">la</data>
+</node>
+<node id="61">
+  <data key="d2">,</data>
+</node>
+<node id="63">
+  <data key="d2">Chambers</data>
+</node>
+<node id="69">
+  <data key="d2">hasta</data>
+</node>
+<node id="70">
+  <data key="d2">la</data>
+</node>
+<node id="75">
+  <data key="d2">,</data>
+</node>
+<node id="77">
+  <data key="d2">y</data>
+</node>
+<edge source="27" target="3"/>
+<edge source="27" target="22"/>
+<edge source="27" target="29"/>
+<edge source="27" target="40"/>
+<edge source="27" target="79"/>
+<edge source="3" target="1"/>
+<edge source="3" target="2"/>
+<edge source="3" target="6"/>
+<edge source="3" target="15"/>
+<edge source="22" target="21"/>
+<edge source="22" target="24"/>
+<edge source="22" target="25"/>
+<edge source="29" target="28"/>
+<edge source="29" target="32"/>
+<edge source="29" target="35"/>
+<edge source="40" target="39"/>
+<edge source="40" target="43"/>
+<edge source="40" target="50"/>
+<edge source="6" target="4"/>
+<edge source="6" target="5"/>
+<edge source="6" target="7"/>
+<edge source="6" target="10"/>
+<edge source="15" target="14"/>
+<edge source="15" target="17"/>
+<edge source="15" target="19"/>
+<edge source="15" target="20"/>
+<edge source="24" target="23"/>
+<edge source="25" target="26"/>
+<edge source="32" target="30"/>
+<edge source="32" target="31"/>
+<edge source="35" target="33"/>
+<edge source="35" target="34"/>
+<edge source="35" target="37"/>
+<edge source="43" target="41"/>
+<edge source="43" target="42"/>
+<edge source="43" target="44"/>
+<edge source="43" target="46"/>
+<edge source="43" target="48"/>
+<edge source="50" target="49"/>
+<edge source="50" target="53"/>
+<edge source="50" target="66"/>
+<edge source="10" target="8"/>
+<edge source="10" target="9"/>
+<edge source="10" target="13"/>
+<edge source="17" target="16"/>
+<edge source="19" target="18"/>
+<edge source="37" target="36"/>
+<edge source="37" target="38"/>
+<edge source="46" target="45"/>
+<edge source="46" target="47"/>
+<edge source="53" target="51"/>
+<edge source="53" target="52"/>
+<edge source="53" target="57"/>
+<edge source="66" target="64"/>
+<edge source="66" target="65"/>
+<edge source="66" target="68"/>
+<edge source="66" target="74"/>
+<edge source="13" target="11"/>
+<edge source="13" target="12"/>
+<edge source="57" target="54"/>
+<edge source="57" target="55"/>
+<edge source="57" target="56"/>
+<edge source="57" target="60"/>
+<edge source="57" target="62"/>
+<edge source="68" target="67"/>
+<edge source="68" target="71"/>
+<edge source="68" target="72"/>
+<edge source="74" target="73"/>
+<edge source="74" target="76"/>
+<edge source="74" target="78"/>
+<edge source="60" target="58"/>
+<edge source="60" target="59"/>
+<edge source="62" target="61"/>
+<edge source="62" target="63"/>
+<edge source="71" target="69"/>
+<edge source="71" target="70"/>
+<edge source="76" target="75"/>
+<edge source="78" target="77"/>
+</graph></graphml>

@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="root" attr.type="long"/>
+<key id="d0" for="graph" attr.name="phrase" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">Inicialmente, ambos rechazaron la composición del Consejo Asesor por ser «arbitrario, inoperante y ad - hoc al modelo educativo actual» y convocaron a una nueva asamblea para el día siguiente destinada a definir el paro que se mantenía oficialmente, a pesar de las importantes bajas.</data>
+<data key="d1">4</data>
+<node id="4">
+  <data key="d2">rechazaron</data>
+</node>
+<node id="1">
+  <data key="d2">Inicialmente</data>
+</node>
+<node id="2">
+  <data key="d2">,</data>
+</node>
+<node id="3">
+  <data key="d2">ambos</data>
+</node>
+<node id="6">
+  <data key="d2">composición</data>
+</node>
+<node id="14">
+  <data key="d2">arbitrario</data>
+</node>
+<node id="28">
+  <data key="d2">convocaron</data>
+</node>
+<node id="53">
+  <data key="d2">.</data>
+</node>
+<node id="5">
+  <data key="d2">la</data>
+</node>
+<node id="9">
+  <data key="d2">Consejo</data>
+</node>
+<node id="11">
+  <data key="d2">por</data>
+</node>
+<node id="12">
+  <data key="d2">ser</data>
+</node>
+<node id="13">
+  <data key="d2">«</data>
+</node>
+<node id="16">
+  <data key="d2">inoperante</data>
+</node>
+<node id="20">
+  <data key="d2">hoc</data>
+</node>
+<node id="26">
+  <data key="d2">»</data>
+</node>
+<node id="27">
+  <data key="d2">y</data>
+</node>
+<node id="32">
+  <data key="d2">asamblea</data>
+</node>
+<node id="35">
+  <data key="d2">día</data>
+</node>
+<node id="7">
+  <data key="d2">de</data>
+</node>
+<node id="8">
+  <data key="d2">el</data>
+</node>
+<node id="10">
+  <data key="d2">Asesor</data>
+</node>
+<node id="15">
+  <data key="d2">,</data>
+</node>
+<node id="17">
+  <data key="d2">y</data>
+</node>
+<node id="18">
+  <data key="d2">ad</data>
+</node>
+<node id="19">
+  <data key="d2">-</data>
+</node>
+<node id="23">
+  <data key="d2">modelo</data>
+</node>
+<node id="29">
+  <data key="d2">a</data>
+</node>
+<node id="30">
+  <data key="d2">una</data>
+</node>
+<node id="31">
+  <data key="d2">nueva</data>
+</node>
+<node id="37">
+  <data key="d2">destinada</data>
+</node>
+<node id="33">
+  <data key="d2">para</data>
+</node>
+<node id="34">
+  <data key="d2">el</data>
+</node>
+<node id="36">
+  <data key="d2">siguiente</data>
+</node>
+<node id="21">
+  <data key="d2">a</data>
+</node>
+<node id="22">
+  <data key="d2">el</data>
+</node>
+<node id="24">
+  <data key="d2">educativo</data>
+</node>
+<node id="25">
+  <data key="d2">actual</data>
+</node>
+<node id="39">
+  <data key="d2">definir</data>
+</node>
+<node id="38">
+  <data key="d2">a</data>
+</node>
+<node id="41">
+  <data key="d2">paro</data>
+</node>
+<node id="40">
+  <data key="d2">el</data>
+</node>
+<node id="44">
+  <data key="d2">mantenía</data>
+</node>
+<node id="42">
+  <data key="d2">que</data>
+</node>
+<node id="43">
+  <data key="d2">se</data>
+</node>
+<node id="45">
+  <data key="d2">oficialmente</data>
+</node>
+<node id="48">
+  <data key="d2">pesar</data>
+</node>
+<node id="46">
+  <data key="d2">,</data>
+</node>
+<node id="47">
+  <data key="d2">a</data>
+</node>
+<node id="52">
+  <data key="d2">bajas</data>
+</node>
+<node id="49">
+  <data key="d2">de</data>
+</node>
+<node id="50">
+  <data key="d2">las</data>
+</node>
+<node id="51">
+  <data key="d2">importantes</data>
+</node>
+<edge source="4" target="1"/>
+<edge source="4" target="2"/>
+<edge source="4" target="3"/>
+<edge source="4" target="6"/>
+<edge source="4" target="14"/>
+<edge source="4" target="28"/>
+<edge source="4" target="53"/>
+<edge source="6" target="5"/>
+<edge source="6" target="9"/>
+<edge source="14" target="11"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="14" target="16"/>
+<edge source="14" target="20"/>
+<edge source="14" target="26"/>
+<edge source="28" target="27"/>
+<edge source="28" target="32"/>
+<edge source="28" target="35"/>
+<edge source="9" target="7"/>
+<edge source="9" target="8"/>
+<edge source="9" target="10"/>
+<edge source="16" target="15"/>
+<edge source="20" target="17"/>
+<edge source="20" target="18"/>
+<edge source="20" target="19"/>
+<edge source="20" target="23"/>
+<edge source="32" target="29"/>
+<edge source="32" target="30"/>
+<edge source="32" target="31"/>
+<edge source="32" target="37"/>
+<edge source="35" target="33"/>
+<edge source="35" target="34"/>
+<edge source="35" target="36"/>
+<edge source="23" target="21"/>
+<edge source="23" target="22"/>
+<edge source="23" target="24"/>
+<edge source="23" target="25"/>
+<edge source="37" target="39"/>
+<edge source="39" target="38"/>
+<edge source="39" target="41"/>
+<edge source="41" target="40"/>
+<edge source="41" target="44"/>
+<edge source="44" target="42"/>
+<edge source="44" target="43"/>
+<edge source="44" target="45"/>
+<edge source="44" target="48"/>
+<edge source="48" target="46"/>
+<edge source="48" target="47"/>
+<edge source="48" target="52"/>
+<edge source="52" target="49"/>
+<edge source="52" target="50"/>
+<edge source="52" target="51"/>
+</graph></graphml>
