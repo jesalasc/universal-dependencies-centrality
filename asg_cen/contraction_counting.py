@@ -1,4 +1,4 @@
-from utils import add_to_row_col, matrix_without_row_col
+from asg_cen.utils import add_to_row_col, matrix_without_row_col
 
 
 def has_ended(matrix, partition):

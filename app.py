@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 from matplotlib.colors import BoundaryNorm
-#from spacy import displacy
+#çfrom spacy import displacy
 import streamlit.components.v1 as components
 import os
 
@@ -12,7 +12,7 @@ import os
 from asg_cen.all_subgraphs_centrality import all_subgraphs_centrality as asg
 
 st.set_page_config(layout="wide")
-st.title("GraphML Centrality Visualizer")
+st.title("Visualizador de centralidad en árboles de dependencias sintácticas")
 
 # --- Load GraphML ---
 def load_graph(file):
@@ -33,7 +33,7 @@ def compute_centrality(G, method):
     elif method == "All-Subgraphs":
         try:
             asg_cen = asg(G)
-            print({G.nodes[n].get('form', n): asg_cen[n] for n in G.nodes()})  # Debugging output
+            #print({G.nodes[n].get('form', n): asg_cen[n] for n in G.nodes()})  # Debugging output
             return asg_cen
         except Exception as e:
             st.warning(f"ASG centrality failed to solve: {e}")

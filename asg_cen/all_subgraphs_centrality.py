@@ -12,8 +12,8 @@ from time import time
 from scipy.io import mmread
 #from progress.bar import Bar
 from asg_cen.decomposition import get_greedy_rich_tree_decomp
-from partition_tools import add_node_to_partition, format_d, get_partition, partition_repr, get_supremum, get_subset_positions, get_not_null_partitions, remove_node_from_partition
-from contraction_counting import contraction_subgraph_count
+from asg_cen.partition_tools import add_node_to_partition, format_d, get_partition, partition_repr, get_supremum, get_subset_positions, get_not_null_partitions, remove_node_from_partition
+from asg_cen.contraction_counting import contraction_subgraph_count
 
 #from main import all_subgraphs_centrality_updated, EXHAUSTIVE
 
