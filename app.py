@@ -80,13 +80,30 @@ def draw_graph(G, centrality, title, pos, type='undirected'):
     nx.draw_networkx_edges(G, pos, ax=ax)
 
     # Draw labels with black font color and larger font size
-    labels = {n: G.nodes[n].get('form', n) for n in G.nodes()}
-    nx.draw_networkx_labels(G, pos, labels=labels, font_size=7, font_color='red', ax=ax)
+    # Compute centrality ranking
+    
     
     if type == 'undirected':
+        try:
+        # Sort nodes by centrality descending, assign ranking starting from 1
+            ranking = {}
+            sorted_nodes = sorted(centrality, key=lambda n: centrality[n], reverse=True)
+            for idx, n in enumerate(sorted_nodes, 1):
+                ranking[n] = idx
+        
+        except Exception:
+            ranking = {n: "" for n in G.nodes()}
+            
+        labels = {n: f"{ranking.get(n, '')}\n{G.nodes[n].get('form', n)}" for n in G.nodes()}
+            
+        nx.draw_networkx_labels(G, pos, labels=labels, font_size=7, font_color='red', ax=ax)
         sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
         sm.set_array([])
         fig.colorbar(sm, ax=ax, shrink=0.9, label='Centrality Score')
+        
+    else:
+        labels = {n: G.nodes[n].get('form', n) for n in G.nodes()}
+        nx.draw_networkx_labels(G, pos, labels=labels, font_size=7, font_color='red', ax=ax)
 
     ax.set_title(title, pad=2)
     ax.axis('off')
@@ -181,7 +198,7 @@ else:
     st.sidebar.markdown("### Elige una medida de centralidad")
     centrality = st.sidebar.selectbox("Medida de centralidad", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"])
     
-    st.sidebar.markdown(f"**Frase**: {G_directed.graph.get('phrase', 'No phrase found')}")
+    st.sidebar.markdown(f"**Frase**: {G_directed.graph.get('phrase', 'No phrase found')}\n\n{selected_file_name}")
 
     # Hang tree from most central node
     centrality_scores = compute_centrality(G_undirected, centrality)
