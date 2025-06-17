@@ -7,12 +7,16 @@ from matplotlib.colors import BoundaryNorm
 #çfrom spacy import displacy
 import streamlit.components.v1 as components
 import os
+import re
 
 # Ensure the all_subgraphs code directory is on the Python path
 from asg_cen.all_subgraphs_centrality import all_subgraphs_centrality as asg
 
 st.set_page_config(layout="wide")
-st.title("Visualizador de centralidad en árboles de dependencias sintácticas")
+
+# --- View selector ---
+view = st.sidebar.radio("Selecciona la vista", ["Visualización de árboles", "Datos de distribución"])
+
     # Pin phrase at top
 
 # --- Load GraphML ---
@@ -183,67 +187,107 @@ def build_dag_from_root(G_undirected, root_node):
     
     return G_dag
 
-GRAPH_DIR = "./UD_Spanish-GSD/"  # Set your desired directory path here
-graph_files = [f for f in os.listdir(GRAPH_DIR) if f.endswith(".graphml")]
-#vis_mode = st.sidebar.radio("Visualization mode", ["Centrality", "Syntax Tree"])
 
-if not graph_files:
-    st.error(f"No .graphml files found in {GRAPH_DIR}.")
-else:
-    selected_file_name = st.sidebar.selectbox("Select graph file", graph_files)
-    with open(os.path.join(GRAPH_DIR, selected_file_name), 'r', encoding='utf-8') as f:
-        G_directed, G_undirected = load_graph(f)
+# --- View logic ---
+import pandas as pd
 
+if view == "Visualización de árboles":
+    not_wanted = []
+    st.title("Visualizador de centralidad en árboles de dependencias sintácticas")
 
-    st.sidebar.markdown("### Elige una medida de centralidad")
-    centrality = st.sidebar.selectbox("Medida de centralidad", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"])
+    GRAPH_DIR = "./UD_Spanish-GSD/"  # Set your desired directory path here
+    graph_files = [f for f in os.listdir(GRAPH_DIR) if f.endswith(".graphml")]
+    #vis_mode = st.sidebar.radio("Visualization mode", ["Centrality", "Syntax Tree"])
+
+    if not graph_files:
+        st.error(f"No .graphml files found in {GRAPH_DIR}.")
+    else:
+        selected_file_name = st.sidebar.selectbox("Select graph file", graph_files)
+        with open(os.path.join(GRAPH_DIR, selected_file_name), 'r', encoding='utf-8') as f:
+            G_directed, G_undirected = load_graph(f)
+
+        include_punctuation = st.sidebar.checkbox("Incluir puntuación", value=True)
+
+        if not include_punctuation:
+            not_wanted = [".", ",", ";", ":"]
+            punct_nodes = [n for n in G_directed.nodes() if G_directed.nodes[n].get("form") in not_wanted]
+            G_directed.remove_nodes_from(punct_nodes)
+            G_undirected = G_directed.to_undirected()
+
+        st.sidebar.markdown("### Elige una medida de centralidad")
+        centrality = st.sidebar.selectbox("Medida de centralidad", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"])
+
+        # Hang tree from most central node
+        centrality_scores = compute_centrality(G_undirected, centrality)
+
+        # --- Node color mapping for phrase visualization ---
+        cmap = cm.viridis
+        values = np.array(list(centrality_scores.values()), dtype=float)
+        vmin, vmax = values.min(), values.max()
+        if vmin == vmax:
+            vmin -= 1
+            vmax += 1
+        bins = np.quantile(values, np.linspace(0, 1, 11))
+        norm = BoundaryNorm(bins, ncolors=cmap.N, clip=True)
+        node_colors_dict = {G_undirected.nodes[node].get("form", "UNKNOWN"): cmap(norm(centrality_scores[node])) for node in G_undirected.nodes()}
+
+        # --- Display colored phrase ---
+        phrase = G_directed.graph.get("phrase")
+        tokens = re.findall(r"\w+|[.,;:]", phrase)
+
+        final_phrase = []
+        for word in tokens:
+            rgba = node_colors_dict.get(word, cmap(0))
+            hex_color = '#{:02x}{:02x}{:02x}'.format(
+                int(rgba[0] * 255),
+                int(rgba[1] * 255),
+                int(rgba[2] * 255)
+            )
+            final_phrase.append(f'<span style="color:{hex_color}; font-weight:bold">{word}</span>')
+        colored_phrase = "**Frase**: " + ' '.join(final_phrase)
+        st.sidebar.markdown(colored_phrase, unsafe_allow_html=True)
+
+        # Display trees side-by-side instead of vertically
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.subheader("Original Syntactic Dependency Tree")
+            root_node = str(G_directed.graph.get('root', None))
+            pos1 = hierarchy_pos(G_directed, root=root_node, vert_gap=3)
+            fig1, ax1 = draw_graph(G_directed, {n: 1 for n in G_directed.nodes()}, "Directed Syntactic Dependency Tree", pos1, 'directed')
+            st.pyplot(fig1)
+
+        with col2:
+            st.subheader(f"Centrality: {centrality}")
+            c = compute_centrality(G_undirected, centrality)
+            root_node = max(c, key=c.get)
+            G_dag = build_dag_from_root(G_undirected, root_node)
+            pos2 = hierarchy_pos(G_dag, root=root_node, vert_gap=3)
+            fig2, ax2 = draw_graph(G_undirected, c, f"Centrality: {centrality}", pos2)
+            st.pyplot(fig2)
+
+elif view == "Datos de distribución":
+    st.title("Visualización de distrubición")
     
-    #st.sidebar.markdown(f"**Frase**: {G_directed.graph.get('phrase', 'No phrase found')}\n\n{selected_file_name}")
+    #st.sidebar.markdown("### Subir archivo CSV local")
+    uploaded_csv = "./distances_to_root.csv"
 
-    # Hang tree from most central node
-    centrality_scores = compute_centrality(G_undirected, centrality)
+    if uploaded_csv is not None:
+        df = pd.read_csv(uploaded_csv)
+        st.markdown("## Vista de las diferencias entre raíces")
+        st.dataframe(df)
 
-    # --- Node color mapping for phrase visualization ---
-    cmap = cm.viridis
-    values = np.array(list(centrality_scores.values()), dtype=float)
-    vmin, vmax = values.min(), values.max()
-    if vmin == vmax:
-        vmin -= 1
-        vmax += 1
-    bins = np.quantile(values, np.linspace(0, 1, 11))
-    norm = BoundaryNorm(bins, ncolors=cmap.N, clip=True)
-    node_colors_dict = {G_undirected.nodes[node].get("form", "UNKNOWN"): cmap(norm(centrality_scores[node])) for node in G_undirected.nodes()}
+        st.markdown("## Estadísticas del CSV")
+        col1, col2, col3 = st.columns(3)
 
-    # --- Display colored phrase ---
-    #st.markdown("### Frase con codificación por centralidad")
-    phrase_tokens = G_directed.graph.get('phrase', 'No phrase found').split(" ")
-    final_phrase = []
-    for word in phrase_tokens:
-        rgba = node_colors_dict.get(word, cmap(0))
-        hex_color = '#{:02x}{:02x}{:02x}'.format(
-            int(rgba[0] * 255),
-            int(rgba[1] * 255),
-            int(rgba[2] * 255)
-        )
-        final_phrase.append(f'<span style="color:{hex_color}; font-weight:bold">{word}</span>')
-    colored_phrase = "**Frase**: " + ' '.join(final_phrase)
-    st.sidebar.markdown(colored_phrase, unsafe_allow_html=True)
+        with col1:
+            st.write("**Máximo por columna:**")
+            st.dataframe(df.max(numeric_only=True))
 
-    # Display trees side-by-side instead of vertically
-    col1, col2 = st.columns(2)
+        with col2:
+            st.write("**Media por columna:**")
+            st.dataframe(df.mean(numeric_only=True))
 
-    with col1:
-        st.subheader("Original Syntactic Dependency Tree")
-        root_node = str(G_directed.graph.get('root', None))
-        pos1 = hierarchy_pos(G_directed, root=root_node, vert_gap=3)
-        fig1, ax1 = draw_graph(G_directed, {n: 1 for n in G_directed.nodes()}, "Directed Syntactic Dependency Tree", pos1, 'directed')
-        st.pyplot(fig1)
-
-    with col2:
-        st.subheader(f"Centrality: {centrality}")
-        c = compute_centrality(G_undirected, centrality)
-        root_node = max(c, key=c.get)
-        G_dag = build_dag_from_root(G_undirected, root_node)
-        pos2 = hierarchy_pos(G_dag, root=root_node, vert_gap=3)
-        fig2, ax2 = draw_graph(G_undirected, c, f"Centrality: {centrality}", pos2)
-        st.pyplot(fig2)
+        with col3:
+            st.write("**Desviación estándar por columna:**")
+            st.dataframe(df.std(numeric_only=True))
