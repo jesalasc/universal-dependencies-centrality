@@ -198,12 +198,36 @@ else:
     st.sidebar.markdown("### Elige una medida de centralidad")
     centrality = st.sidebar.selectbox("Medida de centralidad", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"])
     
-    st.sidebar.markdown(f"**Frase**: {G_directed.graph.get('phrase', 'No phrase found')}\n\n{selected_file_name}")
+    #st.sidebar.markdown(f"**Frase**: {G_directed.graph.get('phrase', 'No phrase found')}\n\n{selected_file_name}")
 
     # Hang tree from most central node
     centrality_scores = compute_centrality(G_undirected, centrality)
 
-    
+    # --- Node color mapping for phrase visualization ---
+    cmap = cm.viridis
+    values = np.array(list(centrality_scores.values()), dtype=float)
+    vmin, vmax = values.min(), values.max()
+    if vmin == vmax:
+        vmin -= 1
+        vmax += 1
+    bins = np.quantile(values, np.linspace(0, 1, 11))
+    norm = BoundaryNorm(bins, ncolors=cmap.N, clip=True)
+    node_colors_dict = {G_undirected.nodes[node].get("form", "UNKNOWN"): cmap(norm(centrality_scores[node])) for node in G_undirected.nodes()}
+
+    # --- Display colored phrase ---
+    #st.markdown("### Frase con codificación por centralidad")
+    phrase_tokens = G_directed.graph.get('phrase', 'No phrase found').split(" ")
+    final_phrase = []
+    for word in phrase_tokens:
+        rgba = node_colors_dict.get(word, cmap(0))
+        hex_color = '#{:02x}{:02x}{:02x}'.format(
+            int(rgba[0] * 255),
+            int(rgba[1] * 255),
+            int(rgba[2] * 255)
+        )
+        final_phrase.append(f'<span style="color:{hex_color}; font-weight:bold">{word}</span>')
+    colored_phrase = "**Frase**: " + ' '.join(final_phrase)
+    st.sidebar.markdown(colored_phrase, unsafe_allow_html=True)
 
     # Display trees side-by-side instead of vertically
     col1, col2 = st.columns(2)
@@ -211,8 +235,6 @@ else:
     with col1:
         st.subheader("Original Syntactic Dependency Tree")
         root_node = str(G_directed.graph.get('root', None))
-        #print(root_node)
-        #print(G_directed.nodes(data=False))
         pos1 = hierarchy_pos(G_directed, root=root_node, vert_gap=3)
         fig1, ax1 = draw_graph(G_directed, {n: 1 for n in G_directed.nodes()}, "Directed Syntactic Dependency Tree", pos1, 'directed')
         st.pyplot(fig1)
@@ -223,6 +245,5 @@ else:
         root_node = max(c, key=c.get)
         G_dag = build_dag_from_root(G_undirected, root_node)
         pos2 = hierarchy_pos(G_dag, root=root_node, vert_gap=3)
-        #print(pos2)
         fig2, ax2 = draw_graph(G_undirected, c, f"Centrality: {centrality}", pos2)
         st.pyplot(fig2)
