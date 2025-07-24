@@ -91,11 +91,13 @@ def classify_sentence(stanza_sentence_obj):
     has_sub = has_subordination(sentence_words)
     has_coord = has_coordination(sentence_words)
 
-    if main_verbs_count <= 1:
+    if main_verbs_count == 1:
         # Con un solo verbo principal, si hay subordinación (ej. Quiero comer), es compleja.
         # Si no hay subordinación, es simple.
         return "Compleja" if has_sub else "Simple"
     
+    if main_verbs_count == 0:
+        return "Unimembre"  # Oraciones sin verbos principales (ej. ¡Hola!, ¡Qué bonito!)
     # Si hay más de un verbo principal
     if has_sub and has_coord:
         return "Compuesta-Compleja"
