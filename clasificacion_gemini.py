@@ -21,6 +21,13 @@ def is_verb(word):
     """Verifica si una palabra es un verbo o un auxiliar."""
     return word.upos in ['VERB', 'AUX']
 
+def get_depth(word, id2word):
+        # Root has head = 0 → depth 0
+        if word.head == 0:
+            return 0
+        # Otherwise, 1 + depth of its head
+        return 1 + get_depth(id2word[word.head], id2word)
+
 def has_subordination(sentence_words):
     """
     Detecta si una oración contiene relaciones de dependencia que indican subordinación.
@@ -49,18 +56,30 @@ def has_subordination(sentence_words):
                 return True
     return False
 
-def has_coordination(sentence_words):
+# def has_coordination(sentence_words):
+#     """
+#     Detecta si una oración contiene relaciones de dependencia que indican coordinación
+#     entre dos o más elementos verbales o cláusulas verbales.
+#     """
+#     for word in sentence_words:
+#         if word.deprel == 'conj' and is_verb(word):
+#             # Si un verbo tiene una relación 'conj', su 'head' (el elemento coordinado)
+#             # también debería ser un verbo para indicar coordinación de cláusulas.
+#             head_word = next((w for w in sentence_words if w.id == word.head), None)
+#             if head_word and is_verb(head_word):
+#                 return True # Dos verbos coordinados
+#     return False
+
+def has_coordination(sentence_words, id2word):
     """
     Detecta si una oración contiene relaciones de dependencia que indican coordinación
     entre dos o más elementos verbales o cláusulas verbales.
     """
-    for word in sentence_words:
-        if word.deprel == 'conj' and is_verb(word):
-            # Si un verbo tiene una relación 'conj', su 'head' (el elemento coordinado)
-            # también debería ser un verbo para indicar coordinación de cláusulas.
-            head_word = next((w for w in sentence_words if w.id == word.head), None)
-            if head_word and is_verb(head_word):
-                return True # Dos verbos coordinados
+    verbs = [word for word in sentence_words if is_verb(word)]
+    verb_levels = [get_depth(word, id2word) for word in verbs]
+    if len(set(verb_levels)) < len(verb_levels):
+        return True
+    # Verifica si hay conjunciones que conectan verbos
     return False
 
 def classify_sentence(stanza_sentence_obj):
@@ -80,7 +99,8 @@ def classify_sentence(stanza_sentence_obj):
     # y los IDs de los verbos que son 'aux' themselves.
     verb_ids = {w.id for w in sentence_words if is_verb(w)}
     aux_heads_ids = {w.head for w in sentence_words if w.deprel == 'aux' and w.head in verb_ids}
-    
+    id2word = {w.id: w for w in sentence_words}
+
     for word in sentence_words:
         if is_verb(word) and word.id not in aux_heads_ids:
             # Si un verbo no es un auxiliar y no es el 'head' de un auxiliar,
@@ -89,7 +109,7 @@ def classify_sentence(stanza_sentence_obj):
             
     # Lógica de clasificación
     has_sub = has_subordination(sentence_words)
-    has_coord = has_coordination(sentence_words)
+    has_coord = has_coordination(sentence_words, id2word)
 
     if main_verbs_count == 1:
         # Con un solo verbo principal, si hay subordinación (ej. Quiero comer), es compleja.
@@ -133,7 +153,7 @@ try:
 
     # Crear DataFrame y exportar resultados con ID
     df = pd.DataFrame(rows)
-    df.to_csv('clasificacion_resultados2.csv', index=False, encoding='utf-8-sig')
+    df.to_csv('clasificacion_resultados3.csv', index=False, encoding='utf-8-sig')
     print("\nProcesamiento terminado. Resultados guardados en 'clasificacion_resultados.csv'.")
 
 except FileNotFoundError:
