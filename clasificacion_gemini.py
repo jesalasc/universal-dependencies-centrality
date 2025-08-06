@@ -56,31 +56,31 @@ def has_subordination(sentence_words):
                 return True
     return False
 
-# def has_coordination(sentence_words):
-#     """
-#     Detecta si una oración contiene relaciones de dependencia que indican coordinación
-#     entre dos o más elementos verbales o cláusulas verbales.
-#     """
-#     for word in sentence_words:
-#         if word.deprel == 'conj' and is_verb(word):
-#             # Si un verbo tiene una relación 'conj', su 'head' (el elemento coordinado)
-#             # también debería ser un verbo para indicar coordinación de cláusulas.
-#             head_word = next((w for w in sentence_words if w.id == word.head), None)
-#             if head_word and is_verb(head_word):
-#                 return True # Dos verbos coordinados
-#     return False
-
-def has_coordination(sentence_words, id2word):
+def has_coordination(sentence_words, id2word=None):
     """
     Detecta si una oración contiene relaciones de dependencia que indican coordinación
     entre dos o más elementos verbales o cláusulas verbales.
     """
-    verbs = [word for word in sentence_words if is_verb(word)]
-    verb_levels = [get_depth(word, id2word) for word in verbs]
-    if len(set(verb_levels)) < len(verb_levels):
-        return True
-    # Verifica si hay conjunciones que conectan verbos
+    for word in sentence_words:
+        if word.deprel == 'conj' and is_verb(word):
+            # Si un verbo tiene una relación 'conj', su 'head' (el elemento coordinado)
+            # también debería ser un verbo para indicar coordinación de cláusulas.
+            head_word = next((w for w in sentence_words if w.id == word.head), None)
+            if head_word and is_verb(head_word):
+                return True # Dos verbos coordinados
     return False
+
+# def has_coordination(sentence_words, id2word=None):
+#     """
+#     Detecta si una oración contiene relaciones de dependencia que indican coordinación
+#     entre dos o más elementos verbales o cláusulas verbales.
+#     """
+#     verbs = [word for word in sentence_words if is_verb(word)]
+#     verb_levels = [get_depth(word, id2word) for word in verbs]
+#     if len(set(verb_levels)) < len(verb_levels):
+#         return True
+#     # Verifica si hay conjunciones que conectan verbos
+#     return False
 
 def classify_sentence(stanza_sentence_obj):
     """
@@ -136,7 +136,7 @@ def classify_sentence(stanza_sentence_obj):
 # Por ejemplo: 'es_gsd-ud-train.conllu' si está en la misma carpeta que tu script.
 # O una ruta completa: '/ruta/a/tu/corpus/es_gsd-ud-train.conllu'
 corpus_file_path = '../data/deep/UD_Spanish-GSD/es_gsd-ud-train.conllu' # <--- CAMBIA ESTO A LA RUTA DE TU ARCHIVO
-
+output_name = "clasificacion_resultados_filtered.csv"
 try:
     # Abrir y leer el archivo CoNLL-U
     # CoNLL.conll2doc() convierte el texto CoNLL-U a un objeto Document de Stanza
@@ -153,8 +153,8 @@ try:
 
     # Crear DataFrame y exportar resultados con ID
     df = pd.DataFrame(rows)
-    df.to_csv('clasificacion_resultados3.csv', index=False, encoding='utf-8-sig')
-    print("\nProcesamiento terminado. Resultados guardados en 'clasificacion_resultados.csv'.")
+    df.to_csv(output_name, index=False, encoding='utf-8-sig')
+    print(f"\nProcesamiento terminado. Resultados guardados en '{output_name}'.")
 
 except FileNotFoundError:
     print(f"Error: El archivo '{corpus_file_path}' no se encontró.")
