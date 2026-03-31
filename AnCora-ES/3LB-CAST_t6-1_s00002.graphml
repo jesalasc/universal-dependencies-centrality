@@ -1,0 +1,522 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="phrase" attr.type="string"/>
+<key id="d0" for="graph" attr.name="root" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">2</data>
+<data key="d1">_ Tocó el familiar bulto con cuidado, recorriendo sus aristas con las yemas de los dedos, contemplando la imagen que le devolvía el espejo y pensando que todo aquello ya no tenía remedio, que nada _ podía hacer ya por su cara, ni por su pecho, por esas piernas que _ no veía, pero _ sabía tan huesudas y separadas como las patas de un pollo mojado, y por esa carne blanquecina, fofa, que comenzaba a acumularse en_torno_a su cintura, a descolgarse hacia abajo arrastrando en su vértigo un ombligo progresivamente hondo, para añadir una nueva vejación, la de los años, a un cuerpo condenado de_antemano, desde antes de existir, a ser feo.</data>
+<node id="1">
+  <data key="d2">_</data>
+</node>
+<node id="2">
+  <data key="d2">Tocó</data>
+</node>
+<node id="3">
+  <data key="d2">el</data>
+</node>
+<node id="4">
+  <data key="d2">familiar</data>
+</node>
+<node id="5">
+  <data key="d2">bulto</data>
+</node>
+<node id="6">
+  <data key="d2">con</data>
+</node>
+<node id="7">
+  <data key="d2">cuidado</data>
+</node>
+<node id="8">
+  <data key="d2">,</data>
+</node>
+<node id="9">
+  <data key="d2">recorriendo</data>
+</node>
+<node id="10">
+  <data key="d2">sus</data>
+</node>
+<node id="11">
+  <data key="d2">aristas</data>
+</node>
+<node id="12">
+  <data key="d2">con</data>
+</node>
+<node id="13">
+  <data key="d2">las</data>
+</node>
+<node id="14">
+  <data key="d2">yemas</data>
+</node>
+<node id="15">
+  <data key="d2">de</data>
+</node>
+<node id="16">
+  <data key="d2">los</data>
+</node>
+<node id="17">
+  <data key="d2">dedos</data>
+</node>
+<node id="18">
+  <data key="d2">,</data>
+</node>
+<node id="19">
+  <data key="d2">contemplando</data>
+</node>
+<node id="20">
+  <data key="d2">la</data>
+</node>
+<node id="21">
+  <data key="d2">imagen</data>
+</node>
+<node id="22">
+  <data key="d2">que</data>
+</node>
+<node id="23">
+  <data key="d2">le</data>
+</node>
+<node id="24">
+  <data key="d2">devolvía</data>
+</node>
+<node id="25">
+  <data key="d2">el</data>
+</node>
+<node id="26">
+  <data key="d2">espejo</data>
+</node>
+<node id="27">
+  <data key="d2">y</data>
+</node>
+<node id="28">
+  <data key="d2">pensando</data>
+</node>
+<node id="29">
+  <data key="d2">que</data>
+</node>
+<node id="30">
+  <data key="d2">todo</data>
+</node>
+<node id="31">
+  <data key="d2">aquello</data>
+</node>
+<node id="32">
+  <data key="d2">ya</data>
+</node>
+<node id="33">
+  <data key="d2">no</data>
+</node>
+<node id="34">
+  <data key="d2">tenía</data>
+</node>
+<node id="35">
+  <data key="d2">remedio</data>
+</node>
+<node id="36">
+  <data key="d2">,</data>
+</node>
+<node id="37">
+  <data key="d2">que</data>
+</node>
+<node id="38">
+  <data key="d2">nada</data>
+</node>
+<node id="39">
+  <data key="d2">_</data>
+</node>
+<node id="40">
+  <data key="d2">podía</data>
+</node>
+<node id="41">
+  <data key="d2">hacer</data>
+</node>
+<node id="42">
+  <data key="d2">ya</data>
+</node>
+<node id="43">
+  <data key="d2">por</data>
+</node>
+<node id="44">
+  <data key="d2">su</data>
+</node>
+<node id="45">
+  <data key="d2">cara</data>
+</node>
+<node id="46">
+  <data key="d2">,</data>
+</node>
+<node id="47">
+  <data key="d2">ni</data>
+</node>
+<node id="48">
+  <data key="d2">por</data>
+</node>
+<node id="49">
+  <data key="d2">su</data>
+</node>
+<node id="50">
+  <data key="d2">pecho</data>
+</node>
+<node id="51">
+  <data key="d2">,</data>
+</node>
+<node id="52">
+  <data key="d2">por</data>
+</node>
+<node id="53">
+  <data key="d2">esas</data>
+</node>
+<node id="54">
+  <data key="d2">piernas</data>
+</node>
+<node id="55">
+  <data key="d2">que</data>
+</node>
+<node id="56">
+  <data key="d2">_</data>
+</node>
+<node id="57">
+  <data key="d2">no</data>
+</node>
+<node id="58">
+  <data key="d2">veía</data>
+</node>
+<node id="59">
+  <data key="d2">,</data>
+</node>
+<node id="60">
+  <data key="d2">pero</data>
+</node>
+<node id="61">
+  <data key="d2">_</data>
+</node>
+<node id="62">
+  <data key="d2">sabía</data>
+</node>
+<node id="63">
+  <data key="d2">tan</data>
+</node>
+<node id="64">
+  <data key="d2">huesudas</data>
+</node>
+<node id="65">
+  <data key="d2">y</data>
+</node>
+<node id="66">
+  <data key="d2">separadas</data>
+</node>
+<node id="67">
+  <data key="d2">como</data>
+</node>
+<node id="68">
+  <data key="d2">las</data>
+</node>
+<node id="69">
+  <data key="d2">patas</data>
+</node>
+<node id="70">
+  <data key="d2">de</data>
+</node>
+<node id="71">
+  <data key="d2">un</data>
+</node>
+<node id="72">
+  <data key="d2">pollo</data>
+</node>
+<node id="73">
+  <data key="d2">mojado</data>
+</node>
+<node id="74">
+  <data key="d2">,</data>
+</node>
+<node id="75">
+  <data key="d2">y</data>
+</node>
+<node id="76">
+  <data key="d2">por</data>
+</node>
+<node id="77">
+  <data key="d2">esa</data>
+</node>
+<node id="78">
+  <data key="d2">carne</data>
+</node>
+<node id="79">
+  <data key="d2">blanquecina</data>
+</node>
+<node id="80">
+  <data key="d2">,</data>
+</node>
+<node id="81">
+  <data key="d2">fofa</data>
+</node>
+<node id="82">
+  <data key="d2">,</data>
+</node>
+<node id="83">
+  <data key="d2">que</data>
+</node>
+<node id="84">
+  <data key="d2">comenzaba</data>
+</node>
+<node id="85">
+  <data key="d2">a</data>
+</node>
+<node id="86">
+  <data key="d2">acumularse</data>
+</node>
+<node id="87">
+  <data key="d2">en_torno_a</data>
+</node>
+<node id="88">
+  <data key="d2">su</data>
+</node>
+<node id="89">
+  <data key="d2">cintura</data>
+</node>
+<node id="90">
+  <data key="d2">,</data>
+</node>
+<node id="91">
+  <data key="d2">a</data>
+</node>
+<node id="92">
+  <data key="d2">descolgarse</data>
+</node>
+<node id="93">
+  <data key="d2">hacia</data>
+</node>
+<node id="94">
+  <data key="d2">abajo</data>
+</node>
+<node id="95">
+  <data key="d2">arrastrando</data>
+</node>
+<node id="96">
+  <data key="d2">en</data>
+</node>
+<node id="97">
+  <data key="d2">su</data>
+</node>
+<node id="98">
+  <data key="d2">vértigo</data>
+</node>
+<node id="99">
+  <data key="d2">un</data>
+</node>
+<node id="100">
+  <data key="d2">ombligo</data>
+</node>
+<node id="101">
+  <data key="d2">progresivamente</data>
+</node>
+<node id="102">
+  <data key="d2">hondo</data>
+</node>
+<node id="103">
+  <data key="d2">,</data>
+</node>
+<node id="104">
+  <data key="d2">para</data>
+</node>
+<node id="105">
+  <data key="d2">añadir</data>
+</node>
+<node id="106">
+  <data key="d2">una</data>
+</node>
+<node id="107">
+  <data key="d2">nueva</data>
+</node>
+<node id="108">
+  <data key="d2">vejación</data>
+</node>
+<node id="109">
+  <data key="d2">,</data>
+</node>
+<node id="110">
+  <data key="d2">la</data>
+</node>
+<node id="111">
+  <data key="d2">de</data>
+</node>
+<node id="112">
+  <data key="d2">los</data>
+</node>
+<node id="113">
+  <data key="d2">años</data>
+</node>
+<node id="114">
+  <data key="d2">,</data>
+</node>
+<node id="115">
+  <data key="d2">a</data>
+</node>
+<node id="116">
+  <data key="d2">un</data>
+</node>
+<node id="117">
+  <data key="d2">cuerpo</data>
+</node>
+<node id="118">
+  <data key="d2">condenado</data>
+</node>
+<node id="119">
+  <data key="d2">de_antemano</data>
+</node>
+<node id="120">
+  <data key="d2">,</data>
+</node>
+<node id="121">
+  <data key="d2">desde</data>
+</node>
+<node id="122">
+  <data key="d2">antes</data>
+</node>
+<node id="123">
+  <data key="d2">de</data>
+</node>
+<node id="124">
+  <data key="d2">existir</data>
+</node>
+<node id="125">
+  <data key="d2">,</data>
+</node>
+<node id="126">
+  <data key="d2">a</data>
+</node>
+<node id="127">
+  <data key="d2">ser</data>
+</node>
+<node id="128">
+  <data key="d2">feo</data>
+</node>
+<node id="129">
+  <data key="d2">.</data>
+</node>
+<edge source="2" target="1"/>
+<edge source="2" target="5"/>
+<edge source="2" target="6"/>
+<edge source="2" target="9"/>
+<edge source="2" target="129"/>
+<edge source="5" target="3"/>
+<edge source="5" target="4"/>
+<edge source="6" target="7"/>
+<edge source="9" target="8"/>
+<edge source="9" target="11"/>
+<edge source="9" target="12"/>
+<edge source="9" target="18"/>
+<edge source="9" target="19"/>
+<edge source="9" target="27"/>
+<edge source="9" target="28"/>
+<edge source="11" target="10"/>
+<edge source="12" target="14"/>
+<edge source="14" target="13"/>
+<edge source="14" target="15"/>
+<edge source="15" target="17"/>
+<edge source="17" target="16"/>
+<edge source="19" target="21"/>
+<edge source="21" target="20"/>
+<edge source="21" target="24"/>
+<edge source="24" target="22"/>
+<edge source="24" target="23"/>
+<edge source="24" target="26"/>
+<edge source="26" target="25"/>
+<edge source="28" target="34"/>
+<edge source="31" target="30"/>
+<edge source="34" target="29"/>
+<edge source="34" target="31"/>
+<edge source="34" target="32"/>
+<edge source="34" target="33"/>
+<edge source="34" target="35"/>
+<edge source="34" target="36"/>
+<edge source="34" target="41"/>
+<edge source="41" target="37"/>
+<edge source="41" target="38"/>
+<edge source="41" target="39"/>
+<edge source="41" target="40"/>
+<edge source="41" target="42"/>
+<edge source="41" target="76"/>
+<edge source="43" target="45"/>
+<edge source="43" target="46"/>
+<edge source="45" target="44"/>
+<edge source="48" target="50"/>
+<edge source="50" target="49"/>
+<edge source="52" target="54"/>
+<edge source="52" target="74"/>
+<edge source="54" target="53"/>
+<edge source="54" target="58"/>
+<edge source="58" target="55"/>
+<edge source="58" target="56"/>
+<edge source="58" target="57"/>
+<edge source="58" target="59"/>
+<edge source="58" target="60"/>
+<edge source="58" target="62"/>
+<edge source="62" target="61"/>
+<edge source="62" target="64"/>
+<edge source="64" target="63"/>
+<edge source="64" target="65"/>
+<edge source="64" target="66"/>
+<edge source="64" target="69"/>
+<edge source="69" target="67"/>
+<edge source="69" target="68"/>
+<edge source="69" target="70"/>
+<edge source="70" target="72"/>
+<edge source="72" target="71"/>
+<edge source="72" target="73"/>
+<edge source="76" target="43"/>
+<edge source="76" target="47"/>
+<edge source="76" target="48"/>
+<edge source="76" target="51"/>
+<edge source="76" target="52"/>
+<edge source="76" target="75"/>
+<edge source="76" target="78"/>
+<edge source="78" target="77"/>
+<edge source="78" target="79"/>
+<edge source="78" target="86"/>
+<edge source="79" target="80"/>
+<edge source="79" target="81"/>
+<edge source="86" target="82"/>
+<edge source="86" target="83"/>
+<edge source="86" target="84"/>
+<edge source="86" target="85"/>
+<edge source="86" target="87"/>
+<edge source="86" target="90"/>
+<edge source="86" target="92"/>
+<edge source="86" target="104"/>
+<edge source="87" target="89"/>
+<edge source="89" target="88"/>
+<edge source="92" target="91"/>
+<edge source="92" target="93"/>
+<edge source="92" target="95"/>
+<edge source="93" target="94"/>
+<edge source="95" target="96"/>
+<edge source="95" target="100"/>
+<edge source="96" target="98"/>
+<edge source="98" target="97"/>
+<edge source="100" target="99"/>
+<edge source="100" target="102"/>
+<edge source="102" target="101"/>
+<edge source="104" target="103"/>
+<edge source="104" target="105"/>
+<edge source="105" target="108"/>
+<edge source="105" target="115"/>
+<edge source="108" target="106"/>
+<edge source="108" target="107"/>
+<edge source="108" target="111"/>
+<edge source="111" target="109"/>
+<edge source="111" target="110"/>
+<edge source="111" target="113"/>
+<edge source="111" target="114"/>
+<edge source="113" target="112"/>
+<edge source="115" target="117"/>
+<edge source="117" target="116"/>
+<edge source="117" target="118"/>
+<edge source="118" target="119"/>
+<edge source="118" target="121"/>
+<edge source="118" target="126"/>
+<edge source="121" target="120"/>
+<edge source="121" target="122"/>
+<edge source="121" target="125"/>
+<edge source="122" target="123"/>
+<edge source="123" target="124"/>
+<edge source="126" target="127"/>
+<edge source="127" target="128"/>
+</graph></graphml>

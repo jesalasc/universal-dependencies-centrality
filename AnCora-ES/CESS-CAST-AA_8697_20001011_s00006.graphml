@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="phrase" attr.type="string"/>
+<key id="d0" for="graph" attr.name="root" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">39</data>
+<data key="d1">Si_bien el artículo 25 del reglamento de la FEB, decreta la descalificación directa del agresor sin amonestación alguna, en_relación_a la gravedad de la conducta antideportiva, y se declararía el combate sin validez, el promotor exige en su carta que la próxima defensa del título por_parte_de Peña"_ la realice frente_a Xavi_Moya, aún_cuando de haberse aplicado el reglamento vigente, lo justo habría sido su descalificación".</data>
+<node id="1">
+  <data key="d2">Si_bien</data>
+</node>
+<node id="2">
+  <data key="d2">el</data>
+</node>
+<node id="3">
+  <data key="d2">artículo</data>
+</node>
+<node id="4">
+  <data key="d2">25</data>
+</node>
+<node id="5">
+  <data key="d2">del</data>
+</node>
+<node id="6">
+  <data key="d2">reglamento</data>
+</node>
+<node id="7">
+  <data key="d2">de</data>
+</node>
+<node id="8">
+  <data key="d2">la</data>
+</node>
+<node id="9">
+  <data key="d2">FEB</data>
+</node>
+<node id="10">
+  <data key="d2">,</data>
+</node>
+<node id="11">
+  <data key="d2">decreta</data>
+</node>
+<node id="12">
+  <data key="d2">la</data>
+</node>
+<node id="13">
+  <data key="d2">descalificación</data>
+</node>
+<node id="14">
+  <data key="d2">directa</data>
+</node>
+<node id="15">
+  <data key="d2">del</data>
+</node>
+<node id="16">
+  <data key="d2">agresor</data>
+</node>
+<node id="17">
+  <data key="d2">sin</data>
+</node>
+<node id="18">
+  <data key="d2">amonestación</data>
+</node>
+<node id="19">
+  <data key="d2">alguna</data>
+</node>
+<node id="20">
+  <data key="d2">,</data>
+</node>
+<node id="21">
+  <data key="d2">en_relación_a</data>
+</node>
+<node id="22">
+  <data key="d2">la</data>
+</node>
+<node id="23">
+  <data key="d2">gravedad</data>
+</node>
+<node id="24">
+  <data key="d2">de</data>
+</node>
+<node id="25">
+  <data key="d2">la</data>
+</node>
+<node id="26">
+  <data key="d2">conducta</data>
+</node>
+<node id="27">
+  <data key="d2">antideportiva</data>
+</node>
+<node id="28">
+  <data key="d2">,</data>
+</node>
+<node id="29">
+  <data key="d2">y</data>
+</node>
+<node id="30">
+  <data key="d2">se</data>
+</node>
+<node id="31">
+  <data key="d2">declararía</data>
+</node>
+<node id="32">
+  <data key="d2">el</data>
+</node>
+<node id="33">
+  <data key="d2">combate</data>
+</node>
+<node id="34">
+  <data key="d2">sin</data>
+</node>
+<node id="35">
+  <data key="d2">validez</data>
+</node>
+<node id="36">
+  <data key="d2">,</data>
+</node>
+<node id="37">
+  <data key="d2">el</data>
+</node>
+<node id="38">
+  <data key="d2">promotor</data>
+</node>
+<node id="39">
+  <data key="d2">exige</data>
+</node>
+<node id="40">
+  <data key="d2">en</data>
+</node>
+<node id="41">
+  <data key="d2">su</data>
+</node>
+<node id="42">
+  <data key="d2">carta</data>
+</node>
+<node id="43">
+  <data key="d2">que</data>
+</node>
+<node id="44">
+  <data key="d2">la</data>
+</node>
+<node id="45">
+  <data key="d2">próxima</data>
+</node>
+<node id="46">
+  <data key="d2">defensa</data>
+</node>
+<node id="47">
+  <data key="d2">del</data>
+</node>
+<node id="48">
+  <data key="d2">título</data>
+</node>
+<node id="49">
+  <data key="d2">por_parte_de</data>
+</node>
+<node id="50">
+  <data key="d2">Peña</data>
+</node>
+<node id="51">
+  <data key="d2">"</data>
+</node>
+<node id="52">
+  <data key="d2">_</data>
+</node>
+<node id="53">
+  <data key="d2">la</data>
+</node>
+<node id="54">
+  <data key="d2">realice</data>
+</node>
+<node id="55">
+  <data key="d2">frente_a</data>
+</node>
+<node id="56">
+  <data key="d2">Xavi_Moya</data>
+</node>
+<node id="57">
+  <data key="d2">,</data>
+</node>
+<node id="58">
+  <data key="d2">aún_cuando</data>
+</node>
+<node id="59">
+  <data key="d2">de</data>
+</node>
+<node id="60">
+  <data key="d2">haberse</data>
+</node>
+<node id="61">
+  <data key="d2">aplicado</data>
+</node>
+<node id="62">
+  <data key="d2">el</data>
+</node>
+<node id="63">
+  <data key="d2">reglamento</data>
+</node>
+<node id="64">
+  <data key="d2">vigente</data>
+</node>
+<node id="65">
+  <data key="d2">,</data>
+</node>
+<node id="66">
+  <data key="d2">lo</data>
+</node>
+<node id="67">
+  <data key="d2">justo</data>
+</node>
+<node id="68">
+  <data key="d2">habría</data>
+</node>
+<node id="69">
+  <data key="d2">sido</data>
+</node>
+<node id="70">
+  <data key="d2">su</data>
+</node>
+<node id="71">
+  <data key="d2">descalificación</data>
+</node>
+<node id="72">
+  <data key="d2">"</data>
+</node>
+<node id="73">
+  <data key="d2">.</data>
+</node>
+<edge source="3" target="2"/>
+<edge source="3" target="4"/>
+<edge source="3" target="5"/>
+<edge source="3" target="10"/>
+<edge source="5" target="6"/>
+<edge source="6" target="7"/>
+<edge source="7" target="9"/>
+<edge source="9" target="8"/>
+<edge source="11" target="1"/>
+<edge source="11" target="3"/>
+<edge source="11" target="13"/>
+<edge source="11" target="28"/>
+<edge source="11" target="29"/>
+<edge source="11" target="31"/>
+<edge source="11" target="36"/>
+<edge source="13" target="12"/>
+<edge source="13" target="14"/>
+<edge source="13" target="15"/>
+<edge source="13" target="17"/>
+<edge source="15" target="16"/>
+<edge source="17" target="18"/>
+<edge source="18" target="19"/>
+<edge source="18" target="21"/>
+<edge source="21" target="20"/>
+<edge source="21" target="23"/>
+<edge source="23" target="22"/>
+<edge source="23" target="24"/>
+<edge source="24" target="26"/>
+<edge source="26" target="25"/>
+<edge source="26" target="27"/>
+<edge source="31" target="30"/>
+<edge source="31" target="33"/>
+<edge source="31" target="34"/>
+<edge source="33" target="32"/>
+<edge source="34" target="35"/>
+<edge source="38" target="37"/>
+<edge source="39" target="11"/>
+<edge source="39" target="38"/>
+<edge source="39" target="40"/>
+<edge source="39" target="54"/>
+<edge source="39" target="73"/>
+<edge source="40" target="42"/>
+<edge source="42" target="41"/>
+<edge source="46" target="44"/>
+<edge source="46" target="45"/>
+<edge source="46" target="47"/>
+<edge source="46" target="49"/>
+<edge source="47" target="48"/>
+<edge source="49" target="50"/>
+<edge source="54" target="43"/>
+<edge source="54" target="46"/>
+<edge source="54" target="51"/>
+<edge source="54" target="52"/>
+<edge source="54" target="53"/>
+<edge source="54" target="55"/>
+<edge source="54" target="69"/>
+<edge source="54" target="72"/>
+<edge source="55" target="56"/>
+<edge source="59" target="61"/>
+<edge source="59" target="65"/>
+<edge source="61" target="60"/>
+<edge source="61" target="63"/>
+<edge source="63" target="62"/>
+<edge source="63" target="64"/>
+<edge source="67" target="66"/>
+<edge source="69" target="57"/>
+<edge source="69" target="58"/>
+<edge source="69" target="59"/>
+<edge source="69" target="67"/>
+<edge source="69" target="68"/>
+<edge source="69" target="71"/>
+<edge source="71" target="70"/>
+</graph></graphml>

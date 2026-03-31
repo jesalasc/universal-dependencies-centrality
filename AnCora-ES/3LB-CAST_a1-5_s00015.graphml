@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="phrase" attr.type="string"/>
+<key id="d0" for="graph" attr.name="root" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">12</data>
+<data key="d1">Pero reunir trabajos dispersos, y difíciles de lograr, no es tarea desdeñable, sino_que _ merece nuestro reconocimiento.</data>
+<node id="1">
+  <data key="d2">Pero</data>
+</node>
+<node id="2">
+  <data key="d2">reunir</data>
+</node>
+<node id="3">
+  <data key="d2">trabajos</data>
+</node>
+<node id="4">
+  <data key="d2">dispersos</data>
+</node>
+<node id="5">
+  <data key="d2">,</data>
+</node>
+<node id="6">
+  <data key="d2">y</data>
+</node>
+<node id="7">
+  <data key="d2">difíciles</data>
+</node>
+<node id="8">
+  <data key="d2">de</data>
+</node>
+<node id="9">
+  <data key="d2">lograr</data>
+</node>
+<node id="10">
+  <data key="d2">,</data>
+</node>
+<node id="11">
+  <data key="d2">no</data>
+</node>
+<node id="12">
+  <data key="d2">es</data>
+</node>
+<node id="13">
+  <data key="d2">tarea</data>
+</node>
+<node id="14">
+  <data key="d2">desdeñable</data>
+</node>
+<node id="15">
+  <data key="d2">,</data>
+</node>
+<node id="16">
+  <data key="d2">sino_que</data>
+</node>
+<node id="17">
+  <data key="d2">_</data>
+</node>
+<node id="18">
+  <data key="d2">merece</data>
+</node>
+<node id="19">
+  <data key="d2">nuestro</data>
+</node>
+<node id="20">
+  <data key="d2">reconocimiento</data>
+</node>
+<node id="21">
+  <data key="d2">.</data>
+</node>
+<edge source="2" target="3"/>
+<edge source="2" target="10"/>
+<edge source="3" target="4"/>
+<edge source="4" target="5"/>
+<edge source="4" target="6"/>
+<edge source="4" target="7"/>
+<edge source="7" target="8"/>
+<edge source="8" target="9"/>
+<edge source="12" target="1"/>
+<edge source="12" target="2"/>
+<edge source="12" target="11"/>
+<edge source="12" target="13"/>
+<edge source="12" target="15"/>
+<edge source="12" target="16"/>
+<edge source="12" target="18"/>
+<edge source="12" target="21"/>
+<edge source="13" target="14"/>
+<edge source="18" target="17"/>
+<edge source="18" target="20"/>
+<edge source="20" target="19"/>
+</graph></graphml>

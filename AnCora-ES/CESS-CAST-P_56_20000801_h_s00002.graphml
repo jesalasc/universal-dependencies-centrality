@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="form" attr.type="string"/>
+<key id="d1" for="graph" attr.name="phrase" attr.type="string"/>
+<key id="d0" for="graph" attr.name="root" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">35</data>
+<data key="d1">El delfín que fue hallado vivo en la costa de Alicante hace una semana y que fue trasladado para su recuperación al Centre_de_Recuperació_d'Animals_Marins de Catalunya (CRAM), con sede en Premià_de_Mar, murió la madrugada del domingo como_consecuencia_de las heridas que _ presentaba en la mandíbula y la boca.</data>
+<node id="1">
+  <data key="d2">El</data>
+</node>
+<node id="2">
+  <data key="d2">delfín</data>
+</node>
+<node id="3">
+  <data key="d2">que</data>
+</node>
+<node id="4">
+  <data key="d2">fue</data>
+</node>
+<node id="5">
+  <data key="d2">hallado</data>
+</node>
+<node id="6">
+  <data key="d2">vivo</data>
+</node>
+<node id="7">
+  <data key="d2">en</data>
+</node>
+<node id="8">
+  <data key="d2">la</data>
+</node>
+<node id="9">
+  <data key="d2">costa</data>
+</node>
+<node id="10">
+  <data key="d2">de</data>
+</node>
+<node id="11">
+  <data key="d2">Alicante</data>
+</node>
+<node id="12">
+  <data key="d2">hace</data>
+</node>
+<node id="13">
+  <data key="d2">una</data>
+</node>
+<node id="14">
+  <data key="d2">semana</data>
+</node>
+<node id="15">
+  <data key="d2">y</data>
+</node>
+<node id="16">
+  <data key="d2">que</data>
+</node>
+<node id="17">
+  <data key="d2">fue</data>
+</node>
+<node id="18">
+  <data key="d2">trasladado</data>
+</node>
+<node id="19">
+  <data key="d2">para</data>
+</node>
+<node id="20">
+  <data key="d2">su</data>
+</node>
+<node id="21">
+  <data key="d2">recuperación</data>
+</node>
+<node id="22">
+  <data key="d2">al</data>
+</node>
+<node id="23">
+  <data key="d2">Centre_de_Recuperació_d'Animals_Marins</data>
+</node>
+<node id="24">
+  <data key="d2">de</data>
+</node>
+<node id="25">
+  <data key="d2">Catalunya</data>
+</node>
+<node id="26">
+  <data key="d2">(</data>
+</node>
+<node id="27">
+  <data key="d2">CRAM</data>
+</node>
+<node id="28">
+  <data key="d2">)</data>
+</node>
+<node id="29">
+  <data key="d2">,</data>
+</node>
+<node id="30">
+  <data key="d2">con</data>
+</node>
+<node id="31">
+  <data key="d2">sede</data>
+</node>
+<node id="32">
+  <data key="d2">en</data>
+</node>
+<node id="33">
+  <data key="d2">Premià_de_Mar</data>
+</node>
+<node id="34">
+  <data key="d2">,</data>
+</node>
+<node id="35">
+  <data key="d2">murió</data>
+</node>
+<node id="36">
+  <data key="d2">la</data>
+</node>
+<node id="37">
+  <data key="d2">madrugada</data>
+</node>
+<node id="38">
+  <data key="d2">del</data>
+</node>
+<node id="39">
+  <data key="d2">domingo</data>
+</node>
+<node id="40">
+  <data key="d2">como_consecuencia_de</data>
+</node>
+<node id="41">
+  <data key="d2">las</data>
+</node>
+<node id="42">
+  <data key="d2">heridas</data>
+</node>
+<node id="43">
+  <data key="d2">que</data>
+</node>
+<node id="44">
+  <data key="d2">_</data>
+</node>
+<node id="45">
+  <data key="d2">presentaba</data>
+</node>
+<node id="46">
+  <data key="d2">en</data>
+</node>
+<node id="47">
+  <data key="d2">la</data>
+</node>
+<node id="48">
+  <data key="d2">mandíbula</data>
+</node>
+<node id="49">
+  <data key="d2">y</data>
+</node>
+<node id="50">
+  <data key="d2">la</data>
+</node>
+<node id="51">
+  <data key="d2">boca</data>
+</node>
+<node id="52">
+  <data key="d2">.</data>
+</node>
+<edge source="2" target="1"/>
+<edge source="2" target="5"/>
+<edge source="5" target="3"/>
+<edge source="5" target="4"/>
+<edge source="5" target="6"/>
+<edge source="5" target="7"/>
+<edge source="5" target="14"/>
+<edge source="5" target="15"/>
+<edge source="5" target="18"/>
+<edge source="7" target="9"/>
+<edge source="9" target="8"/>
+<edge source="9" target="10"/>
+<edge source="10" target="11"/>
+<edge source="14" target="12"/>
+<edge source="14" target="13"/>
+<edge source="18" target="16"/>
+<edge source="18" target="17"/>
+<edge source="18" target="19"/>
+<edge source="18" target="22"/>
+<edge source="19" target="21"/>
+<edge source="21" target="20"/>
+<edge source="22" target="23"/>
+<edge source="23" target="24"/>
+<edge source="23" target="27"/>
+<edge source="23" target="30"/>
+<edge source="24" target="25"/>
+<edge source="27" target="26"/>
+<edge source="27" target="28"/>
+<edge source="30" target="29"/>
+<edge source="30" target="31"/>
+<edge source="30" target="34"/>
+<edge source="31" target="32"/>
+<edge source="32" target="33"/>
+<edge source="35" target="2"/>
+<edge source="35" target="37"/>
+<edge source="35" target="40"/>
+<edge source="35" target="52"/>
+<edge source="37" target="36"/>
+<edge source="37" target="38"/>
+<edge source="38" target="39"/>
+<edge source="40" target="42"/>
+<edge source="42" target="41"/>
+<edge source="42" target="45"/>
+<edge source="45" target="43"/>
+<edge source="45" target="44"/>
+<edge source="45" target="46"/>
+<edge source="46" target="48"/>
+<edge source="48" target="47"/>
+<edge source="48" target="49"/>
+<edge source="48" target="51"/>
+<edge source="51" target="50"/>
+</graph></graphml>
