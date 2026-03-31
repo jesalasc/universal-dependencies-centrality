@@ -1,7 +1,6 @@
 # import psutil
 #from main import format_d
 import networkx as nx
-from networkx.generators.trees import random_tree
 import numpy as np
 from re import split
 from itertools import combinations, product
@@ -67,7 +66,7 @@ def all_subgraphs_centrality(graph, vee=None):
                         if node_set[j] in rtd.nodes()[u]['subgraph'][node_set[i]]:
                             matrix[i][j] = 1
                             matrix[j][i] = 1
-                m = nx.convert_matrix.from_numpy_matrix(np.array(matrix))
+                m = nx.convert_matrix.from_numpy_array(np.array(matrix))
                 if not nx.is_connected(m):
                     continue
                 val = contraction_subgraph_count(matrix, set([i for i in range(len(node_set))]), [

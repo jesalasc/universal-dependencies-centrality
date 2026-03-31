@@ -1,126 +1,229 @@
-import streamlit as st
-import networkx as nx
+from __future__ import annotations
+
+import html
+from pathlib import Path
+
 import matplotlib.pyplot as plt
+import networkx as nx
 import numpy as np
+import pandas as pd
+import streamlit as st
 from matplotlib import cm
 from matplotlib.colors import BoundaryNorm
-# from spacy import displacy
-import streamlit.components.v1 as components
-import os
-import re
 
-# Ensure the all_subgraphs code directory is on the Python path
-from asg_cen.all_subgraphs_centrality import all_subgraphs_centrality as asg
+from graph_centrality_store import (
+    CENTRALITY_METHODS,
+    CLOSING_PUNCTUATION,
+    DATASET_DEFINITIONS,
+    DATABASE_PATH,
+    OPENING_PUNCTUATION,
+    REPO_ROOT,
+    compute_centrality,
+    create_connection,
+    fetch_centrality_scores,
+    get_dataset_graph_dir,
+    get_dataset_label,
+    get_graph_record,
+    list_graph_files,
+    load_graph,
+    ordered_node_ids,
+    remove_punctuation_nodes,
+    store_centrality_scores,
+    upsert_graph,
+)
+
 
 st.set_page_config(layout="wide")
 
-# --- View selector ---
-view = st.sidebar.radio(
-    "Selecciona la vista",
-    ["Visualización de árboles", "Visualización múltiple de grafos", "Datos de distribución"]
-)
 
-# --- Load GraphML ---
-def load_graph(file):
-    G = nx.read_graphml(file)
-    G.graph['phrase'] = G.graph.get('phrase', 'No phrase found')
-    return G, G.to_undirected()
+@st.cache_resource
+def get_database_connection():
+    return create_connection(DATABASE_PATH)
 
-# --- Centrality Computation ---
-def compute_centrality(G, method):
-    if method == "Betweenness":
-        # Shortest-path betweenness centrality.  [oai_citation:1‡networkx.org](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.betweenness_centrality.html?utm_source=chatgpt.com)
-        return nx.betweenness_centrality(G)
-    elif method == "PageRank":
-        # PageRank over graph structure.  [oai_citation:2‡networkx.org](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.pagerank_alg.pagerank.html?utm_source=chatgpt.com)
-        return nx.pagerank(G)
-    elif method == "Closeness":
-        # Reciprocal of average shortest-path distance.  [oai_citation:3‡networkx.org](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.closeness_centrality.html?utm_source=chatgpt.com)
-        return nx.closeness_centrality(G)
-    elif method == "Harmonic":
-        # Sum of reciprocals of distances.  [oai_citation:4‡networkx.org](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.harmonic_centrality.html?utm_source=chatgpt.com)
-        return nx.harmonic_centrality(G)
-    elif method == "All-Subgraphs":
-        try:
-            asg_cen = asg(G)
-            return asg_cen
-        except Exception as e:
-            st.warning(f"ASG centrality failed to solve: {e}")
-            return {n: 0 for n in G.nodes()}
+
+def get_graph_files(dataset_id: str) -> list[str]:
+    connection = get_database_connection()
+    graph_files = list_graph_files(connection, dataset_id)
+    if graph_files:
+        return graph_files
+
+    graph_dir = get_dataset_graph_dir(dataset_id)
+    if not graph_dir.exists():
+        return []
+    return sorted(path.name for path in graph_dir.glob("*.graphml"))
+
+
+def get_graph_path(dataset_id: str, file_name: str) -> Path:
+    connection = get_database_connection()
+    record = get_graph_record(connection, dataset_id, file_name)
+    if record is not None:
+        return REPO_ROOT / str(record["relative_path"])
+    return get_dataset_graph_dir(dataset_id) / file_name
+
+
+def ensure_graph_record_exists(dataset_id: str, file_name: str, directed_graph: nx.DiGraph, graph_path: Path) -> int:
+    connection = get_database_connection()
+    record = get_graph_record(connection, dataset_id, file_name)
+    if record is not None:
+        return int(record["id"])
+
+    graph_id = upsert_graph(
+        connection,
+        dataset_id=dataset_id,
+        file_name=file_name,
+        relative_path=str(graph_path.relative_to(REPO_ROOT)),
+        phrase=str(directed_graph.graph.get("phrase", "")),
+        root_node=str(directed_graph.graph.get("root")) if directed_graph.graph.get("root") is not None else None,
+        node_count=directed_graph.number_of_nodes(),
+        edge_count=directed_graph.number_of_edges(),
+    )
+    connection.commit()
+    return graph_id
+
+
+def load_selected_graph(dataset_id: str, file_name: str) -> tuple[int, nx.DiGraph, nx.Graph]:
+    graph_path = get_graph_path(dataset_id, file_name)
+    directed_graph, undirected_graph = load_graph(graph_path)
+    graph_id = ensure_graph_record_exists(dataset_id, file_name, directed_graph, graph_path)
+    return graph_id, directed_graph, undirected_graph
+
+
+def apply_punctuation_filter(graph: nx.DiGraph, include_punctuation: bool) -> tuple[nx.DiGraph, nx.Graph]:
+    if include_punctuation:
+        return graph.copy(), graph.to_undirected()
+
+    filtered_directed = remove_punctuation_nodes(graph)
+    return filtered_directed, filtered_directed.to_undirected()
+
+
+def get_centrality_scores(
+    dataset_id: str,
+    file_name: str,
+    graph_id: int,
+    graph: nx.Graph,
+    method: str,
+    include_punctuation: bool,
+) -> dict[str, float]:
+    connection = get_database_connection()
+    cached_scores = fetch_centrality_scores(connection, dataset_id, file_name, method, include_punctuation)
+    if cached_scores is not None:
+        return cached_scores
+
+    try:
+        centrality_scores = compute_centrality(graph, method)
+    except Exception as error:
+        st.warning(f"No se pudo calcular {method}: {error}")
+        centrality_scores = {str(node_id): 0.0 for node_id in graph.nodes()}
+
+    store_centrality_scores(connection, graph_id, method, include_punctuation, centrality_scores)
+    connection.commit()
+    return centrality_scores
+
+
+def build_color_mapping(graph: nx.Graph, centrality_scores: dict[str, float]) -> dict[str, tuple[float, ...]]:
+    node_ids = ordered_node_ids(graph)
+    if not node_ids:
+        return {}
+
+    values = np.array([float(centrality_scores.get(node_id, 0.0)) for node_id in node_ids], dtype=float)
+    vmin = float(values.min()) if len(values) else 0.0
+    vmax = float(values.max()) if len(values) else 1.0
+
+    if np.isclose(vmin, vmax):
+        bins = np.linspace(vmin - 1.0, vmax + 1.0, 11)
     else:
-        return {n: 0 for n in G.nodes()}
+        bins = np.quantile(values, np.linspace(0, 1, 11))
+        bins = np.unique(bins)
+        if len(bins) < 2:
+            bins = np.linspace(vmin, vmax, 11)
 
-# --- Draw Graph ---
-def draw_graph(G, centrality, title, pos, type='undirected'):
-    # Adjust height based on tree size
-    num_nodes = len(G.nodes())
-    fig_height = max(6, min(0.5 * num_nodes, 20))
+    norm = BoundaryNorm(bins, ncolors=cm.viridis.N, clip=True)
+    return {
+        node_id: cm.viridis(norm(float(centrality_scores.get(node_id, 0.0))))
+        for node_id in node_ids
+    }
+
+
+def draw_graph(
+    graph: nx.Graph,
+    centrality_scores: dict[str, float],
+    title: str,
+    positions: dict[str, tuple[float, float]],
+    graph_type: str = "undirected",
+):
+    num_nodes = len(graph.nodes())
+    fig_height = max(6, min(0.5 * max(num_nodes, 1), 20))
     fig, ax = plt.subplots(figsize=(8, fig_height))
 
-    # Prepare centrality values as floats
-    values = np.array(list(centrality.values()), dtype=float)
+    if num_nodes == 0:
+        ax.text(0.5, 0.5, "Sin nodos para visualizar", ha="center", va="center")
+        ax.set_title(title, pad=2)
+        ax.axis("off")
+        return fig, ax
 
-    # Create quantile-based bins for more discriminative coloring
-    num_bins = 10
-    vmin, vmax = values.min(), values.max()
-    if vmin == vmax:
-        vmin -= 1
-        vmax += 1
-    bins = np.quantile(values, np.linspace(0, 1, num_bins + 1))
+    node_colors = build_color_mapping(graph, centrality_scores)
+    values = np.array(
+        [float(centrality_scores.get(str(node_id), 0.0)) for node_id in graph.nodes()],
+        dtype=float,
+    )
+    vmin = float(values.min())
+    vmax = float(values.max())
+
+    if np.isclose(vmin, vmax):
+        bins = np.linspace(vmin - 1.0, vmax + 1.0, 11)
+    else:
+        bins = np.quantile(values, np.linspace(0, 1, 11))
+        bins = np.unique(bins)
+        if len(bins) < 2:
+            bins = np.linspace(vmin, vmax, 11)
+
     norm = BoundaryNorm(bins, ncolors=cm.viridis.N, clip=True)
 
-    cmap = cm.viridis
-    node_colors_dict = {node: cmap(norm(value)) for node, value in centrality.items()}
-
-    # Draw nodes individually
-    for node, (x, y) in pos.items():
+    for node_id, (x_pos, y_pos) in positions.items():
         ax.scatter(
-            x, y,
+            x_pos,
+            y_pos,
             s=500,
-            color=node_colors_dict.get(node, cmap(0)),
-            edgecolors='black',
-            zorder=2
+            color=node_colors.get(str(node_id), cm.viridis(0)),
+            edgecolors="black",
+            zorder=2,
         )
 
-    # Draw edges
-    nx.draw_networkx_edges(G, pos, ax=ax)
+    nx.draw_networkx_edges(graph, positions, ax=ax)
 
-    if type == 'undirected':
-        # Ranking labels
-        try:
-            ranking = {}
-            sorted_nodes = sorted(centrality, key=lambda n: centrality[n], reverse=True)
-            for idx, n in enumerate(sorted_nodes, 1):
-                ranking[n] = idx
-        except Exception:
-            ranking = {n: "" for n in G.nodes()}
+    if graph_type == "undirected":
+        sorted_nodes = sorted(graph.nodes(), key=lambda node_id: centrality_scores.get(str(node_id), 0.0), reverse=True)
+        ranking = {str(node_id): index for index, node_id in enumerate(sorted_nodes, start=1)}
+        labels = {
+            node_id: f"{ranking.get(str(node_id), '')}\n{graph.nodes[node_id].get('form', node_id)}"
+            for node_id in graph.nodes()
+        }
+        nx.draw_networkx_labels(graph, positions, labels=labels, font_size=7, font_color="red", ax=ax)
 
-        labels = {n: f"{ranking.get(n, '')}\n{G.nodes[n].get('form', n)}" for n in G.nodes()}
-        nx.draw_networkx_labels(G, pos, labels=labels, font_size=7, font_color='red', ax=ax)
-
-        # Standalone colorbar via ScalarMappable.  [oai_citation:5‡matplotlib.org](https://matplotlib.org/stable/users/explain/colors/colorbar_only.html?utm_source=chatgpt.com)
-        sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-        sm.set_array([])
-        fig.colorbar(sm, ax=ax, shrink=0.9, label='Centrality Score')
+        scalar_mappable = plt.cm.ScalarMappable(cmap=cm.viridis, norm=norm)
+        scalar_mappable.set_array([])
+        fig.colorbar(scalar_mappable, ax=ax, shrink=0.9, label="Centrality Score")
     else:
-        labels = {n: G.nodes[n].get('form', n) for n in G.nodes()}
-        nx.draw_networkx_labels(G, pos, labels=labels, font_size=7, font_color='red', ax=ax)
+        labels = {node_id: graph.nodes[node_id].get("form", node_id) for node_id in graph.nodes()}
+        nx.draw_networkx_labels(graph, positions, labels=labels, font_size=7, font_color="red", ax=ax)
 
     ax.set_title(title, pad=2)
-    ax.axis('off')
+    ax.axis("off")
     plt.subplots_adjust(top=0.75)
     return fig, ax
 
-def hierarchy_pos(G, root=None, width=1.0, vert_gap=2, vert_loc=0, xcenter=0.5):
-    if root is None:
-        roots = [n for n in G.nodes if G.in_degree(n) == 0]
-        if not roots:
-            raise ValueError("No root found")
-        root = roots[0]
 
-    def _hierarchy_pos(node, depth=0, pos=None, level_widths=None):
-        if pos is None:
-            pos = {}
+def hierarchy_pos(graph: nx.DiGraph, root: str | None = None, vert_gap: float = 2):
+    if graph.number_of_nodes() == 0:
+        return {}
+
+    if root is None or root not in graph:
+        roots = [node_id for node_id in graph.nodes if isinstance(graph, nx.DiGraph) and graph.in_degree(node_id) == 0]
+        root = roots[0] if roots else next(iter(graph.nodes()))
+
+    def _hierarchy_pos(node_id: str, depth: int = 0, positions: dict | None = None, level_widths: dict | None = None):
+        if positions is None:
+            positions = {}
         if level_widths is None:
             level_widths = {}
 
@@ -129,271 +232,264 @@ def hierarchy_pos(G, root=None, width=1.0, vert_gap=2, vert_loc=0, xcenter=0.5):
         else:
             level_widths[depth] += 1
 
-        x = level_widths[depth]
-        y = -depth * vert_gap
-        pos[node] = (x, y)
+        positions[node_id] = (level_widths[depth], -depth * vert_gap)
 
-        children = list(G.successors(node))
-        for child in children:
-            _hierarchy_pos(child, depth + 1, pos, level_widths)
-
-        return pos
-
-    pos = _hierarchy_pos(root)
-
-    # Normalize x coordinates per level to spread evenly in [0, 1] range
-    levels = {}
-    for node, (x, y) in pos.items():
-        if y not in levels:
-            levels[y] = []
-        levels[y].append(x)
-
-    for y in levels:
-        xs = sorted(levels[y])
-        n = len(xs)
-        if n == 1:
-            mapped = [xcenter]
+        if isinstance(graph, nx.DiGraph):
+            children = list(graph.successors(node_id))
         else:
-            mapped = np.linspace(0, 1, n)
-        for i, x in enumerate(xs):
-            for node, (nx_, ny_) in pos.items():
-                if ny_ == y and nx_ == x:
-                    pos[node] = (mapped[i], ny_)
+            children = list(graph.neighbors(node_id))
 
-    return pos
+        for child_id in children:
+            if child_id not in positions:
+                _hierarchy_pos(child_id, depth + 1, positions, level_widths)
 
-def build_dag_from_root(G_undirected, root_node):
-    """
-    Given an undirected graph and a root node, return a DAG
-    with edges directed away from the root based on BFS.
-    """
-    G_dag = nx.DiGraph()
-    G_dag.add_node(root_node, **G_undirected.nodes[root_node])
+        return positions
 
-    visited = set([root_node])
+    positions = _hierarchy_pos(root)
+    levels: dict[float, list[float]] = {}
+
+    for node_id, (x_pos, y_pos) in positions.items():
+        levels.setdefault(y_pos, []).append(x_pos)
+
+    for y_pos, x_positions in levels.items():
+        sorted_positions = sorted(x_positions)
+        if len(sorted_positions) == 1:
+            mapped_positions = [0.5]
+        else:
+            mapped_positions = np.linspace(0, 1, len(sorted_positions))
+
+        for index, x_pos in enumerate(sorted_positions):
+            for node_id, (current_x, current_y) in positions.items():
+                if current_y == y_pos and current_x == x_pos:
+                    positions[node_id] = (mapped_positions[index], current_y)
+
+    return positions
+
+
+def build_dag_from_root(graph: nx.Graph, root_node: str) -> nx.DiGraph:
+    dag = nx.DiGraph()
+    dag.add_node(root_node, **graph.nodes[root_node])
+
+    visited = {root_node}
     queue = [root_node]
 
     while queue:
-        current = queue.pop(0)
-        for neighbor in G_undirected.neighbors(current):
+        current_node = queue.pop(0)
+        for neighbor in graph.neighbors(current_node):
             if neighbor not in visited:
-                G_dag.add_node(neighbor, **G_undirected.nodes[neighbor])
-                G_dag.add_edge(current, neighbor, **G_undirected.edges[current, neighbor])
+                dag.add_node(neighbor, **graph.nodes[neighbor])
+                dag.add_edge(current_node, neighbor, **graph.edges[current_node, neighbor])
                 visited.add(neighbor)
                 queue.append(neighbor)
 
-    return G_dag
+    return dag
 
-# --- Helper to color the phrase per-centrality ---
-def phrase_html(G_directed, G_undirected, centrality_scores):
-    cmap = cm.viridis
-    values = np.array(list(centrality_scores.values()), dtype=float)
-    vmin, vmax = values.min(), values.max()
-    if vmin == vmax:
-        vmin -= 1
-        vmax += 1
-    bins = np.quantile(values, np.linspace(0, 1, 11))
-    norm = BoundaryNorm(bins, ncolors=cmap.N, clip=True)
-    node_colors_dict = {G_undirected.nodes[node].get("form", "UNKNOWN"): cmap(norm(centrality_scores[node])) for node in G_undirected.nodes()}
 
-    phrase = G_directed.graph.get("phrase", "")
-    tokens = re.findall(r"\w+|[.,;:]", phrase)
+def phrase_html(graph: nx.DiGraph, centrality_scores: dict[str, float]) -> str:
+    node_colors = build_color_mapping(graph, centrality_scores)
+    rendered_phrase = ""
+    previous_token = ""
 
-    final_phrase = []
-    for word in tokens:
-        rgba = node_colors_dict.get(word, cmap(0))
-        hex_color = '#{:02x}{:02x}{:02x}'.format(
+    for node_id in ordered_node_ids(graph):
+        token = str(graph.nodes[node_id].get("form", node_id))
+        rgba = node_colors.get(node_id, cm.viridis(0))
+        hex_color = "#{:02x}{:02x}{:02x}".format(
             int(rgba[0] * 255),
             int(rgba[1] * 255),
-            int(rgba[2] * 255)
+            int(rgba[2] * 255),
         )
-        final_phrase.append(f'<span style="color:{hex_color}; font-weight:bold">{word}</span>')
-    return "**Frase**: " + ' '.join(final_phrase)
+        token_html = f'<span style="color:{hex_color}; font-weight:bold">{html.escape(token)}</span>'
 
-# --- View logic ---
-import pandas as pd
+        if not rendered_phrase:
+            rendered_phrase = token_html
+        elif token in CLOSING_PUNCTUATION:
+            rendered_phrase += token_html
+        elif previous_token in OPENING_PUNCTUATION:
+            rendered_phrase += token_html
+        else:
+            rendered_phrase += f" {token_html}"
+
+        previous_token = token
+
+    return "**Frase**: " + rendered_phrase
+
+
+def root_for_display(graph: nx.DiGraph) -> str | None:
+    root_node = graph.graph.get("root")
+    if root_node is not None and str(root_node) in graph:
+        return str(root_node)
+    node_ids = ordered_node_ids(graph)
+    return node_ids[0] if node_ids else None
+
+
+def render_single_graph_view(dataset_id: str, file_name: str, include_punctuation: bool, centrality_name: str) -> None:
+    graph_id, directed_graph, _ = load_selected_graph(dataset_id, file_name)
+    directed_view, undirected_view = apply_punctuation_filter(directed_graph, include_punctuation)
+    centrality_scores = get_centrality_scores(
+        dataset_id,
+        file_name,
+        graph_id,
+        undirected_view,
+        centrality_name,
+        include_punctuation,
+    )
+
+    st.sidebar.markdown(phrase_html(directed_view, centrality_scores), unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("Árbol de dependencias (dirigido)")
+        root_node = root_for_display(directed_view)
+        positions = hierarchy_pos(directed_view, root=root_node, vert_gap=3)
+        fig, _ = draw_graph(
+            directed_view,
+            {str(node_id): 1.0 for node_id in directed_view.nodes()},
+            "Árbol sintáctico (dirigido)",
+            positions,
+            "directed",
+        )
+        st.pyplot(fig)
+
+    with col2:
+        st.subheader(f"Centralidad: {centrality_name}")
+        if centrality_scores:
+            root_node = max(centrality_scores, key=centrality_scores.get)
+            centrality_dag = build_dag_from_root(undirected_view, root_node)
+            positions = hierarchy_pos(centrality_dag, root=root_node, vert_gap=3)
+            fig, _ = draw_graph(undirected_view, centrality_scores, f"Centralidad: {centrality_name}", positions)
+            st.pyplot(fig)
+        else:
+            st.warning("No se pudo calcular centralidad para este grafo.")
+
+
+def render_graph_panel(title: str, dataset_id: str, file_name: str, include_punctuation: bool, centrality_name: str) -> None:
+    graph_id, directed_graph, _ = load_selected_graph(dataset_id, file_name)
+    directed_view, undirected_view = apply_punctuation_filter(directed_graph, include_punctuation)
+    centrality_scores = get_centrality_scores(
+        dataset_id,
+        file_name,
+        graph_id,
+        undirected_view,
+        centrality_name,
+        include_punctuation,
+    )
+
+    st.subheader(f"{title} — {file_name}")
+
+    with st.expander(f"Frase coloreada ({title})"):
+        st.markdown(phrase_html(directed_view, centrality_scores), unsafe_allow_html=True)
+
+    left_column, right_column = st.columns(2)
+
+    with left_column:
+        st.markdown("**Árbol de dependencias (dirigido)**")
+        root_node = root_for_display(directed_view)
+        positions = hierarchy_pos(directed_view, root=root_node, vert_gap=3)
+        fig, _ = draw_graph(
+            directed_view,
+            {str(node_id): 1.0 for node_id in directed_view.nodes()},
+            "Árbol sintáctico (dirigido)",
+            positions,
+            "directed",
+        )
+        st.pyplot(fig)
+
+    with right_column:
+        st.markdown(f"**Centralidad: {centrality_name}**")
+        if centrality_scores:
+            root_node = max(centrality_scores, key=centrality_scores.get)
+            centrality_dag = build_dag_from_root(undirected_view, root_node)
+            positions = hierarchy_pos(centrality_dag, root=root_node, vert_gap=3)
+            fig, _ = draw_graph(undirected_view, centrality_scores, f"Centralidad: {centrality_name}", positions)
+            st.pyplot(fig)
+        else:
+            st.warning(f"No se pudo calcular centralidad para {title}.")
+
+
+dataset_ids = list(DATASET_DEFINITIONS.keys())
+selected_dataset = st.sidebar.selectbox(
+    "Selecciona el dataset",
+    dataset_ids,
+    format_func=get_dataset_label,
+)
+
+view = st.sidebar.radio(
+    "Selecciona la vista",
+    ["Visualización de árboles", "Visualización múltiple de grafos", "Datos de distribución"],
+)
 
 if view == "Visualización de árboles":
-    not_wanted = []
     st.title("Visualizador de centralidad en árboles de dependencias sintácticas")
+    st.caption(f"Dataset activo: {get_dataset_label(selected_dataset)}")
 
-    GRAPH_DIR = "./UD_Spanish-GSD/"  # Set your desired directory path here
-    graph_files = [f for f in os.listdir(GRAPH_DIR) if f.endswith(".graphml")]
+    graph_files = get_graph_files(selected_dataset)
 
     if not graph_files:
-        st.error(f"No .graphml files found in {GRAPH_DIR}.")
+        st.error(f"No se encontraron grafos en {get_dataset_graph_dir(selected_dataset)}.")
     else:
-        selected_file_name = st.sidebar.selectbox("Select graph file", graph_files)
-        with open(os.path.join(GRAPH_DIR, selected_file_name), 'r', encoding='utf-8') as f:
-            G_directed, G_undirected = load_graph(f)
-
+        selected_file_name = st.sidebar.selectbox("Selecciona el grafo", graph_files)
         include_punctuation = st.sidebar.checkbox("Incluir puntuación", value=True)
-
-        if not include_punctuation:
-            not_wanted = [".", ",", ";", ":"]
-            punct_nodes = [n for n in G_directed.nodes() if G_directed.nodes[n].get("form") in not_wanted]
-            G_directed.remove_nodes_from(punct_nodes)
-            G_undirected = G_directed.to_undirected()
-
-        st.sidebar.markdown("### Elige una medida de centralidad")
-        centrality_name = st.sidebar.selectbox("Medida de centralidad", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"])
-
-        centrality_scores = compute_centrality(G_undirected, centrality_name)
-
-        # Colored phrase in sidebar
-        st.sidebar.markdown(phrase_html(G_directed, G_undirected, centrality_scores), unsafe_allow_html=True)
-
-        # Display trees side-by-side
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.subheader("Árbol de dependencias (dirigido)")
-            root_node = str(G_directed.graph.get('root', None))
-            pos1 = hierarchy_pos(G_directed, root=root_node, vert_gap=3)
-            fig1, _ = draw_graph(G_directed, {n: 1 for n in G_directed.nodes()}, "Árbol sintáctico (dirigido)", pos1, 'directed')
-            st.pyplot(fig1)
-
-        with col2:
-            st.subheader(f"Centralidad: {centrality_name}")
-            c = centrality_scores
-            root_node = max(c, key=c.get)
-            G_dag = build_dag_from_root(G_undirected, root_node)
-            pos2 = hierarchy_pos(G_dag, root=root_node, vert_gap=3)
-            fig2, _ = draw_graph(G_undirected, c, f"Centralidad: {centrality_name}", pos2)
-            st.pyplot(fig2)
+        centrality_name = st.sidebar.selectbox("Medida de centralidad", CENTRALITY_METHODS)
+        render_single_graph_view(selected_dataset, selected_file_name, include_punctuation, centrality_name)
 
 elif view == "Visualización múltiple de grafos":
     st.title("Visualización múltiple de grafos")
+    st.caption(f"Dataset activo: {get_dataset_label(selected_dataset)}")
 
-    GRAPH_DIR = "./UD_Spanish-GSD/"
-    graph_files = [f for f in os.listdir(GRAPH_DIR) if f.endswith(".graphml")]
+    graph_files = get_graph_files(selected_dataset)
 
     if not graph_files:
-        st.error(f"No .graphml files found in {GRAPH_DIR}.")
+        st.error(f"No se encontraron grafos en {get_dataset_graph_dir(selected_dataset)}.")
     else:
         st.sidebar.markdown("### Selección de archivos")
-        # Pre-select first two different files if available
-        default_idx_a = 0
-        default_idx_b = 1 if len(graph_files) > 1 else 0
+        default_index_a = 0
+        default_index_b = 1 if len(graph_files) > 1 else 0
 
-        file_a = st.sidebar.selectbox("Archivo A", graph_files, index=default_idx_a, key="file_a_select")
-        file_b = st.sidebar.selectbox("Archivo B", graph_files, index=default_idx_b, key="file_b_select")
+        file_a = st.sidebar.selectbox("Archivo A", graph_files, index=default_index_a, key="file_a_select")
+        file_b = st.sidebar.selectbox("Archivo B", graph_files, index=default_index_b, key="file_b_select")
 
-        # Settings per-graph
         with st.sidebar.expander("Ajustes del Grafo A", expanded=True):
-            include_punct_a = st.checkbox("Incluir puntuación (A)", value=True, key="punct_a")
-            centrality_a = st.selectbox("Medida de centralidad (A)", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"], key="cent_a")
+            include_punctuation_a = st.checkbox("Incluir puntuación (A)", value=True, key="punct_a")
+            centrality_a = st.selectbox("Medida de centralidad (A)", CENTRALITY_METHODS, key="cent_a")
 
         with st.sidebar.expander("Ajustes del Grafo B", expanded=True):
-            include_punct_b = st.checkbox("Incluir puntuación (B)", value=True, key="punct_b")
-            centrality_b = st.selectbox("Medida de centralidad (B)", ["Betweenness", "Closeness", "Harmonic", "All-Subgraphs", "PageRank"], key="cent_b")
+            include_punctuation_b = st.checkbox("Incluir puntuación (B)", value=True, key="punct_b")
+            centrality_b = st.selectbox("Medida de centralidad (B)", CENTRALITY_METHODS, key="cent_b")
 
         if file_a == file_b:
-            st.info("Has seleccionado el mismo archivo para A y B. Aún así se muestran ambos paneles (útil para comparar centralidades o filtros).")
+            st.info("Has seleccionado el mismo archivo para A y B. Aún así se muestran ambos paneles.")
 
-        # Load both graphs
-        with open(os.path.join(GRAPH_DIR, file_a), 'r', encoding='utf-8') as fa:
-            Gd_a, Gu_a = load_graph(fa)
-        with open(os.path.join(GRAPH_DIR, file_b), 'r', encoding='utf-8') as fb:
-            Gd_b, Gu_b = load_graph(fb)
+        col_a, col_b = st.columns(2)
 
-        # Apply punctuation filters
-        if not include_punct_a:
-            not_wanted = [".", ",", ";", ":"]
-            punct_nodes_a = [n for n in Gd_a.nodes() if Gd_a.nodes[n].get("form") in not_wanted]
-            Gd_a.remove_nodes_from(punct_nodes_a)
-            Gu_a = Gd_a.to_undirected()
+        with col_a:
+            render_graph_panel("Grafo A", selected_dataset, file_a, include_punctuation_a, centrality_a)
 
-        if not include_punct_b:
-            not_wanted = [".", ",", ";", ":"]
-            punct_nodes_b = [n for n in Gd_b.nodes() if Gd_b.nodes[n].get("form") in not_wanted]
-            Gd_b.remove_nodes_from(punct_nodes_b)
-            Gu_b = Gd_b.to_undirected()
-
-        # Compute centralities
-        cen_a = compute_centrality(Gu_a, centrality_a)
-        cen_b = compute_centrality(Gu_b, centrality_b)
-
-        # Two main columns: A | B
-        colA, colB = st.columns(2)
-
-        # ----- Panel A -----
-        with colA:
-            st.subheader(f"Grafo A — {file_a}")
-            # Colored phrase for A
-            with st.expander("Frase coloreada (A)"):
-                st.markdown(phrase_html(Gd_a, Gu_a, cen_a), unsafe_allow_html=True)
-
-            # Split: Directed | Centrality
-            subA1, subA2 = st.columns(2)
-
-            with subA1:
-                st.markdown("**Árbol de dependencias (dirigido)**")
-                root_a = str(Gd_a.graph.get('root', None))
-                posA1 = hierarchy_pos(Gd_a, root=root_a, vert_gap=3)
-                figA1, _ = draw_graph(Gd_a, {n: 1 for n in Gd_a.nodes()}, "Árbol sintáctico (dirigido)", posA1, 'directed')
-                st.pyplot(figA1)
-
-            with subA2:
-                st.markdown(f"**Centralidad: {centrality_a}**")
-                root_a_c = max(cen_a, key=cen_a.get) if len(cen_a) else None
-                if root_a_c is not None:
-                    Gdag_a = build_dag_from_root(Gu_a, root_a_c)
-                    posA2 = hierarchy_pos(Gdag_a, root=root_a_c, vert_gap=3)
-                    figA2, _ = draw_graph(Gu_a, cen_a, f"Centralidad: {centrality_a}", posA2)
-                    st.pyplot(figA2)
-                else:
-                    st.warning("No se pudo calcular centralidad para el Grafo A.")
-
-        # ----- Panel B -----
-        with colB:
-            st.subheader(f"Grafo B — {file_b}")
-            # Colored phrase for B
-            with st.expander("Frase coloreada (B)"):
-                st.markdown(phrase_html(Gd_b, Gu_b, cen_b), unsafe_allow_html=True)
-
-            # Split: Directed | Centrality
-            subB1, subB2 = st.columns(2)
-
-            with subB1:
-                st.markdown("**Árbol de dependencias (dirigido)**")
-                root_b = str(Gd_b.graph.get('root', None))
-                posB1 = hierarchy_pos(Gd_b, root=root_b, vert_gap=3)
-                figB1, _ = draw_graph(Gd_b, {n: 1 for n in Gd_b.nodes()}, "Árbol sintáctico (dirigido)", posB1, 'directed')
-                st.pyplot(figB1)
-
-            with subB2:
-                st.markdown(f"**Centralidad: {centrality_b}**")
-                root_b_c = max(cen_b, key=cen_b.get) if len(cen_b) else None
-                if root_b_c is not None:
-                    Gdag_b = build_dag_from_root(Gu_b, root_b_c)
-                    posB2 = hierarchy_pos(Gdag_b, root=root_b_c, vert_gap=3)
-                    figB2, _ = draw_graph(Gu_b, cen_b, f"Centralidad: {centrality_b}", posB2)
-                    st.pyplot(figB2)
-                else:
-                    st.warning("No se pudo calcular centralidad para el Grafo B.")
+        with col_b:
+            render_graph_panel("Grafo B", selected_dataset, file_b, include_punctuation_b, centrality_b)
 
 elif view == "Datos de distribución":
-    st.title("Visualización de distrubición")
+    st.title("Visualización de distribución")
 
-    uploaded_csv = "./distances_to_root.csv"
-
-    if uploaded_csv is not None:
-        df = pd.read_csv(uploaded_csv)
+    csv_path = REPO_ROOT / "distances_to_root.csv"
+    if not csv_path.exists():
+        st.error(f"No se encontró el archivo {csv_path}.")
+    else:
+        dataframe = pd.read_csv(csv_path)
         st.markdown("## Vista de las diferencias entre raíces")
-        st.dataframe(df)
+        st.dataframe(dataframe)
 
         st.markdown("## Estadísticas del CSV")
         col1, col2, col3 = st.columns(3)
 
         with col1:
             st.write("**Máximo por columna:**")
-            st.dataframe(df.max(numeric_only=True))
+            st.dataframe(dataframe.max(numeric_only=True))
 
         with col2:
             st.write("**Media por columna:**")
-            st.dataframe(df.mean(numeric_only=True))
+            st.dataframe(dataframe.mean(numeric_only=True))
 
         with col3:
             st.write("**Desviación estándar por columna:**")
-            st.dataframe(df.std(numeric_only=True))
+            st.dataframe(dataframe.std(numeric_only=True))
