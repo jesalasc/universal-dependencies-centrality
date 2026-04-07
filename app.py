@@ -36,6 +36,16 @@ from graph_centrality_store import (
 st.set_page_config(layout="wide")
 
 
+HISTOGRAM_METRICS = [
+    ("node_count", "Tamaño (nodos)", "Número de nodos"),
+    ("average_degree", "Grado promedio", "Grado promedio"),
+    ("average_out_degree", "Grado de salida promedio", "Grado de salida promedio"),
+    ("maximum_degree", "Grado máximo", "Grado máximo"),
+    ("diameter", "Diámetro", "Diámetro"),
+    ("average_distance", "Distancia promedio", "Distancia promedio"),
+]
+
+
 @st.cache_resource
 def get_database_connection():
     return create_connection(DATABASE_PATH)
@@ -43,14 +53,10 @@ def get_database_connection():
 
 def get_graph_files(dataset_id: str) -> list[str]:
     connection = get_database_connection()
-    graph_files = list_graph_files(connection, dataset_id)
-    if graph_files:
-        return graph_files
-
     graph_dir = get_dataset_graph_dir(dataset_id)
-    if not graph_dir.exists():
-        return []
-    return sorted(path.name for path in graph_dir.glob("*.graphml"))
+    filesystem_files = sorted(path.name for path in graph_dir.glob("*.graphml")) if graph_dir.exists() else []
+    graph_files = list_graph_files(connection, dataset_id)
+    return sorted(set(graph_files) | set(filesystem_files))
 
 
 def get_graph_path(dataset_id: str, file_name: str) -> Path:
@@ -94,6 +100,220 @@ def apply_punctuation_filter(graph: nx.DiGraph, include_punctuation: bool) -> tu
 
     filtered_directed = remove_punctuation_nodes(graph)
     return filtered_directed, filtered_directed.to_undirected()
+
+
+def diameter_and_connectivity(graph: nx.Graph) -> tuple[int, bool]:
+    node_count = graph.number_of_nodes()
+    if node_count <= 1:
+        return 0, True
+
+    if nx.is_connected(graph):
+        return int(nx.diameter(graph)), True
+
+    largest_component_diameter = max(
+        (
+            int(nx.diameter(graph.subgraph(component_nodes).copy()))
+            for component_nodes in nx.connected_components(graph)
+        ),
+        default=0,
+    )
+    return largest_component_diameter, False
+
+
+def average_distance_and_connectivity(graph: nx.Graph) -> tuple[float, bool]:
+    node_count = graph.number_of_nodes()
+    if node_count <= 1:
+        return 0.0, True
+
+    if nx.is_connected(graph):
+        return float(nx.average_shortest_path_length(graph)), True
+
+    total_distance = 0.0
+    total_pairs = 0
+    for component_nodes in nx.connected_components(graph):
+        component_graph = graph.subgraph(component_nodes).copy()
+        component_size = component_graph.number_of_nodes()
+        if component_size <= 1:
+            continue
+
+        pair_count = component_size * (component_size - 1) // 2
+        total_pairs += pair_count
+        total_distance += float(nx.average_shortest_path_length(component_graph)) * pair_count
+
+    if total_pairs == 0:
+        return 0.0, False
+
+    return total_distance / total_pairs, False
+
+
+def compute_graph_distribution_metrics(
+    directed_graph: nx.DiGraph,
+    undirected_graph: nx.Graph,
+) -> dict[str, float | int | bool]:
+    node_count = undirected_graph.number_of_nodes()
+    degree_values = [degree for _, degree in undirected_graph.degree()]
+    out_degree_values = [degree for _, degree in directed_graph.out_degree()]
+    average_degree = float(sum(degree_values) / node_count) if node_count else 0.0
+    average_out_degree = float(sum(out_degree_values) / node_count) if node_count else 0.0
+    maximum_degree = int(max(degree_values, default=0))
+    diameter, is_connected = diameter_and_connectivity(undirected_graph)
+    average_distance, _ = average_distance_and_connectivity(undirected_graph)
+    return {
+        "node_count": int(node_count),
+        "average_degree": average_degree,
+        "average_out_degree": average_out_degree,
+        "maximum_degree": maximum_degree,
+        "diameter": int(diameter),
+        "average_distance": average_distance,
+        "is_connected": is_connected,
+    }
+
+
+@st.cache_data(show_spinner=False)
+def get_dataset_distribution_dataframe(dataset_id: str, graph_files: tuple[str, ...]) -> pd.DataFrame:
+    graph_dir = get_dataset_graph_dir(dataset_id)
+    rows: list[dict[str, object]] = []
+
+    for file_name in graph_files:
+        graph_path = graph_dir / file_name
+        if not graph_path.exists():
+            graph_path = get_graph_path(dataset_id, file_name)
+
+        directed_graph, undirected_graph = load_graph(graph_path)
+        graph_metrics = compute_graph_distribution_metrics(directed_graph, undirected_graph)
+        rows.append({"file_name": file_name, **graph_metrics})
+
+    return pd.DataFrame(rows)
+
+
+def histogram_bins(values: pd.Series) -> np.ndarray | int:
+    clean_values = values.dropna()
+    if clean_values.empty:
+        return 1
+
+    numeric_values = clean_values.to_numpy(dtype=float)
+    integer_like = np.allclose(numeric_values, np.round(numeric_values))
+    min_value = float(numeric_values.min())
+    max_value = float(numeric_values.max())
+
+    if integer_like and (max_value - min_value) <= 30:
+        return np.arange(min_value - 0.5, max_value + 1.5, 1.0)
+
+    return min(40, max(10, int(np.sqrt(len(numeric_values)))))
+
+
+def build_distribution_histograms_figure(dataframe: pd.DataFrame, dataset_label: str):
+    columns = 2
+    rows = (len(HISTOGRAM_METRICS) + columns - 1) // columns
+    fig, axes = plt.subplots(rows, columns, figsize=(14, 4.5 * rows))
+    flat_axes = np.atleast_1d(axes).flatten()
+
+    for axis, (column_name, title, x_label) in zip(flat_axes, HISTOGRAM_METRICS):
+        axis.hist(
+            dataframe[column_name],
+            bins=histogram_bins(dataframe[column_name]),
+            color="#4C78A8",
+            edgecolor="white",
+            linewidth=0.8,
+        )
+        axis.set_title(title)
+        axis.set_xlabel(x_label)
+        axis.set_ylabel("Cantidad de grafos")
+        axis.grid(axis="y", alpha=0.25)
+
+    for axis in flat_axes[len(HISTOGRAM_METRICS):]:
+        axis.remove()
+
+    fig.suptitle(f"Distribuciones estructurales del corpus: {dataset_label}")
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    return fig
+
+
+def render_corpus_histogram_view(dataset_id: str) -> None:
+    st.title("Histogramas estructurales del corpus")
+    st.caption(f"Dataset activo: {get_dataset_label(dataset_id)}")
+    st.caption(
+        "Las métricas se calculan por grafo: tamaño, grado promedio, grado máximo, diámetro y distancia promedio en la versión no dirigida; grado de salida promedio en la versión dirigida."
+    )
+
+    graph_files = get_graph_files(dataset_id)
+    if not graph_files:
+        st.error(f"No se encontraron grafos en {get_dataset_graph_dir(dataset_id)}.")
+        return
+
+    with st.spinner("Calculando métricas estructurales del corpus..."):
+        distribution_dataframe = get_dataset_distribution_dataframe(dataset_id, tuple(graph_files))
+
+    if distribution_dataframe.empty:
+        st.warning("No se pudieron calcular métricas para este corpus.")
+        return
+
+    metric_columns = [column_name for column_name, _, _ in HISTOGRAM_METRICS]
+    summary_dataframe = (
+        distribution_dataframe[metric_columns]
+        .agg(["min", "mean", "median", "max", "std"])
+        .transpose()
+        .rename(
+            columns={
+                "min": "Mínimo",
+                "mean": "Media",
+                "median": "Mediana",
+                "max": "Máximo",
+                "std": "Desviación estándar",
+            }
+        )
+    )
+    summary_dataframe.index = [
+        "Tamaño (nodos)",
+        "Grado promedio",
+        "Grado de salida promedio",
+        "Grado máximo",
+        "Diámetro",
+        "Distancia promedio",
+    ]
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Grafos analizados", f"{len(distribution_dataframe):,}")
+    with col2:
+        st.metric("Tamaño medio", f"{distribution_dataframe['node_count'].mean():.2f}")
+    with col3:
+        st.metric("Grado promedio medio", f"{distribution_dataframe['average_degree'].mean():.2f}")
+    with col4:
+        st.metric("Diámetro medio", f"{distribution_dataframe['diameter'].mean():.2f}")
+
+    figure = build_distribution_histograms_figure(distribution_dataframe, get_dataset_label(dataset_id))
+    st.pyplot(figure)
+    plt.close(figure)
+
+    disconnected_graph_count = int((~distribution_dataframe["is_connected"]).sum())
+    if disconnected_graph_count:
+        st.info(
+            "Se detectaron "
+            f"{disconnected_graph_count} grafos no conexos. "
+            "Para ellos, el diámetro mostrado corresponde al mayor diámetro entre sus componentes conexas, "
+            "y la distancia promedio se calcula como el promedio ponderado por pares alcanzables dentro de cada componente conexa."
+        )
+
+    st.markdown("## Resumen estadístico")
+    st.dataframe(summary_dataframe.style.format("{:.2f}"))
+
+    with st.expander("Ver métricas por grafo"):
+        st.dataframe(
+            distribution_dataframe.rename(
+                columns={
+                    "file_name": "Archivo",
+                    "node_count": "Tamaño (nodos)",
+                    "average_degree": "Grado promedio",
+                    "average_out_degree": "Grado de salida promedio",
+                    "maximum_degree": "Grado máximo",
+                    "diameter": "Diámetro",
+                    "average_distance": "Distancia promedio",
+                    "is_connected": "Es conexo",
+                }
+            ),
+            use_container_width=True,
+        )
 
 
 def get_centrality_scores(
@@ -416,7 +636,12 @@ selected_dataset = st.sidebar.selectbox(
 
 view = st.sidebar.radio(
     "Selecciona la vista",
-    ["Visualización de árboles", "Visualización múltiple de grafos", "Datos de distribución"],
+    [
+        "Visualización de árboles",
+        "Visualización múltiple de grafos",
+        "Histogramas estructurales del corpus",
+        "Datos de distribución",
+    ],
 )
 
 if view == "Visualización de árboles":
@@ -467,6 +692,9 @@ elif view == "Visualización múltiple de grafos":
 
         with col_b:
             render_graph_panel("Grafo B", selected_dataset, file_b, include_punctuation_b, centrality_b)
+
+elif view == "Histogramas estructurales del corpus":
+    render_corpus_histogram_view(selected_dataset)
 
 elif view == "Datos de distribución":
     st.title("Visualización de distribución")
