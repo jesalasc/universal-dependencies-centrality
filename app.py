@@ -9,6 +9,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+import boto3
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -53,12 +54,32 @@ HISTOGRAM_METRICS = [
 
 DATABASE_URL_SECRET = "graph_centralities_db_url"
 DATASET_ARCHIVE_URLS_SECRET = "dataset_archive_urls"
+AWS_SECTION_SECRET = "aws"
+AWS_BUCKET_SECRET = "aws_s3_bucket"
+AWS_REGION_SECRET = "aws_region"
+AWS_DB_KEY_SECRET = "aws_db_key"
+AWS_DATASET_KEYS_SECRET = "aws_dataset_keys"
 
 
 def get_secret_or_env(name: str, default=None):
     if hasattr(st, "secrets") and name in st.secrets:
         return st.secrets[name]
     return os.environ.get(name, default)
+
+
+def get_section_secret(section_name: str, key: str, default=None):
+    if hasattr(st, "secrets") and section_name in st.secrets:
+        section = st.secrets[section_name]
+        if key in section:
+            return section[key]
+    return default
+
+
+def get_aws_setting(key: str, env_name: str, default=None):
+    section_value = get_section_secret(AWS_SECTION_SECRET, key)
+    if section_value is not None:
+        return section_value
+    return get_secret_or_env(env_name, default)
 
 
 def get_dataset_archive_url(dataset_id: str) -> str | None:
@@ -71,10 +92,48 @@ def get_dataset_archive_url(dataset_id: str) -> str | None:
     return os.environ.get(env_name)
 
 
+def get_dataset_archive_s3_key(dataset_id: str) -> str | None:
+    section_keys = get_section_secret(AWS_SECTION_SECRET, "dataset_keys")
+    if section_keys and dataset_id in section_keys:
+        return str(section_keys[dataset_id])
+
+    if hasattr(st, "secrets") and AWS_DATASET_KEYS_SECRET in st.secrets:
+        dataset_keys = st.secrets[AWS_DATASET_KEYS_SECRET]
+        if dataset_id in dataset_keys:
+            return str(dataset_keys[dataset_id])
+
+    env_name = f"AWS_DATASET_KEY_{dataset_id.upper()}"
+    return os.environ.get(env_name)
+
+
 def download_file(url: str, destination: Path) -> None:
     request = urllib.request.Request(url, headers={"User-Agent": "streamlit-centrality-app/1.0"})
     with urllib.request.urlopen(request) as response, destination.open("wb") as output_file:
         shutil.copyfileobj(response, output_file)
+
+
+@st.cache_resource
+def get_s3_client():
+    session_kwargs = {}
+    aws_access_key_id = get_aws_setting("access_key_id", "AWS_ACCESS_KEY_ID")
+    aws_secret_access_key = get_aws_setting("secret_access_key", "AWS_SECRET_ACCESS_KEY")
+    aws_session_token = get_aws_setting("session_token", "AWS_SESSION_TOKEN")
+    region_name = get_aws_setting("region", "AWS_DEFAULT_REGION") or get_secret_or_env(AWS_REGION_SECRET)
+
+    if aws_access_key_id and aws_secret_access_key:
+        session_kwargs["aws_access_key_id"] = str(aws_access_key_id)
+        session_kwargs["aws_secret_access_key"] = str(aws_secret_access_key)
+    if aws_session_token:
+        session_kwargs["aws_session_token"] = str(aws_session_token)
+    if region_name:
+        session_kwargs["region_name"] = str(region_name)
+
+    session = boto3.session.Session(**session_kwargs)
+    return session.client("s3")
+
+
+def download_s3_file(bucket: str, key: str, destination: Path) -> None:
+    get_s3_client().download_file(bucket, key, str(destination))
 
 
 def normalize_extracted_graph_dir(graph_dir: Path) -> None:
@@ -107,19 +166,27 @@ def ensure_database_bootstrap() -> str | None:
         return None
 
     database_url = get_secret_or_env(DATABASE_URL_SECRET)
-    if not database_url:
+    database_s3_key = get_aws_setting("db_key", "AWS_DB_KEY") or get_secret_or_env(AWS_DB_KEY_SECRET)
+    s3_bucket = get_aws_setting("bucket", "AWS_S3_BUCKET") or get_secret_or_env(AWS_BUCKET_SECRET)
+    if not database_url and not (s3_bucket and database_s3_key):
         return (
             "No se encontró la base de datos de centralidades precomputadas. "
-            f"Configura `{DATABASE_URL_SECRET}` en `st.secrets` o como variable de entorno para descargarla automáticamente."
+            f"Configura `{DATABASE_URL_SECRET}` o el origen S3 (`{AWS_BUCKET_SECRET}` y `{AWS_DB_KEY_SECRET}`) "
+            "en `st.secrets` o como variables de entorno para descargarla automáticamente."
         )
 
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_dir:
         temporary_path = Path(temp_dir) / DATABASE_PATH.name
-        download_file(str(database_url), temporary_path)
+        if database_url:
+            download_file(str(database_url), temporary_path)
+            source_message = f"Base de datos descargada desde `{DATABASE_URL_SECRET}`."
+        else:
+            download_s3_file(str(s3_bucket), str(database_s3_key), temporary_path)
+            source_message = "Base de datos descargada automáticamente desde S3."
         shutil.move(str(temporary_path), str(DATABASE_PATH))
 
-    return f"Base de datos descargada desde `{DATABASE_URL_SECRET}`."
+    return source_message
 
 
 def ensure_dataset_bootstrap(dataset_id: str) -> str | None:
@@ -128,17 +195,23 @@ def ensure_dataset_bootstrap(dataset_id: str) -> str | None:
         return None
 
     archive_url = get_dataset_archive_url(dataset_id)
-    if not archive_url:
+    archive_s3_key = get_dataset_archive_s3_key(dataset_id)
+    s3_bucket = get_aws_setting("bucket", "AWS_S3_BUCKET") or get_secret_or_env(AWS_BUCKET_SECRET)
+    if not archive_url and not (s3_bucket and archive_s3_key):
         env_name = f"DATASET_ARCHIVE_URL_{dataset_id.upper()}"
         return (
             f"No se encontraron grafos para `{get_dataset_label(dataset_id)}`. "
-            f"Configura `{DATASET_ARCHIVE_URLS_SECRET}.{dataset_id}` en `st.secrets` o `{env_name}` como variable de entorno."
+            f"Configura `{DATASET_ARCHIVE_URLS_SECRET}.{dataset_id}` o el origen S3 para ese dataset "
+            f"en `st.secrets`, o `{env_name}` como variable de entorno."
         )
 
     graph_dir.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_dir:
         temporary_archive = Path(temp_dir) / "dataset_archive"
-        download_file(str(archive_url), temporary_archive)
+        if archive_url:
+            download_file(str(archive_url), temporary_archive)
+        else:
+            download_s3_file(str(s3_bucket), str(archive_s3_key), temporary_archive)
         extract_archive(temporary_archive, graph_dir)
 
     graph_count = sum(1 for _ in graph_dir.glob("*.graphml"))
