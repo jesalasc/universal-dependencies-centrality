@@ -357,15 +357,29 @@ def average_distance_and_connectivity(graph: nx.Graph) -> tuple[float, bool]:
     return total_distance / total_pairs, False
 
 
+def remove_leaf_nodes(graph: nx.Graph) -> nx.Graph:
+    pruned_graph = graph.copy()
+    leaf_nodes = [node_id for node_id, degree in pruned_graph.degree() if degree <= 1]
+    pruned_graph.remove_nodes_from(leaf_nodes)
+    return pruned_graph
+
+
 def compute_graph_distribution_metrics(
     directed_graph: nx.DiGraph,
     undirected_graph: nx.Graph,
+    *,
+    remove_leaves_for_degree_metrics: bool = False,
 ) -> dict[str, float | int | bool]:
     node_count = undirected_graph.number_of_nodes()
-    degree_values = [degree for _, degree in undirected_graph.degree()]
-    out_degree_values = [degree for _, degree in directed_graph.out_degree()]
-    average_degree = float(sum(degree_values) / node_count) if node_count else 0.0
-    average_out_degree = float(sum(out_degree_values) / node_count) if node_count else 0.0
+    degree_graph = remove_leaf_nodes(undirected_graph) if remove_leaves_for_degree_metrics else undirected_graph
+    directed_degree_graph = (
+        directed_graph.subgraph(degree_graph.nodes()).copy() if remove_leaves_for_degree_metrics else directed_graph
+    )
+    degree_node_count = degree_graph.number_of_nodes()
+    degree_values = [degree for _, degree in degree_graph.degree()]
+    out_degree_values = [degree for _, degree in directed_degree_graph.out_degree()]
+    average_degree = float(sum(degree_values) / degree_node_count) if degree_node_count else 0.0
+    average_out_degree = float(sum(out_degree_values) / degree_node_count) if degree_node_count else 0.0
     maximum_degree = int(max(degree_values, default=0))
     diameter, is_connected = diameter_and_connectivity(undirected_graph)
     average_distance, _ = average_distance_and_connectivity(undirected_graph)
@@ -377,11 +391,17 @@ def compute_graph_distribution_metrics(
         "diameter": int(diameter),
         "average_distance": average_distance,
         "is_connected": is_connected,
+        "degree_node_count": int(degree_node_count),
+        "leaf_nodes_removed": int(node_count - degree_node_count),
     }
 
 
 @st.cache_data(show_spinner=False)
-def get_dataset_distribution_dataframe(dataset_id: str, graph_files: tuple[str, ...]) -> pd.DataFrame:
+def get_dataset_distribution_dataframe(
+    dataset_id: str,
+    graph_files: tuple[str, ...],
+    remove_leaves_for_degree_metrics: bool,
+) -> pd.DataFrame:
     graph_dir = get_dataset_graph_dir(dataset_id)
     rows: list[dict[str, object]] = []
 
@@ -391,7 +411,11 @@ def get_dataset_distribution_dataframe(dataset_id: str, graph_files: tuple[str, 
             graph_path = get_graph_path(dataset_id, file_name)
 
         directed_graph, undirected_graph = load_graph(graph_path)
-        graph_metrics = compute_graph_distribution_metrics(directed_graph, undirected_graph)
+        graph_metrics = compute_graph_distribution_metrics(
+            directed_graph,
+            undirected_graph,
+            remove_leaves_for_degree_metrics=remove_leaves_for_degree_metrics,
+        )
         rows.append({"file_name": file_name, **graph_metrics})
 
     return pd.DataFrame(rows)
@@ -440,6 +464,96 @@ def build_distribution_histograms_figure(dataframe: pd.DataFrame, dataset_label:
     return fig
 
 
+@st.cache_data(show_spinner=False)
+def get_dataset_centrality_distribution_dataframe(
+    dataset_id: str,
+    graph_files: tuple[str, ...],
+    method: str,
+    include_punctuation: bool,
+    remove_leaves_before_centrality: bool,
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+
+    for file_name in graph_files:
+        graph_id, directed_graph, _ = load_selected_graph(dataset_id, file_name)
+        directed_view, undirected_view = apply_punctuation_filter(directed_graph, include_punctuation)
+        if remove_leaves_before_centrality:
+            undirected_view = remove_leaf_nodes(undirected_view)
+            try:
+                centrality_scores = compute_centrality(undirected_view, method)
+            except Exception:
+                centrality_scores = {str(node_id): 0.0 for node_id in undirected_view.nodes()}
+        else:
+            centrality_scores = get_centrality_scores(
+                dataset_id,
+                file_name,
+                graph_id,
+                undirected_view,
+                method,
+                include_punctuation,
+            )
+
+        values = np.array(list(centrality_scores.values()), dtype=float)
+        if values.size == 0:
+            rows.append(
+                {
+                    "file_name": file_name,
+                    "node_count": 0,
+                    "centrality_mean": 0.0,
+                    "centrality_median": 0.0,
+                    "centrality_max": 0.0,
+                    "centrality_std": 0.0,
+                }
+            )
+            continue
+
+        rows.append(
+            {
+                "file_name": file_name,
+                "node_count": int(values.size),
+                "centrality_mean": float(values.mean()),
+                "centrality_median": float(np.median(values)),
+                "centrality_max": float(values.max()),
+                "centrality_std": float(values.std()),
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def build_centrality_histograms_figure(dataframe: pd.DataFrame, dataset_label: str, method: str):
+    centrality_metrics = [
+        ("centrality_mean", "Centralidad media", "Valor medio"),
+        ("centrality_median", "Centralidad mediana", "Valor mediano"),
+        ("centrality_max", "Centralidad máxima", "Valor máximo"),
+        ("centrality_std", "Desviación estándar de centralidad", "Desviación estándar"),
+    ]
+    columns = 2
+    rows = (len(centrality_metrics) + columns - 1) // columns
+    fig, axes = plt.subplots(rows, columns, figsize=(14, 4.5 * rows))
+    flat_axes = np.atleast_1d(axes).flatten()
+
+    for axis, (column_name, title, x_label) in zip(flat_axes, centrality_metrics):
+        axis.hist(
+            dataframe[column_name],
+            bins=histogram_bins(dataframe[column_name]),
+            color="#F58518",
+            edgecolor="white",
+            linewidth=0.8,
+        )
+        axis.set_title(title)
+        axis.set_xlabel(x_label)
+        axis.set_ylabel("Cantidad de grafos")
+        axis.grid(axis="y", alpha=0.25)
+
+    for axis in flat_axes[len(centrality_metrics):]:
+        axis.remove()
+
+    fig.suptitle(f"Distribuciones de centralidad por grafo: {dataset_label} ({method})")
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    return fig
+
+
 def render_corpus_histogram_view(dataset_id: str) -> None:
     st.title("Histogramas estructurales del corpus")
     st.caption(f"Dataset activo: {get_dataset_label(dataset_id)}")
@@ -447,13 +561,34 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
         "Las métricas se calculan por grafo: tamaño, grado promedio, grado máximo, diámetro y distancia promedio en la versión no dirigida; grado de salida promedio en la versión dirigida."
     )
 
+    structural_col1, structural_col2 = st.columns(2)
+    with structural_col1:
+        remove_leaves_for_degree_metrics = st.checkbox(
+            "Excluir hojas para métricas de grado",
+            value=False,
+            help=(
+                "Elimina nodos hoja (grado <= 1) solo para calcular grado promedio, grado de salida promedio "
+                "y grado máximo. El tamaño, diámetro y distancia promedio se mantienen sobre el grafo original."
+            ),
+        )
+    with structural_col2:
+        include_punctuation_for_centrality = st.checkbox(
+            "Incluir puntuación en centralidad",
+            value=True,
+            help="Aplica a la sección de histogramas de centralidad.",
+        )
+
     graph_files = get_graph_files(dataset_id)
     if not graph_files:
         st.error(f"No se encontraron grafos en {get_dataset_graph_dir(dataset_id)}.")
         return
 
     with st.spinner("Calculando métricas estructurales del corpus..."):
-        distribution_dataframe = get_dataset_distribution_dataframe(dataset_id, tuple(graph_files))
+        distribution_dataframe = get_dataset_distribution_dataframe(
+            dataset_id,
+            tuple(graph_files),
+            remove_leaves_for_degree_metrics,
+        )
 
     if distribution_dataframe.empty:
         st.warning("No se pudieron calcular métricas para este corpus.")
@@ -493,6 +628,15 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
     with col4:
         st.metric("Diámetro medio", f"{distribution_dataframe['diameter'].mean():.2f}")
 
+    if remove_leaves_for_degree_metrics:
+        removed_leaf_mean = distribution_dataframe["leaf_nodes_removed"].mean()
+        degree_node_mean = distribution_dataframe["degree_node_count"].mean()
+        st.caption(
+            "Las métricas de grado se calcularon sin nodos hoja. "
+            f"Promedio de hojas removidas por grafo: {removed_leaf_mean:.2f}. "
+            f"Nodos considerados para grado por grafo: {degree_node_mean:.2f}."
+        )
+
     figure = build_distribution_histograms_figure(distribution_dataframe, get_dataset_label(dataset_id))
     st.pyplot(figure)
     plt.close(figure)
@@ -521,6 +665,91 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
                     "diameter": "Diámetro",
                     "average_distance": "Distancia promedio",
                     "is_connected": "Es conexo",
+                    "degree_node_count": "Nodos para grado",
+                    "leaf_nodes_removed": "Hojas removidas",
+                }
+            ),
+            use_container_width=True,
+        )
+
+    st.markdown("## Histogramas de centralidad")
+    centrality_col1, centrality_col2 = st.columns(2)
+    with centrality_col1:
+        selected_centrality = st.selectbox(
+            "Medida de centralidad para histogramas",
+            CENTRALITY_METHODS,
+            key=f"histogram_centrality_{dataset_id}",
+        )
+    with centrality_col2:
+        remove_leaves_for_centrality = st.checkbox(
+            "Excluir hojas antes de calcular centralidad",
+            value=False,
+            help="Elimina nodos hoja del grafo filtrado antes de calcular la centralidad.",
+        )
+
+    with st.spinner("Calculando distribuciones de centralidad..."):
+        centrality_distribution_dataframe = get_dataset_centrality_distribution_dataframe(
+            dataset_id,
+            tuple(graph_files),
+            selected_centrality,
+            include_punctuation_for_centrality,
+            remove_leaves_for_centrality,
+        )
+
+    if centrality_distribution_dataframe.empty:
+        st.warning("No se pudieron calcular distribuciones de centralidad para este corpus.")
+        return
+
+    centrality_summary_dataframe = (
+        centrality_distribution_dataframe[["centrality_mean", "centrality_median", "centrality_max", "centrality_std"]]
+        .agg(["min", "mean", "median", "max", "std"])
+        .transpose()
+        .rename(
+            columns={
+                "min": "Mínimo",
+                "mean": "Media",
+                "median": "Mediana",
+                "max": "Máximo",
+                "std": "Desviación estándar",
+            }
+        )
+    )
+    centrality_summary_dataframe.index = [
+        "Centralidad media",
+        "Centralidad mediana",
+        "Centralidad máxima",
+        "Desviación estándar de centralidad",
+    ]
+
+    centrality_metric_col1, centrality_metric_col2, centrality_metric_col3 = st.columns(3)
+    with centrality_metric_col1:
+        st.metric("Nodos analizados por grafo", f"{centrality_distribution_dataframe['node_count'].mean():.2f}")
+    with centrality_metric_col2:
+        st.metric("Centralidad media global", f"{centrality_distribution_dataframe['centrality_mean'].mean():.4f}")
+    with centrality_metric_col3:
+        st.metric("Centralidad máxima media", f"{centrality_distribution_dataframe['centrality_max'].mean():.4f}")
+
+    centrality_figure = build_centrality_histograms_figure(
+        centrality_distribution_dataframe,
+        get_dataset_label(dataset_id),
+        selected_centrality,
+    )
+    st.pyplot(centrality_figure)
+    plt.close(centrality_figure)
+
+    st.markdown("## Resumen de centralidad")
+    st.dataframe(centrality_summary_dataframe.style.format("{:.4f}"))
+
+    with st.expander("Ver métricas de centralidad por grafo"):
+        st.dataframe(
+            centrality_distribution_dataframe.rename(
+                columns={
+                    "file_name": "Archivo",
+                    "node_count": "Nodos analizados",
+                    "centrality_mean": "Centralidad media",
+                    "centrality_median": "Centralidad mediana",
+                    "centrality_max": "Centralidad máxima",
+                    "centrality_std": "Desviación estándar de centralidad",
                 }
             ),
             use_container_width=True,
