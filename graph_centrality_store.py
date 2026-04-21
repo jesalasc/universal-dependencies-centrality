@@ -49,6 +49,7 @@ def create_connection(database_path: str | Path = DATABASE_PATH) -> sqlite3.Conn
     connection.execute("PRAGMA journal_mode = WAL")
     connection.execute("PRAGMA synchronous = NORMAL")
     ensure_schema(connection)
+    register_datasets(connection)
     return connection
 
 

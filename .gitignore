@@ -7,3 +7,4 @@ graph_centralities.sqlite-shm
 graph_centralities.sqlite-wal
 __pycache__/
 .streamlit/secrets.toml
+*.zip
