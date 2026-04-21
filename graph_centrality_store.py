@@ -27,6 +27,10 @@ DATASET_DEFINITIONS = {
         "label": "UD Spanish GSD",
         "graph_dir": REPO_ROOT / "UD_Spanish-GSD",
     },
+    "ud_spanish_ancora": {
+        "label": "UD Spanish AnCora",
+        "graph_dir": REPO_ROOT / "UD_Spanish-AnCora",
+    },
     "ancora_dep_2_0_es": {
         "label": "AnCora DEP 2.0 (es)",
         "graph_dir": REPO_ROOT / "AnCora-ES",

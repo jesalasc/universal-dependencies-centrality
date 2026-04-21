@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import time
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -27,6 +28,7 @@ from graph_centrality_store import (
 
 
 ANCORA_SOURCE_DEFAULT = Path("/Users/summa/Documents/Cenia/C. Riveros/data/ancora-dep-2.0/es")
+ANCORA_UD_SOURCE_DEFAULT = Path("/Users/summa/Documents/Cenia/C. Riveros/data/ancora-ud/es_ancora-ud-train.conllu")
 EXPECTED_CACHE_ENTRIES_PER_GRAPH = len(CENTRALITY_METHODS) * 2
 
 
@@ -108,6 +110,103 @@ def build_ancora_graphml_dataset(source_dir: Path, output_dir: Path, rebuild: bo
             print(f"[ancora] processed {source_documents} source files")
 
     return source_documents, written_graphs
+
+
+def sanitize_graph_name(name: str) -> str:
+    return re.sub(r"[^A-Za-z0-9_.-]+", "_", name).strip("_") or "sentence"
+
+
+def parse_conllu_sentences(source_path: Path):
+    sentence_rows = []
+    comments: dict[str, str] = {}
+    sentence_index = 0
+
+    for raw_line in source_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        stripped_line = raw_line.strip()
+
+        if not stripped_line:
+            if sentence_rows:
+                sentence_index += 1
+                yield sentence_index, comments, sentence_rows
+                sentence_rows = []
+                comments = {}
+            continue
+
+        if stripped_line.startswith("#"):
+            comment_body = stripped_line[1:].strip()
+            if "=" in comment_body:
+                key, value = comment_body.split("=", 1)
+                comments[key.strip()] = value.strip()
+            continue
+
+        parts = raw_line.split("\t")
+        if len(parts) != 10:
+            raise ValueError(f"Unexpected CoNLL-U row format in {source_path}: {raw_line!r}")
+
+        token_id, form, lemma, upos, xpos, feats, head, deprel, deps, misc = parts
+        if "-" in token_id or "." in token_id:
+            continue
+
+        sentence_rows.append(
+            {
+                "id": token_id,
+                "form": form,
+                "lemma": lemma,
+                "upos": upos,
+                "xpos": xpos,
+                "feats": feats,
+                "head": head,
+                "deprel": deprel,
+                "deps": deps,
+                "misc": misc,
+            }
+        )
+
+    if sentence_rows:
+        sentence_index += 1
+        yield sentence_index, comments, sentence_rows
+
+
+def build_conllu_graph(comments: dict[str, str], sentence_rows: list[dict[str, str]]) -> nx.DiGraph:
+    graph = nx.DiGraph()
+
+    for row in sentence_rows:
+        graph.add_node(row["id"], form=row["form"])
+
+    root_node = None
+    for row in sentence_rows:
+        if row["head"] == "0":
+            root_node = row["id"]
+            continue
+        graph.add_edge(row["head"], row["id"])
+
+    if root_node is None:
+        raise ValueError("Sentence without root node")
+
+    graph.graph["root"] = root_node
+    graph.graph["phrase"] = comments.get("text") or detokenize(
+        row["form"] for row in sorted(sentence_rows, key=lambda row: int(row["id"]))
+    )
+    return graph
+
+
+def build_conllu_graphml_dataset(source_path: Path, output_dir: Path, rebuild: bool) -> int:
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    written_graphs = 0
+    for sentence_index, comments, sentence_rows in parse_conllu_sentences(source_path):
+        graph = build_conllu_graph(comments, sentence_rows)
+        sent_id = comments.get("sent_id") or f"{source_path.stem}_s{sentence_index:05d}"
+        file_name = f"{sanitize_graph_name(sent_id)}.graphml"
+        output_path = output_dir / file_name
+        if rebuild or not output_path.exists():
+            nx.write_graphml(graph, output_path)
+        written_graphs += 1
+
+        if sentence_index % 1000 == 0:
+            print(f"[ancora-ud] processed {sentence_index} sentences")
+
+    return written_graphs
 
 
 def sync_graph_metadata(connection, dataset_id: str) -> int:
@@ -269,6 +368,17 @@ def parse_args() -> argparse.Namespace:
         default=ANCORA_SOURCE_DEFAULT,
         help="Path to the original AnCora CSV files",
     )
+    parser.add_argument(
+        "--rebuild-ancora-ud-graphs",
+        action="store_true",
+        help="Rewrite the UD AnCora GraphML files even if they already exist",
+    )
+    parser.add_argument(
+        "--ancora-ud-source",
+        type=Path,
+        default=ANCORA_UD_SOURCE_DEFAULT,
+        help="Path to the UD AnCora CoNLL-U file",
+    )
     return parser.parse_args()
 
 
@@ -282,6 +392,14 @@ def main() -> None:
             rebuild=args.rebuild_ancora_graphs,
         )
         print(f"[ancora] ready: {source_documents} source files, {written_graphs} graphs")
+
+    if "ud_spanish_ancora" in args.datasets:
+        written_graphs = build_conllu_graphml_dataset(
+            args.ancora_ud_source,
+            get_dataset_graph_dir("ud_spanish_ancora"),
+            rebuild=args.rebuild_ancora_ud_graphs,
+        )
+        print(f"[ancora-ud] ready: {written_graphs} graphs")
 
     connection = create_connection(args.database)
     register_datasets(connection)

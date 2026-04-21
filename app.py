@@ -1,6 +1,12 @@
 from __future__ import annotations
 
 import html
+import os
+import shutil
+import tarfile
+import tempfile
+import urllib.request
+import zipfile
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -44,6 +50,126 @@ HISTOGRAM_METRICS = [
     ("diameter", "Diámetro", "Diámetro"),
     ("average_distance", "Distancia promedio", "Distancia promedio"),
 ]
+
+DATABASE_URL_SECRET = "graph_centralities_db_url"
+DATASET_ARCHIVE_URLS_SECRET = "dataset_archive_urls"
+
+
+def get_secret_or_env(name: str, default=None):
+    if hasattr(st, "secrets") and name in st.secrets:
+        return st.secrets[name]
+    return os.environ.get(name, default)
+
+
+def get_dataset_archive_url(dataset_id: str) -> str | None:
+    if hasattr(st, "secrets") and DATASET_ARCHIVE_URLS_SECRET in st.secrets:
+        archive_urls = st.secrets[DATASET_ARCHIVE_URLS_SECRET]
+        if dataset_id in archive_urls:
+            return str(archive_urls[dataset_id])
+
+    env_name = f"DATASET_ARCHIVE_URL_{dataset_id.upper()}"
+    return os.environ.get(env_name)
+
+
+def download_file(url: str, destination: Path) -> None:
+    request = urllib.request.Request(url, headers={"User-Agent": "streamlit-centrality-app/1.0"})
+    with urllib.request.urlopen(request) as response, destination.open("wb") as output_file:
+        shutil.copyfileobj(response, output_file)
+
+
+def normalize_extracted_graph_dir(graph_dir: Path) -> None:
+    if any(graph_dir.glob("*.graphml")):
+        return
+
+    extracted_graphs = [path for path in graph_dir.rglob("*.graphml") if path.parent != graph_dir]
+    for graph_path in extracted_graphs:
+        target_path = graph_dir / graph_path.name
+        if target_path.exists():
+            continue
+        shutil.move(str(graph_path), str(target_path))
+
+
+def extract_archive(archive_path: Path, destination_dir: Path) -> None:
+    if zipfile.is_zipfile(archive_path):
+        with zipfile.ZipFile(archive_path) as archive:
+            archive.extractall(destination_dir)
+    elif tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path) as archive:
+            archive.extractall(destination_dir)
+    else:
+        raise ValueError(f"Unsupported archive format: {archive_path.name}")
+
+    normalize_extracted_graph_dir(destination_dir)
+
+
+def ensure_database_bootstrap() -> str | None:
+    if DATABASE_PATH.exists():
+        return None
+
+    database_url = get_secret_or_env(DATABASE_URL_SECRET)
+    if not database_url:
+        return (
+            "No se encontró la base de datos de centralidades precomputadas. "
+            f"Configura `{DATABASE_URL_SECRET}` en `st.secrets` o como variable de entorno para descargarla automáticamente."
+        )
+
+    DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_dir:
+        temporary_path = Path(temp_dir) / DATABASE_PATH.name
+        download_file(str(database_url), temporary_path)
+        shutil.move(str(temporary_path), str(DATABASE_PATH))
+
+    return f"Base de datos descargada desde `{DATABASE_URL_SECRET}`."
+
+
+def ensure_dataset_bootstrap(dataset_id: str) -> str | None:
+    graph_dir = get_dataset_graph_dir(dataset_id)
+    if graph_dir.exists() and any(graph_dir.glob("*.graphml")):
+        return None
+
+    archive_url = get_dataset_archive_url(dataset_id)
+    if not archive_url:
+        env_name = f"DATASET_ARCHIVE_URL_{dataset_id.upper()}"
+        return (
+            f"No se encontraron grafos para `{get_dataset_label(dataset_id)}`. "
+            f"Configura `{DATASET_ARCHIVE_URLS_SECRET}.{dataset_id}` en `st.secrets` o `{env_name}` como variable de entorno."
+        )
+
+    graph_dir.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_dir:
+        temporary_archive = Path(temp_dir) / "dataset_archive"
+        download_file(str(archive_url), temporary_archive)
+        extract_archive(temporary_archive, graph_dir)
+
+    graph_count = sum(1 for _ in graph_dir.glob("*.graphml"))
+    if graph_count == 0:
+        raise RuntimeError(f"El archivo descargado para {dataset_id} no contiene grafos GraphML utilizables.")
+
+    return f"Corpus `{get_dataset_label(dataset_id)}` descargado automáticamente ({graph_count} grafos)."
+
+
+def ensure_runtime_assets(dataset_id: str) -> None:
+    bootstrap_messages = []
+
+    try:
+        database_message = ensure_database_bootstrap()
+        if database_message:
+            bootstrap_messages.append(("info", database_message))
+    except Exception as error:
+        bootstrap_messages.append(("warning", f"No se pudo descargar la base de datos precomputada: {error}"))
+
+    try:
+        dataset_message = ensure_dataset_bootstrap(dataset_id)
+        if dataset_message:
+            bootstrap_messages.append(("info", dataset_message))
+    except Exception as error:
+        bootstrap_messages.append(("warning", f"No se pudo descargar el corpus `{get_dataset_label(dataset_id)}`: {error}"))
+
+    for level, message in bootstrap_messages:
+        if level == "warning":
+            st.warning(message)
+        else:
+            st.info(message)
 
 
 @st.cache_resource
@@ -633,6 +759,8 @@ selected_dataset = st.sidebar.selectbox(
     dataset_ids,
     format_func=get_dataset_label,
 )
+
+ensure_runtime_assets(selected_dataset)
 
 view = st.sidebar.radio(
     "Selecciona la vista",

@@ -1,2 +1,8 @@
 *.csv
 UD_Spanish-GSD/*.graphml
+UD_Spanish-AnCora/*.graphml
+AnCora-ES/*.graphml
+graph_centralities.sqlite
+graph_centralities.sqlite-shm
+graph_centralities.sqlite-wal
+__pycache__/
