@@ -259,11 +259,15 @@ def get_graph_files(dataset_id: str) -> list[str]:
 
 
 def get_graph_path(dataset_id: str, file_name: str) -> Path:
+    filesystem_path = get_dataset_graph_dir(dataset_id) / file_name
+    if filesystem_path.exists():
+        return filesystem_path
+
     connection = get_database_connection()
     record = get_graph_record(connection, dataset_id, file_name)
     if record is not None:
         return REPO_ROOT / str(record["relative_path"])
-    return get_dataset_graph_dir(dataset_id) / file_name
+    return filesystem_path
 
 
 def ensure_graph_record_exists(dataset_id: str, file_name: str, directed_graph: nx.DiGraph, graph_path: Path) -> int:
@@ -288,7 +292,15 @@ def ensure_graph_record_exists(dataset_id: str, file_name: str, directed_graph: 
 
 def load_selected_graph(dataset_id: str, file_name: str) -> tuple[int, nx.DiGraph, nx.Graph]:
     graph_path = get_graph_path(dataset_id, file_name)
-    directed_graph, undirected_graph = load_graph(graph_path)
+    try:
+        directed_graph, undirected_graph = load_graph(graph_path)
+    except Exception:
+        fallback_path = get_dataset_graph_dir(dataset_id) / file_name
+        if fallback_path != graph_path and fallback_path.exists():
+            directed_graph, undirected_graph = load_graph(fallback_path)
+            graph_path = fallback_path
+        else:
+            raise
     graph_id = ensure_graph_record_exists(dataset_id, file_name, directed_graph, graph_path)
     return graph_id, directed_graph, undirected_graph
 
