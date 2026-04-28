@@ -25,9 +25,12 @@ from graph_centrality_store import (
     DATABASE_PATH,
     OPENING_PUNCTUATION,
     REPO_ROOT,
+    TREE_BALANCE_INDEXES,
+    TREE_BALANCE_INDEX_LABELS,
     compute_centrality,
     create_connection,
     fetch_centrality_scores,
+    fetch_tree_balance_rows,
     get_dataset_graph_dir,
     get_dataset_label,
     get_graph_record,
@@ -552,6 +555,181 @@ def build_centrality_histograms_figure(dataframe: pd.DataFrame, dataset_label: s
     fig.suptitle(f"Distribuciones de centralidad por grafo: {dataset_label} ({method})")
     fig.tight_layout(rect=(0, 0, 1, 0.97))
     return fig
+
+
+@st.cache_data(show_spinner=False)
+def get_dataset_tree_balance_dataframe(dataset_id: str, include_punctuation: bool) -> pd.DataFrame:
+    connection = get_database_connection()
+    rows = fetch_tree_balance_rows(connection, dataset_id, include_punctuation)
+    dataframe = pd.DataFrame([dict(row) for row in rows])
+    if dataframe.empty:
+        return dataframe
+
+    dataframe["index_label"] = dataframe["index_name"].map(TREE_BALANCE_INDEX_LABELS).fillna(dataframe["index_name"])
+    dataframe["value"] = pd.to_numeric(dataframe["value"], errors="coerce")
+    for column_name in [
+        "node_count",
+        "leaf_count",
+        "internal_node_count",
+        "suppressed_unary_nodes",
+        "synthetic_root_added",
+    ]:
+        dataframe[column_name] = pd.to_numeric(dataframe[column_name], errors="coerce")
+    return dataframe
+
+
+def build_tree_balance_histogram_figure(dataframe: pd.DataFrame, dataset_label: str, index_label: str):
+    fig, axis = plt.subplots(figsize=(10, 5))
+    axis.hist(
+        dataframe["value"].dropna(),
+        bins=histogram_bins(dataframe["value"]),
+        color="#54A24B",
+        edgecolor="white",
+        linewidth=0.8,
+    )
+    axis.set_title(f"Distribución: {index_label}")
+    axis.set_xlabel("Valor del índice")
+    axis.set_ylabel("Cantidad de grafos")
+    axis.grid(axis="y", alpha=0.25)
+    fig.suptitle(f"Índices de balance de árboles: {dataset_label}")
+    fig.tight_layout(rect=(0, 0, 1, 0.95))
+    return fig
+
+
+def render_tree_balance_view(dataset_id: str) -> None:
+    st.title("Índices de balance de árboles")
+    st.caption(f"Dataset activo: {get_dataset_label(dataset_id)}")
+    st.caption(
+        "Los valores se calculan con el paquete R `treebalance` sobre árboles en formato `phylo`; "
+        "los nodos internos con un único hijo se contraen antes del cálculo porque ese formato no los representa."
+    )
+
+    graph_files = get_graph_files(dataset_id)
+    if not graph_files:
+        st.error(f"No se encontraron grafos en {get_dataset_graph_dir(dataset_id)}.")
+        return
+
+    include_punctuation = st.checkbox("Incluir puntuación", value=True, key=f"tree_balance_punctuation_{dataset_id}")
+    dataframe = get_dataset_tree_balance_dataframe(dataset_id, include_punctuation)
+    expected_entries = len(graph_files) * len(TREE_BALANCE_INDEXES)
+
+    if len(dataframe) < expected_entries:
+        missing_entries = expected_entries - len(dataframe)
+        st.warning(f"Faltan {missing_entries:,} filas de índices de balance para este corpus.")
+        if st.button("Calcular índices faltantes", type="primary"):
+            try:
+                from build_centrality_cache import build_tree_balance_cache_entries, sync_graph_metadata
+
+                connection = get_database_connection()
+                with st.spinner("Indexando grafos y calculando índices de balance con R..."):
+                    sync_graph_metadata(connection, dataset_id)
+                    build_tree_balance_cache_entries(
+                        connection,
+                        [dataset_id],
+                        workers=1,
+                        force=False,
+                        chunk_size=250,
+                    )
+                get_dataset_tree_balance_dataframe.clear()
+                st.rerun()
+            except Exception as error:
+                st.error(f"No se pudieron calcular los índices de balance: {error}")
+
+    if dataframe.empty:
+        st.info("Aún no hay índices de balance cacheados para este corpus.")
+        return
+
+    ok_dataframe = dataframe[(dataframe["status"] == "ok") & dataframe["value"].notna()].copy()
+    if ok_dataframe.empty:
+        st.warning("No hay valores numéricos válidos para resumir.")
+        with st.expander("Ver errores de cálculo"):
+            st.dataframe(dataframe, use_container_width=True)
+        return
+
+    summary_dataframe = (
+        ok_dataframe.groupby(["index_name", "index_label"])["value"]
+        .agg(["count", "mean", "median", "std", "min", "max"])
+        .reset_index()
+        .sort_values("index_label")
+        .rename(
+            columns={
+                "index_label": "Índice",
+                "count": "Grafos válidos",
+                "mean": "Media",
+                "median": "Mediana",
+                "std": "Desviación estándar",
+                "min": "Mínimo",
+                "max": "Máximo",
+            }
+        )
+    )
+
+    metadata = dataframe.drop_duplicates("file_name")
+    metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+    with metric_col1:
+        st.metric("Grafos con balance", f"{metadata['file_name'].nunique():,}")
+    with metric_col2:
+        st.metric("Hojas medias", f"{metadata['leaf_count'].mean():.2f}")
+    with metric_col3:
+        st.metric("Nodos unarios contraídos", f"{metadata['suppressed_unary_nodes'].mean():.2f}")
+    with metric_col4:
+        valid_fraction = len(ok_dataframe) / len(dataframe) if len(dataframe) else 0.0
+        st.metric("Valores válidos", f"{valid_fraction:.1%}")
+
+    st.markdown("## Resumen estadístico")
+    st.dataframe(
+        summary_dataframe.set_index("Índice").drop(columns=["index_name"]).style.format(
+            {
+                "Grafos válidos": "{:.0f}",
+                "Media": "{:.4f}",
+                "Mediana": "{:.4f}",
+                "Desviación estándar": "{:.4f}",
+                "Mínimo": "{:.4f}",
+                "Máximo": "{:.4f}",
+            }
+        ),
+        use_container_width=True,
+    )
+
+    selected_index_label = st.selectbox(
+        "Índice para histograma",
+        sorted(ok_dataframe["index_label"].unique()),
+        key=f"tree_balance_index_{dataset_id}",
+    )
+    selected_dataframe = ok_dataframe[ok_dataframe["index_label"] == selected_index_label]
+    figure = build_tree_balance_histogram_figure(
+        selected_dataframe,
+        get_dataset_label(dataset_id),
+        selected_index_label,
+    )
+    st.pyplot(figure)
+    plt.close(figure)
+
+    with st.expander("Ver índices por grafo"):
+        wide_dataframe = ok_dataframe.pivot_table(
+            index="file_name",
+            columns="index_label",
+            values="value",
+            aggfunc="first",
+        ).reset_index()
+        st.dataframe(wide_dataframe, use_container_width=True)
+
+    problem_dataframe = dataframe[dataframe["status"] != "ok"]
+    if not problem_dataframe.empty:
+        with st.expander("Ver valores no calculados"):
+            st.dataframe(
+                problem_dataframe[
+                    ["file_name", "index_label", "status", "error_message"]
+                ].rename(
+                    columns={
+                        "file_name": "Archivo",
+                        "index_label": "Índice",
+                        "status": "Estado",
+                        "error_message": "Detalle",
+                    }
+                ),
+                use_container_width=True,
+            )
 
 
 def render_corpus_histogram_view(dataset_id: str) -> None:
@@ -1082,6 +1260,7 @@ view = st.sidebar.radio(
         "Visualización de árboles",
         "Visualización múltiple de grafos",
         "Histogramas estructurales del corpus",
+        "Índices de balance de árboles",
         "Datos de distribución",
     ],
 )
@@ -1137,6 +1316,9 @@ elif view == "Visualización múltiple de grafos":
 
 elif view == "Histogramas estructurales del corpus":
     render_corpus_histogram_view(selected_dataset)
+
+elif view == "Índices de balance de árboles":
+    render_tree_balance_view(selected_dataset)
 
 elif view == "Datos de distribución":
     st.title("Visualización de distribución")

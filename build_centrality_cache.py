@@ -13,8 +13,10 @@ from graph_centrality_store import (
     DATABASE_PATH,
     DATASET_DEFINITIONS,
     REPO_ROOT,
+    TREE_BALANCE_INDEXES,
     compute_centrality,
     count_cached_centralities,
+    count_cached_tree_balances,
     create_connection,
     detokenize,
     get_dataset_graph_dir,
@@ -23,13 +25,17 @@ from graph_centrality_store import (
     register_datasets,
     remove_punctuation_nodes,
     store_centrality_scores,
+    store_tree_balance_metadata,
+    store_tree_balance_scores,
     upsert_graph,
 )
+from tree_balance import TreeBalancePayload, build_tree_balance_payload, compute_tree_balance_batch
 
 
 ANCORA_SOURCE_DEFAULT = Path("/Users/summa/Documents/Cenia/C. Riveros/data/ancora-dep-2.0/es")
 ANCORA_UD_SOURCE_DEFAULT = Path("/Users/summa/Documents/Cenia/C. Riveros/data/ancora-ud/es_ancora-ud-train.conllu")
 EXPECTED_CACHE_ENTRIES_PER_GRAPH = len(CENTRALITY_METHODS) * 2
+EXPECTED_TREE_BALANCE_ENTRIES_PER_GRAPH = len(TREE_BALANCE_INDEXES) * 2
 
 
 def parse_ancora_sentences(source_path: Path):
@@ -266,6 +272,34 @@ def graphs_missing_cache(connection, dataset_ids: list[str], force: bool) -> lis
     ]
 
 
+def graphs_missing_tree_balance_cache(connection, dataset_ids: list[str], force: bool) -> list[tuple[int, str]]:
+    placeholders = ", ".join("?" for _ in dataset_ids)
+    rows = connection.execute(
+        f"""
+        SELECT
+            graphs.id AS graph_id,
+            graphs.relative_path AS relative_path,
+            COUNT(cache.index_name) AS cached_entries
+        FROM graphs
+        LEFT JOIN tree_balance_cache AS cache
+            ON cache.graph_id = graphs.id
+        WHERE graphs.dataset_id IN ({placeholders})
+        GROUP BY graphs.id, graphs.relative_path
+        ORDER BY graphs.dataset_id, graphs.file_name
+        """,
+        dataset_ids,
+    ).fetchall()
+
+    if force:
+        return [(int(row["graph_id"]), str(row["relative_path"])) for row in rows]
+
+    return [
+        (int(row["graph_id"]), str(row["relative_path"]))
+        for row in rows
+        if int(row["cached_entries"]) < EXPECTED_TREE_BALANCE_ENTRIES_PER_GRAPH
+    ]
+
+
 def compute_graph_cache(relative_path: str) -> list[tuple[str, bool, dict[str, float]]]:
     graph_path = REPO_ROOT / relative_path
     _, undirected_graph = load_graph(graph_path)
@@ -331,6 +365,103 @@ def build_cache_entries(connection, dataset_ids: list[str], workers: int, force:
         connection.commit()
 
 
+def compute_graph_tree_balance_payloads(graph_id: int, relative_path: str) -> list[TreeBalancePayload]:
+    graph_path = REPO_ROOT / relative_path
+    directed_graph, _ = load_graph(graph_path)
+    graph_variants = {
+        True: directed_graph,
+        False: remove_punctuation_nodes(directed_graph),
+    }
+    return [
+        build_tree_balance_payload(graph_id, graph, include_punctuation)
+        for include_punctuation, graph in graph_variants.items()
+    ]
+
+
+def chunked(items: list[TreeBalancePayload], size: int):
+    for start_index in range(0, len(items), size):
+        yield items[start_index : start_index + size]
+
+
+def build_tree_balance_cache_entries(
+    connection,
+    dataset_ids: list[str],
+    workers: int,
+    force: bool,
+    chunk_size: int,
+) -> None:
+    tasks = graphs_missing_tree_balance_cache(connection, dataset_ids, force)
+    if not tasks:
+        print("[tree-balance] all requested graphs are already cached")
+        return
+
+    print(f"[tree-balance] preparing {len(tasks)} graphs with {workers} worker(s)")
+    started_at = time.time()
+    payloads: list[TreeBalancePayload] = []
+    completed = 0
+
+    def consume_executor(executor) -> None:
+        nonlocal completed
+        future_to_graph = {
+            executor.submit(compute_graph_tree_balance_payloads, graph_id, relative_path): (graph_id, relative_path)
+            for graph_id, relative_path in tasks
+        }
+
+        for future in as_completed(future_to_graph):
+            graph_payloads = future.result()
+            payloads.extend(graph_payloads)
+            for payload in graph_payloads:
+                store_tree_balance_metadata(
+                    connection,
+                    payload.graph_id,
+                    payload.include_punctuation,
+                    node_count=payload.node_count,
+                    leaf_count=payload.leaf_count,
+                    internal_node_count=payload.internal_node_count,
+                    suppressed_unary_nodes=payload.suppressed_unary_nodes,
+                    synthetic_root_added=payload.synthetic_root_added,
+                    newick=payload.newick,
+                )
+
+            completed += 1
+            if completed % 500 == 0:
+                connection.commit()
+                elapsed = time.time() - started_at
+                rate = completed / elapsed if elapsed else 0.0
+                print(f"[tree-balance] prepared {completed}/{len(tasks)} graphs ({rate:.2f} graphs/s)")
+
+    try:
+        if workers <= 1:
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                consume_executor(executor)
+        else:
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                consume_executor(executor)
+    finally:
+        connection.commit()
+
+    if not payloads:
+        print("[tree-balance] no tree-balance payloads were produced")
+        return
+
+    print(f"[tree-balance] computing {len(payloads)} rooted-tree variants in R")
+    cached_payloads = 0
+    for payload_chunk in chunked(payloads, max(1, chunk_size)):
+        results = compute_tree_balance_batch(payload_chunk)
+        for payload in payload_chunk:
+            rows = results[(payload.graph_id, payload.include_punctuation)]
+            store_tree_balance_scores(connection, payload.graph_id, payload.include_punctuation, rows)
+
+        cached_payloads += len(payload_chunk)
+        connection.commit()
+        elapsed = time.time() - started_at
+        rate = cached_payloads / elapsed if elapsed else 0.0
+        print(
+            "[tree-balance] "
+            f"{cached_payloads}/{len(payloads)} rooted-tree variants cached ({rate:.2f} variants/s)"
+        )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build GraphML datasets and centrality cache")
     parser.add_argument(
@@ -356,6 +487,22 @@ def parse_args() -> argparse.Namespace:
         "--force",
         action="store_true",
         help="Recompute cached centralities even if entries already exist",
+    )
+    parser.add_argument(
+        "--skip-centrality",
+        action="store_true",
+        help="Index graph metadata but do not compute node-centrality caches",
+    )
+    parser.add_argument(
+        "--skip-tree-balance",
+        action="store_true",
+        help="Index graph metadata but do not compute tree-balance caches",
+    )
+    parser.add_argument(
+        "--tree-balance-chunk-size",
+        type=int,
+        default=500,
+        help="Number of rooted-tree variants sent to each R treebalance batch",
     )
     parser.add_argument(
         "--rebuild-ancora-graphs",
@@ -408,10 +555,21 @@ def main() -> None:
         indexed_graphs = sync_graph_metadata(connection, dataset_id)
         print(f"[metadata] {dataset_id}: {indexed_graphs} graphs indexed")
 
-    build_cache_entries(connection, args.datasets, args.workers, args.force)
+    if not args.skip_centrality:
+        build_cache_entries(connection, args.datasets, args.workers, args.force)
+
+    if not args.skip_tree_balance:
+        build_tree_balance_cache_entries(
+            connection,
+            args.datasets,
+            args.workers,
+            args.force,
+            args.tree_balance_chunk_size,
+        )
 
     for dataset_id in args.datasets:
         print(f"[summary] {dataset_id}: {count_cached_centralities(connection, dataset_id)} cached entries")
+        print(f"[summary] {dataset_id}: {count_cached_tree_balances(connection, dataset_id)} tree-balance entries")
 
     connection.close()
 

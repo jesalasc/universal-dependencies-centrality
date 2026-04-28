@@ -22,6 +22,29 @@ CENTRALITY_METHODS = [
     "PageRank",
 ]
 
+TREE_BALANCE_INDEXES = [
+    {"name": "sackin", "label": "Sackin"},
+    {"name": "average_leaf_depth", "label": "Profundidad media de hojas"},
+    {"name": "variance_leaf_depth", "label": "Varianza de profundidad de hojas"},
+    {"name": "total_cophenetic", "label": "Cophenetic total"},
+    {"name": "area_per_pair", "label": "Área por par"},
+    {"name": "b1", "label": "B1"},
+    {"name": "b2", "label": "B2"},
+    {"name": "cherry", "label": "Cherry"},
+    {"name": "colless_like_exp_mdm", "label": "Colless-like (exp, MDM)"},
+    {"name": "maximum_depth", "label": "Profundidad máxima"},
+    {"name": "maximum_width", "label": "Anchura máxima"},
+    {"name": "maximum_width_over_depth", "label": "Anchura máxima / profundidad"},
+    {"name": "modified_maximum_width_difference", "label": "Diferencia modificada máxima de anchuras"},
+    {"name": "rooted_quartet", "label": "Cuartetos enraizados"},
+    {"name": "s_shape", "label": "s-shape"},
+    {"name": "total_internal_path_length", "label": "Longitud interna total"},
+    {"name": "total_path_length", "label": "Longitud total de caminos"},
+    {"name": "average_vertex_depth", "label": "Profundidad media de vértices"},
+]
+
+TREE_BALANCE_INDEX_LABELS = {index["name"]: index["label"] for index in TREE_BALANCE_INDEXES}
+
 DATASET_DEFINITIONS = {
     "ud_spanish_gsd": {
         "label": "UD Spanish GSD",
@@ -89,6 +112,35 @@ def ensure_schema(connection: sqlite3.Connection) -> None:
             FOREIGN KEY (graph_id) REFERENCES graphs(id) ON DELETE CASCADE,
             PRIMARY KEY (graph_id, method, include_punctuation)
         );
+
+        CREATE TABLE IF NOT EXISTS tree_balance_graph_cache (
+            graph_id INTEGER NOT NULL,
+            include_punctuation INTEGER NOT NULL,
+            node_count INTEGER NOT NULL,
+            leaf_count INTEGER NOT NULL,
+            internal_node_count INTEGER NOT NULL,
+            suppressed_unary_nodes INTEGER NOT NULL,
+            synthetic_root_added INTEGER NOT NULL,
+            newick TEXT,
+            updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (graph_id) REFERENCES graphs(id) ON DELETE CASCADE,
+            PRIMARY KEY (graph_id, include_punctuation)
+        );
+
+        CREATE TABLE IF NOT EXISTS tree_balance_cache (
+            graph_id INTEGER NOT NULL,
+            include_punctuation INTEGER NOT NULL,
+            index_name TEXT NOT NULL,
+            value REAL,
+            status TEXT NOT NULL DEFAULT 'ok',
+            error_message TEXT,
+            updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (graph_id) REFERENCES graphs(id) ON DELETE CASCADE,
+            PRIMARY KEY (graph_id, include_punctuation, index_name)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_tree_balance_cache_index
+        ON tree_balance_cache(index_name, include_punctuation);
         """
     )
 
@@ -332,6 +384,161 @@ def count_cached_centralities(connection: sqlite3.Connection, dataset_id: str | 
             """
             SELECT COUNT(*) AS total
             FROM centrality_cache AS cache
+            JOIN graphs AS graphs ON graphs.id = cache.graph_id
+            WHERE graphs.dataset_id = ?
+            """,
+            (dataset_id,),
+        ).fetchone()
+    return int(row["total"])
+
+
+def store_tree_balance_metadata(
+    connection: sqlite3.Connection,
+    graph_id: int,
+    include_punctuation: bool,
+    *,
+    node_count: int,
+    leaf_count: int,
+    internal_node_count: int,
+    suppressed_unary_nodes: int,
+    synthetic_root_added: bool,
+    newick: str | None,
+) -> None:
+    connection.execute(
+        """
+        INSERT INTO tree_balance_graph_cache(
+            graph_id,
+            include_punctuation,
+            node_count,
+            leaf_count,
+            internal_node_count,
+            suppressed_unary_nodes,
+            synthetic_root_added,
+            newick
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(graph_id, include_punctuation) DO UPDATE SET
+            node_count = excluded.node_count,
+            leaf_count = excluded.leaf_count,
+            internal_node_count = excluded.internal_node_count,
+            suppressed_unary_nodes = excluded.suppressed_unary_nodes,
+            synthetic_root_added = excluded.synthetic_root_added,
+            newick = excluded.newick,
+            updated_at = CURRENT_TIMESTAMP
+        """,
+        (
+            graph_id,
+            int(include_punctuation),
+            int(node_count),
+            int(leaf_count),
+            int(internal_node_count),
+            int(suppressed_unary_nodes),
+            int(synthetic_root_added),
+            newick,
+        ),
+    )
+
+
+def store_tree_balance_scores(
+    connection: sqlite3.Connection,
+    graph_id: int,
+    include_punctuation: bool,
+    rows: Iterable[dict[str, object]],
+) -> None:
+    connection.executemany(
+        """
+        INSERT INTO tree_balance_cache(
+            graph_id,
+            include_punctuation,
+            index_name,
+            value,
+            status,
+            error_message
+        )
+        VALUES (?, ?, ?, ?, ?, ?)
+        ON CONFLICT(graph_id, include_punctuation, index_name) DO UPDATE SET
+            value = excluded.value,
+            status = excluded.status,
+            error_message = excluded.error_message,
+            updated_at = CURRENT_TIMESTAMP
+        """,
+        [
+            (
+                graph_id,
+                int(include_punctuation),
+                str(row["index_name"]),
+                row.get("value"),
+                str(row.get("status") or "ok"),
+                row.get("error_message"),
+            )
+            for row in rows
+        ],
+    )
+
+
+def fetch_tree_balance_scores(
+    connection: sqlite3.Connection,
+    dataset_id: str,
+    file_name: str,
+    include_punctuation: bool,
+) -> dict[str, float | None] | None:
+    rows = connection.execute(
+        """
+        SELECT cache.index_name, cache.value
+        FROM tree_balance_cache AS cache
+        JOIN graphs AS graphs ON graphs.id = cache.graph_id
+        WHERE graphs.dataset_id = ?
+          AND graphs.file_name = ?
+          AND cache.include_punctuation = ?
+        ORDER BY cache.index_name
+        """,
+        (dataset_id, file_name, int(include_punctuation)),
+    ).fetchall()
+    if not rows:
+        return None
+    return {str(row["index_name"]): row["value"] for row in rows}
+
+
+def fetch_tree_balance_rows(
+    connection: sqlite3.Connection,
+    dataset_id: str,
+    include_punctuation: bool,
+) -> list[sqlite3.Row]:
+    return connection.execute(
+        """
+        SELECT
+            graphs.file_name,
+            graphs.phrase,
+            graph_cache.node_count,
+            graph_cache.leaf_count,
+            graph_cache.internal_node_count,
+            graph_cache.suppressed_unary_nodes,
+            graph_cache.synthetic_root_added,
+            cache.index_name,
+            cache.value,
+            cache.status,
+            cache.error_message
+        FROM tree_balance_cache AS cache
+        JOIN graphs AS graphs ON graphs.id = cache.graph_id
+        LEFT JOIN tree_balance_graph_cache AS graph_cache
+            ON graph_cache.graph_id = cache.graph_id
+           AND graph_cache.include_punctuation = cache.include_punctuation
+        WHERE graphs.dataset_id = ?
+          AND cache.include_punctuation = ?
+        ORDER BY graphs.file_name, cache.index_name
+        """,
+        (dataset_id, int(include_punctuation)),
+    ).fetchall()
+
+
+def count_cached_tree_balances(connection: sqlite3.Connection, dataset_id: str | None = None) -> int:
+    if dataset_id is None:
+        row = connection.execute("SELECT COUNT(*) AS total FROM tree_balance_cache").fetchone()
+    else:
+        row = connection.execute(
+            """
+            SELECT COUNT(*) AS total
+            FROM tree_balance_cache AS cache
             JOIN graphs AS graphs ON graphs.id = cache.graph_id
             WHERE graphs.dataset_id = ?
             """,
