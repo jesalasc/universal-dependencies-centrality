@@ -63,6 +63,12 @@ AWS_REGION_SECRET = "aws_region"
 AWS_DB_KEY_SECRET = "aws_db_key"
 AWS_DATASET_KEYS_SECRET = "aws_dataset_keys"
 
+GCS_SECTION_SECRET = "gcs"
+GCS_BUCKET_SECRET = "gcs_bucket"
+GCS_DB_BLOB_SECRET = "gcs_db_blob"
+GCS_DATASET_BLOBS_SECRET = "gcs_dataset_blobs"
+GCP_SERVICE_ACCOUNT_SECRET = "gcp_service_account"
+
 
 def get_secret_or_env(name: str, default=None):
     if hasattr(st, "secrets") and name in st.secrets:
@@ -83,6 +89,27 @@ def get_aws_setting(key: str, env_name: str, default=None):
     if section_value is not None:
         return section_value
     return get_secret_or_env(env_name, default)
+
+
+def get_gcs_setting(key: str, env_name: str, default=None):
+    section_value = get_section_secret(GCS_SECTION_SECRET, key)
+    if section_value is not None:
+        return section_value
+    return get_secret_or_env(env_name, default)
+
+
+def get_dataset_gcs_blob(dataset_id: str) -> str | None:
+    section_blobs = get_section_secret(GCS_SECTION_SECRET, "dataset_blobs")
+    if section_blobs and dataset_id in section_blobs:
+        return str(section_blobs[dataset_id])
+
+    if hasattr(st, "secrets") and GCS_DATASET_BLOBS_SECRET in st.secrets:
+        dataset_blobs = st.secrets[GCS_DATASET_BLOBS_SECRET]
+        if dataset_id in dataset_blobs:
+            return str(dataset_blobs[dataset_id])
+
+    env_name = f"GCS_DATASET_BLOB_{dataset_id.upper()}"
+    return os.environ.get(env_name)
 
 
 def get_dataset_archive_url(dataset_id: str) -> str | None:
@@ -139,6 +166,29 @@ def download_s3_file(bucket: str, key: str, destination: Path) -> None:
     get_s3_client().download_file(bucket, key, str(destination))
 
 
+@st.cache_resource
+def get_gcs_client():
+    from google.cloud import storage
+
+    if hasattr(st, "secrets") and GCP_SERVICE_ACCOUNT_SECRET in st.secrets:
+        from google.oauth2 import service_account
+
+        credentials_info = dict(st.secrets[GCP_SERVICE_ACCOUNT_SECRET])
+        credentials = service_account.Credentials.from_service_account_info(credentials_info)
+        project_id = get_gcs_setting("project_id", "GCS_PROJECT_ID") or credentials_info.get("project_id")
+        return storage.Client(credentials=credentials, project=project_id)
+
+    # Sin credenciales explícitas: usa Application Default Credentials
+    # (p. ej. la variable de entorno GOOGLE_APPLICATION_CREDENTIALS).
+    return storage.Client()
+
+
+def download_gcs_file(bucket_name: str, blob_name: str, destination: Path) -> None:
+    client = get_gcs_client()
+    blob = client.bucket(bucket_name).blob(blob_name)
+    blob.download_to_filename(str(destination))
+
+
 def normalize_extracted_graph_dir(graph_dir: Path) -> None:
     if any(graph_dir.glob("*.graphml")):
         return
@@ -169,12 +219,18 @@ def ensure_database_bootstrap() -> str | None:
         return None
 
     database_url = get_secret_or_env(DATABASE_URL_SECRET)
+    gcs_bucket = get_gcs_setting("bucket", "GCS_BUCKET") or get_secret_or_env(GCS_BUCKET_SECRET)
+    gcs_db_blob = get_gcs_setting("db_blob", "GCS_DB_BLOB") or get_secret_or_env(GCS_DB_BLOB_SECRET)
     database_s3_key = get_aws_setting("db_key", "AWS_DB_KEY") or get_secret_or_env(AWS_DB_KEY_SECRET)
     s3_bucket = get_aws_setting("bucket", "AWS_S3_BUCKET") or get_secret_or_env(AWS_BUCKET_SECRET)
-    if not database_url and not (s3_bucket and database_s3_key):
+
+    has_gcs = bool(gcs_bucket and gcs_db_blob)
+    has_s3 = bool(s3_bucket and database_s3_key)
+    if not database_url and not has_gcs and not has_s3:
         return (
             "No se encontró la base de datos de centralidades precomputadas. "
-            f"Configura `{DATABASE_URL_SECRET}` o el origen S3 (`{AWS_BUCKET_SECRET}` y `{AWS_DB_KEY_SECRET}`) "
+            f"Configura `{DATABASE_URL_SECRET}`, el origen GCS (`{GCS_BUCKET_SECRET}` y `{GCS_DB_BLOB_SECRET}`) "
+            f"o el origen S3 (`{AWS_BUCKET_SECRET}` y `{AWS_DB_KEY_SECRET}`) "
             "en `st.secrets` o como variables de entorno para descargarla automáticamente."
         )
 
@@ -184,6 +240,9 @@ def ensure_database_bootstrap() -> str | None:
         if database_url:
             download_file(str(database_url), temporary_path)
             source_message = f"Base de datos descargada desde `{DATABASE_URL_SECRET}`."
+        elif has_gcs:
+            download_gcs_file(str(gcs_bucket), str(gcs_db_blob), temporary_path)
+            source_message = "Base de datos descargada automáticamente desde Google Cloud Storage."
         else:
             download_s3_file(str(s3_bucket), str(database_s3_key), temporary_path)
             source_message = "Base de datos descargada automáticamente desde S3."
@@ -198,13 +257,19 @@ def ensure_dataset_bootstrap(dataset_id: str) -> str | None:
         return None
 
     archive_url = get_dataset_archive_url(dataset_id)
+    gcs_bucket = get_gcs_setting("bucket", "GCS_BUCKET") or get_secret_or_env(GCS_BUCKET_SECRET)
+    archive_gcs_blob = get_dataset_gcs_blob(dataset_id)
     archive_s3_key = get_dataset_archive_s3_key(dataset_id)
     s3_bucket = get_aws_setting("bucket", "AWS_S3_BUCKET") or get_secret_or_env(AWS_BUCKET_SECRET)
-    if not archive_url and not (s3_bucket and archive_s3_key):
+
+    has_gcs = bool(gcs_bucket and archive_gcs_blob)
+    has_s3 = bool(s3_bucket and archive_s3_key)
+    if not archive_url and not has_gcs and not has_s3:
         env_name = f"DATASET_ARCHIVE_URL_{dataset_id.upper()}"
         return (
             f"No se encontraron grafos para `{get_dataset_label(dataset_id)}`. "
-            f"Configura `{DATASET_ARCHIVE_URLS_SECRET}.{dataset_id}` o el origen S3 para ese dataset "
+            f"Configura `{DATASET_ARCHIVE_URLS_SECRET}.{dataset_id}`, el origen GCS "
+            f"(`{GCS_SECTION_SECRET}.dataset_blobs.{dataset_id}`) o el origen S3 para ese dataset "
             f"en `st.secrets`, o `{env_name}` como variable de entorno."
         )
 
@@ -213,6 +278,8 @@ def ensure_dataset_bootstrap(dataset_id: str) -> str | None:
         temporary_archive = Path(temp_dir) / "dataset_archive"
         if archive_url:
             download_file(str(archive_url), temporary_archive)
+        elif has_gcs:
+            download_gcs_file(str(gcs_bucket), str(archive_gcs_blob), temporary_archive)
         else:
             download_s3_file(str(s3_bucket), str(archive_s3_key), temporary_archive)
         extract_archive(temporary_archive, graph_dir)
@@ -360,13 +427,6 @@ def average_distance_and_connectivity(graph: nx.Graph) -> tuple[float, bool]:
     return total_distance / total_pairs, False
 
 
-def remove_leaf_nodes(graph: nx.Graph) -> nx.Graph:
-    pruned_graph = graph.copy()
-    leaf_nodes = [node_id for node_id, degree in pruned_graph.degree() if degree <= 1]
-    pruned_graph.remove_nodes_from(leaf_nodes)
-    return pruned_graph
-
-
 def compute_graph_distribution_metrics(
     directed_graph: nx.DiGraph,
     undirected_graph: nx.Graph,
@@ -374,13 +434,14 @@ def compute_graph_distribution_metrics(
     remove_leaves_for_degree_metrics: bool = False,
 ) -> dict[str, float | int | bool]:
     node_count = undirected_graph.number_of_nodes()
-    degree_graph = remove_leaf_nodes(undirected_graph) if remove_leaves_for_degree_metrics else undirected_graph
-    directed_degree_graph = (
-        directed_graph.subgraph(degree_graph.nodes()).copy() if remove_leaves_for_degree_metrics else directed_graph
-    )
-    degree_node_count = degree_graph.number_of_nodes()
-    degree_values = [degree for _, degree in degree_graph.degree()]
-    out_degree_values = [degree for _, degree in directed_degree_graph.out_degree()]
+    degree_by_node = dict(undirected_graph.degree())
+    if remove_leaves_for_degree_metrics:
+        degree_nodes = [node_id for node_id, degree in degree_by_node.items() if degree > 1]
+    else:
+        degree_nodes = list(degree_by_node)
+    degree_node_count = len(degree_nodes)
+    degree_values = [degree_by_node[node_id] for node_id in degree_nodes]
+    out_degree_values = [directed_graph.out_degree(node_id) for node_id in degree_nodes]
     average_degree = float(sum(degree_values) / degree_node_count) if degree_node_count else 0.0
     average_out_degree = float(sum(out_degree_values) / degree_node_count) if degree_node_count else 0.0
     maximum_degree = int(max(degree_values, default=0))
@@ -480,21 +541,19 @@ def get_dataset_centrality_distribution_dataframe(
     for file_name in graph_files:
         graph_id, directed_graph, _ = load_selected_graph(dataset_id, file_name)
         directed_view, undirected_view = apply_punctuation_filter(directed_graph, include_punctuation)
+        centrality_scores = get_centrality_scores(
+            dataset_id,
+            file_name,
+            graph_id,
+            undirected_view,
+            method,
+            include_punctuation,
+        )
         if remove_leaves_before_centrality:
-            undirected_view = remove_leaf_nodes(undirected_view)
-            try:
-                centrality_scores = compute_centrality(undirected_view, method)
-            except Exception:
-                centrality_scores = {str(node_id): 0.0 for node_id in undirected_view.nodes()}
-        else:
-            centrality_scores = get_centrality_scores(
-                dataset_id,
-                file_name,
-                graph_id,
-                undirected_view,
-                method,
-                include_punctuation,
-            )
+            non_leaf_ids = {str(node_id) for node_id, degree in undirected_view.degree() if degree > 1}
+            centrality_scores = {
+                node_id: score for node_id, score in centrality_scores.items() if node_id in non_leaf_ids
+            }
 
         values = np.array(list(centrality_scores.values()), dtype=float)
         if values.size == 0:
@@ -745,8 +804,10 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
             "Excluir hojas para métricas de grado",
             value=False,
             help=(
-                "Elimina nodos hoja (grado <= 1) solo para calcular grado promedio, grado de salida promedio "
-                "y grado máximo. El tamaño, diámetro y distancia promedio se mantienen sobre el grafo original."
+                "Excluye los nodos hoja (grado <= 1) del cálculo de grado promedio, grado de salida promedio "
+                "y grado máximo, usando los grados del grafo original (suma de grados de nodos no hoja dividida "
+                "por la cantidad de nodos no hoja). El tamaño, diámetro y distancia promedio se mantienen sobre "
+                "el grafo original."
             ),
         )
     with structural_col2:
@@ -810,8 +871,8 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
         removed_leaf_mean = distribution_dataframe["leaf_nodes_removed"].mean()
         degree_node_mean = distribution_dataframe["degree_node_count"].mean()
         st.caption(
-            "Las métricas de grado se calcularon sin nodos hoja. "
-            f"Promedio de hojas removidas por grafo: {removed_leaf_mean:.2f}. "
+            "Las métricas de grado consideran solo nodos no hoja, con los grados del grafo original. "
+            f"Promedio de hojas excluidas por grafo: {removed_leaf_mean:.2f}. "
             f"Nodos considerados para grado por grafo: {degree_node_mean:.2f}."
         )
 
@@ -844,7 +905,7 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
                     "average_distance": "Distancia promedio",
                     "is_connected": "Es conexo",
                     "degree_node_count": "Nodos para grado",
-                    "leaf_nodes_removed": "Hojas removidas",
+                    "leaf_nodes_removed": "Hojas excluidas",
                 }
             ),
             use_container_width=True,
@@ -860,9 +921,12 @@ def render_corpus_histogram_view(dataset_id: str) -> None:
         )
     with centrality_col2:
         remove_leaves_for_centrality = st.checkbox(
-            "Excluir hojas antes de calcular centralidad",
+            "Excluir hojas de las estadísticas de centralidad",
             value=False,
-            help="Elimina nodos hoja del grafo filtrado antes de calcular la centralidad.",
+            help=(
+                "La centralidad se calcula sobre el grafo completo; los nodos hoja (grado <= 1) "
+                "se excluyen solo al agregar las estadísticas (media, mediana, máximo, desviación)."
+            ),
         )
 
     with st.spinner("Calculando distribuciones de centralidad..."):
